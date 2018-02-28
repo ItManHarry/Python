@@ -6,10 +6,10 @@ def sort_words(words):
 	return sorted(words)
 def print_first_word(words):
 	word = words.pop(0)
-	return word
+	print word
 def print_last_word(words):
 	word = words.pop(-1)
-	return word
+	print word
 def sort_sentence(sentence):
 	words = break_words(sentence)
 	return sort_words(words)
