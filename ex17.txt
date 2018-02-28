@@ -1,0 +1,4 @@
+I clean the file again.
+Now , I am going to write new things.
+OK?
+I am going to be copied to the ex17.txt file.
