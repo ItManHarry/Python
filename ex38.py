@@ -12,9 +12,15 @@ while len(stuff) != 10 :
 	stuff.append(next_one)
 	print "There's %d items now." % len(stuff)
 print "Here we go : ", stuff
+print "-" * 60
 for s in stuff :
 	print "Element is : %s" % s
+print "-" * 60
+for i in range(0,len(stuff)) :
+	print "Element  is : %s" % stuff[i]
+print "-" * 60
 print "Element of first index : ", stuff[1]
 print "Try this : ", stuff[-1]
 print ' '.join(stuff)
+#print stuff.join(" ")
 print "#".join(stuff[3:5])
