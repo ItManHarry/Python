@@ -15,7 +15,7 @@ class MyStuff():
 		print "My information is : {Name : %s, Age : %d, Birthday : % s}" %(self.name, self.age, self.birthday)
 	address = ""
 happy_birth = Song(["Happy birthday to you",
-	"happy birthday to you ",
+    "happy birthday to you ",
 	"happy birthday to my friend"])
 happy_birth.sing_me_a_song()
 print happy_birth.lyrics
