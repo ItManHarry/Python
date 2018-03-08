@@ -3,7 +3,7 @@ class Song(object):
 		self.lyrics = lyrics
 	def sing_me_a_song(self):
 		for line in self.lyrics:
-			print line
+			print line			
 class MyStuff():
 	def __init__(self):
 		self.age = 35
@@ -13,7 +13,7 @@ class MyStuff():
 		print "I am MyStuff's Apple."
 	def info(self):
 		print "My information is : {Name : %s, Age : %d, Birthday : % s}" %(self.name, self.age, self.birthday)
-	address = ""	
+	address = ""
 happy_birth = Song(["Happy birthday to you",
 	"happy birthday to you ",
 	"happy birthday to my friend"])
