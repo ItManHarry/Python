@@ -2,11 +2,11 @@
 
 ## Install Packages:
 
-1. pip from http://pypi.python.org/pypi/pip
-	1 
+- pip from http://pypi.python.org/pypi/pip
+	-  Install
 
-2. distribute from http://pypi.python.org/pypi/distribute
+- distribute from http://pypi.python.org/pypi/distribute
 
-3. nose from http://pypi.python.org/pypi/nose
+- nose from http://pypi.python.org/pypi/nose
 
-4. virtualenv from http://pypi.python.org/pypi/virtualenv
+- virtualenv from http://pypi.python.org/pypi/virtualenv
