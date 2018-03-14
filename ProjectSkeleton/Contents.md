@@ -8,8 +8,28 @@
 
 	- upgrade the pip on windows:
 		python -m pip install -U pip
+		
 - distribute from http://pypi.python.org/pypi/distribute
 
+ 	- user pip to install the distribue:
+	
+	```
+	pip install distribute
+	```
+
+	
 - nose from http://pypi.python.org/pypi/nose
 
+	- user pip to install the distribue:
+	
+	```
+	pip install nose
+	```
+
 - virtualenv from http://pypi.python.org/pypi/virtualenv
+
+	- user pip to install the distribue:
+	
+	```
+	pip install virtualenv
+	```
