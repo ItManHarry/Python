@@ -11,7 +11,7 @@
 		
 - distribute from http://pypi.python.org/pypi/distribute
 
- 	- user pip to install the distribue:
+ 	- use pip to install the distribue:
 	
 	```
 	pip install distribute
@@ -20,7 +20,7 @@
 	
 - nose from http://pypi.python.org/pypi/nose
 
-	- user pip to install the distribue:
+	- use pip to install the nose:
 	
 	```
 	pip install nose
@@ -28,7 +28,7 @@
 
 - virtualenv from http://pypi.python.org/pypi/virtualenv
 
-	- user pip to install the distribue:
+	- use pip to install the virtualenv:
 	
 	```
 	pip install virtualenv
