@@ -1,5 +1,6 @@
 MANIFEST.in
 pkg_resources.py
+setup.cfg
 setup.py
 distribute.egg-info/PKG-INFO
 distribute.egg-info/SOURCES.txt
