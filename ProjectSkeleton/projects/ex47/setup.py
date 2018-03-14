@@ -2,7 +2,7 @@ try:
 	from setuptools import setup
 except ImportError:
 	from distutils.core import setup
-config = [
+config = {
 	'description':'My First Python Project For Test',
 	'author':'Harry',
 	'url':'URL to get it.',
@@ -13,5 +13,5 @@ config = [
 	'packages':['ex47'],
 	'scripts':[],
 	'name':'ex47',
-]
+}
 setup(**config)
