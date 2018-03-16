@@ -1,4 +1,4 @@
-# _*_  coding:utf-8 _*_.
+# _*_  coding:utf-8 _*_
 print "Hello World!"
 print "Hell Again!"
 print "I like typing this."
