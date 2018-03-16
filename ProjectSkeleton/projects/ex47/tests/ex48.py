@@ -21,7 +21,7 @@ class Lexicon(object):
 			elif word in self.nouns:
 				self.sen.append(('noun', word))
 			else:					
-				self.sen.append(('number', convert_number(word)))
+				self.sen.append(('number', self.convert_number(word)))
 	def convert_number(self, s):
 		try:
 			return int(s)
