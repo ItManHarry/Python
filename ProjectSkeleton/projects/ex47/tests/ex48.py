@@ -10,6 +10,7 @@ class Lexicon(object):
 	def scan(self, sentence):
 		self.sentence = sentence
 		words = self.sentence.split(' ')
+		print "The words is : ",words
 		self.sen = []
 		for word in words:
 			if word in self.directions:
@@ -22,12 +23,15 @@ class Lexicon(object):
 				self.sen.append(('noun', word))
 			else:					
 				self.sen.append(('number', self.convert_number(word)))
+		return self.sen
 	def convert_number(self, s):
 		try:
 			return int(s)
 		except ValueError:
-			return None
+			return s
 lexicon = Lexicon()
+lexicon.scan("north")
+print lexicon.sen
 lexicon.scan('in the south there is a gold house I want to go maybe there should be a bear on the road or a dragon 34 90')
 for tuple in lexicon.sen:
 	print "Tuple is : ", tuple
