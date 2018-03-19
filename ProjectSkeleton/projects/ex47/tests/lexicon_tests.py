@@ -7,9 +7,9 @@ def test_directions():
 	result = lexicon.scan("north south east")
 	assert_equal(result, [('direction','north'),('direction','south'),('direction','east')])
 def	test_verbs():
-		assert_equal(lexicon.scan("go"), [('verb','go')])
-		result = lexicon.scan("go kill eat")
-		assert_equal(result, [('verb','go'),('verb','kill'),('verb','eat')])
+	assert_equal(lexicon.scan("go"), [('verb','go')])
+	result = lexicon.scan("go kill eat")
+	assert_equal(result, [('verb','go'),('verb','kill'),('verb','eat')])
 def test_stops():
 	assert_equal(lexicon.scan("the"),[('stop','the')])
 	result = lexicon.scan("the in of")
