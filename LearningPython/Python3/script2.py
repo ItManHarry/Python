@@ -71,3 +71,31 @@ print("Lower case is : {0}, upper case is : {1}!".format("spam","SPAM"))
 print("Lower case is : {}, upper case is : {}!".format("spam","SPAM"))
 print("{:,.2f}".format(296999.2567))
 print("%.2f | %+05d" %(3.14159, -42))
+s = "A\nB\tC"
+print(s)
+print("The length of the s is : ", len(s))
+print(ord("\n"))
+s = "a\0B\0C"
+print("Now the s is : ", s)
+s = """
+	aaaaaa,
+	bbbbbb,
+	cccccc,
+	dddddd,
+	'eeeee',
+	'fffff'
+	c:\\uses\\20112004\\desktop,
+	d:/java/projects
+"""
+print(s)
+print("*" * 70)
+#Unicode Strings
+s = 'sp\xc4m'
+print(s)
+s = 'a\x01c'
+print(s)
+s = b'a\x01c'
+print(s)
+s = "sp\xc4\u00c4\U000000c4m"
+print(s)
+print('\u00A3', '\u00A3'.encode('latin1'), b'\xA3'.decode('latin1'))
