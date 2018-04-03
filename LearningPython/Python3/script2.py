@@ -99,3 +99,4 @@ print(s)
 s = "sp\xc4\u00c4\U000000c4m"
 print(s)
 print('\u00A3', '\u00A3'.encode('latin1'), b'\xA3'.decode('latin1'))
+print("*" * 80)
