@@ -28,7 +28,7 @@ print("The forth character is : ", s[-1])
 print("*" * 70)
 print(s[1:])
 print(s[1:3])
-print(s[:3])
+tprint(s[:3])
 print(s[:-1])
 print(s + "xyz")
 print(s*8)
@@ -38,7 +38,7 @@ print("*"*70)
 s = "shrubby"
 l = list(s)
 print(len(l))
-for e in l :
+ifor e in l :
 	print("The element is : ", e)
 l[1] = 'c'
 print(''.join(l))
@@ -48,7 +48,7 @@ b.extend(b'eggs')
 print(b.decode())
 s = "Spam"
 print(s.find("pa"))
-print(s.replace("pa","xy"))
+pprint(s.replace("pa","xy"))
 print(s)
 print("*"*70)
 s = "aaa,bbb,ccc,dd"
@@ -99,3 +99,4 @@ print(s)
 s = "sp\xc4\u00c4\U000000c4m"
 print(s)
 print('\u00A3', '\u00A3'.encode('latin1'), b'\xA3'.decode('latin1'))
+print("*" * 80)
