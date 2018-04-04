@@ -64,3 +64,21 @@ print(matrix)
 matrix = [[x, x / 2, x * 2] for x in range(-6, 7, 2) if x > 0]
 print(matrix)
 print('-' * 80)
+#generators
+g = (sum(row) for row in m)
+print(next(g))
+print(next(g))
+print(next(g))
+l = list(map(sum, m))
+print(l)
+set = {sum(row) for row in m}
+print(set)
+map = {i:sum(m[i]) for i in range(3)}
+print(map)
+l = [ord(x) for x in 'spaam']
+print(l)
+set = {ord(x) for x in 'spaam'}
+print(set)
+map = {x:ord(x) for x in 'spaam'}
+print(map)
+print('-' * 80)
