@@ -1,1 +1,5 @@
 print('-' * 80)
+print(40 + 3.14)
+print(int(3.1415))
+print(float(3))
+print('-' * 80)
