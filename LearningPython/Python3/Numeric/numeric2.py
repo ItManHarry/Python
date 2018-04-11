@@ -1,4 +1,5 @@
 import math
+import random
 #Division:classic,floor,and True
 #the '/' operand and '//' operand
 print('-' * 80)
@@ -40,4 +41,25 @@ x = 1
 print(x << 2)
 print(x | 2)
 print(x & 1)
+print('-' * 80)
+print('PI is : ', math.pi, ', E is : ', math.e)
+print('Sin is : ', math.sin(2 * math.pi / 180))
+print('144 square root is : ', math.sqrt(144), ',2 square root is : ', math.sqrt(2))
+print(pow(2,4), 2 ** 4, 2.0 ** 4.0)
+print(abs(-42.0), sum((1,2,3,4)))
+print(min(2,3,1,4), max(1,3,4,7))
+print(math.trunc(2.657))
+print(round(2.567), round(2.467), round(2.567, 2))
+print('%.1f' % 2.567, '{0:.2f}'.format(2.567))
+print('-' * 80)
+print(random.random())
+print(random.randint(1, 10))
+print(random.randint(1, 10))
+print(random.choice(['A','B','C','D','E']))
+print(random.choice(['A','B','C','D','E']))
+suits = ['B','C','F','A','D']
+random.shuffle(suits)
+print(suits)
+random.shuffle(suits)
+print(suits)
 print('-' * 80)
