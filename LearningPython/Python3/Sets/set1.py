@@ -1,0 +1,57 @@
+#an unordered collection of unique and immutable 
+#objects that supports operations corresponding to
+#mathematical set theory
+# python 2.6 and earlier
+print('-' * 80)
+x = set('abcdeabcde')
+y = set('bdxyzbdxyz')
+print('Set x is : ', x)
+print('set y is : ', y)
+print('Difference : ', (x - y))
+print('Union : ', (x | y))
+print('Intersection : ', (x & y))
+print('Symmetric difference : ', x ^ y)
+print('Superset : ', x > y)
+print('Subset : ', x < y)
+print('e' in x)
+print(22 in [11,22,33])
+print('-' * 80)
+#set methods
+x = set('abcde')
+y = set('bdxyz')
+z = x.intersection(y)
+print(z)
+z.add('spam')
+print(z)
+z.update(set(['x', 'y']))
+print(z)
+z.remove('b')
+print(z)
+for item in set('abc'):
+	print(item * 3)
+print('-' * 80)
+s = set([1,2,3])
+print(s | set([3,4]))
+print(s)
+print(s.union([3,4]))
+print(s.intersection((1,3,5)))
+print(s.issubset(range(-5,5)))
+print('-' * 80)
+#python 3.x 
+s = {1,2,3,4}
+print(s)
+s = {'a','b','c','d','e'}
+print(s)
+s.add('alot')
+print(s)
+s = {1,2,3,4}
+print(s & {1,3})
+print({1,5,3,6} | s)
+print(s - {1,3,4})
+print(s > {1,3})
+print(s - {1,2,3,4})
+print(type({}))
+s = set()
+s.add(1.23)
+print(s)
+print('-' * 80)
