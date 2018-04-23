@@ -60,3 +60,45 @@
 - String slicing
 
 ![String Slice](https://github.com/ItManHarry/Python/blob/master/LearningPython/Python3/String/stringSlice.jpg)
+
+- Indexing (S[i]) fetches components at offsets:
+	
+	- The first item is at offset 0.
+	
+	- Negative indexes mean to count backward from the end or right.
+	
+	- S[0] fetches the first item.
+	
+	- S[−2] fetches the second item from the end (like S[len(S)−2]).
+	
+- Slicing (S[i:j]) extracts contiguous sections of sequences:
+
+	- The upper bound is noninclusive.
+	
+	- Slice boundaries default to 0 and the sequence length, if omitted.
+	
+	- S[1:3] fetches items at offsets 1 up to but not including 3.
+	
+	- S[1:] fetches items at offset 1 through the end (the sequence length).
+	
+	- S[:3] fetches items at offset 0 up to but not including 3.
+	
+	- S[:−1] fetches items at offset 0 up to but not including the last item.
+	
+	- S[:] fetches items at offsets 0 through the end—making a top-level copy of S.
+	
+- Extended slicing (S[i:j:k]) accepts a step (or stride) k, which defaults to +1:
+	
+	- Allows for skipping items and reversing order—see the next section.
+	
+- String Conversion Tools
+
+	- int("42"), float("1.5"), str(42), str(3.1515) 	# Convert from/to string
+	
+	- repr(42) 											# Convert to as-code string
+
+- Character code conversions
+
+	- ord function  # from character to int
+	
+	- chr function  # from int to character
