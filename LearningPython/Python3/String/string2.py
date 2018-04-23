@@ -55,4 +55,44 @@ s = chr(ord(s) + 1)
 print('now the s is : ',s)
 s = chr(ord(s) + 1)
 print('now the s is : ',s)
+print('2 square is : ', 2 ** 0)
+b = '1101'
+i = 0
+while b != '':
+	i = i * 2 + (ord(b[0]) - ord('0'))
+	b = b[1:]
+print('finally i is : ', i)
+print(int('1101', 2))	# Convert binary to integer: built-in
+print(bin(13))			# Convert integer to binary: built-in
+print('-' * 80)
+s = 'spam'
+s = s + 'SPAM!'
+print(s)
+s = s[:4] + 'Burger' + s[-1]
+print(s)
+s = 'splot'
+s = s.replace('pl','pamal')
+print(s)
+print('That is %d %s bird!' %(1,'dead'))
+print('That is {0} {1} bird!'.format(1,'dead'))
+print('-' * 80)
+s = 'spam'
+r = s.find('pas')
+print("'pas' is in the s ? ", r)
+#String methods
+print('-' * 80)
+s = 'spammy'
+s = s[:3] + 'xx' + s[5:]	# Slice sections from S
+print(s)
+s = s.replace('xx', 'zz')
+print('after replace the s now is : ', s)
+print('aa$bb$cc$dd'.replace('$','SPAM'))
+s = 'xxxSPAMxxxxSPAMxxxx'
+index = s.find('SPAM')		# Search for position
+print('index is : ', index)
+s = s[:index] + 'EGGS' + s[(index+4):]
+print(s)
+s = 'xxxSPAMxxxxSPAMxxxx'
+print(s.replace('SPAM','EGGS'))		# Replace all
+print(s.replace('SPAM','EGGS',1))	# Replace one
 print('-' * 80)

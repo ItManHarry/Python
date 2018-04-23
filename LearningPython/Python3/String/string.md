@@ -100,3 +100,62 @@
 	- ord function  # from character to int
 	
 	- chr function  # from int to character
+
+# String Methods
+
+- Attribute fetches
+
+	An expression of the form object.attribute means “fetch the value of attribute
+in object.”
+
+- Call expressions
+
+	An expression of the form function(arguments) means “invoke the code of func
+tion, passing zero or more comma-separated argument objects to it, and return
+function’s result value.”
+
+| String Methods |
+| --- |
+| S.capitalize() | 
+| S.ljust(width [, fill])| 
+| S.casefold() | 
+| S.lower()| 
+| S.center(width [, fill]) | 
+| S.lstrip([chars])| 
+| S.count(sub [, start [, end]]) | 
+| S.maketrans(x[, y[, z]])| 
+| S.encode([encoding [,errors]]) | 
+| S.partition(sep)| 
+| S.endswith(suffix [, start [, end]]) | 
+| S.replace(old, new [, count])| 
+| S.expandtabs([tabsize]) | 
+| S.rfind(sub [,start [,end]])| 
+| S.find(sub [, start [, end]]) | 
+| S.rindex(sub [, start [, end]])| 
+| S.format(fmtstr, *args, **kwargs)|  
+| S.rjust(width [, fill])| 
+| S.index(sub [, start [, end]]) | 
+| S.rpartition(sep)| 
+| S.isalnum() | 
+| S.rsplit([sep[, maxsplit]])| 
+| S.isalpha() | 
+| S.rstrip([chars])| 
+| S.isdecimal() | 
+| S.split([sep [,maxsplit]])| 
+| S.isdigit() | 
+| S.splitlines([keepends])| 
+| S.isidentifier() | 
+| S.startswith(prefix [, start [, end]])| 
+| S.islower() | 
+| S.strip([chars])| 
+| S.isnumeric() | 
+| S.swapcase()| 
+| S.isprintable() | 
+| S.title()| 
+| S.isspace() | 
+| S.translate(map)| 
+| S.istitle() | 
+| S.upper()| 
+| S.isupper()|  
+| S.zfill(width)| 
+| S.join(iterable)| 
