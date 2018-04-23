@@ -1,3 +1,5 @@
+# Common string literals and operations
+
 ```
 	Operation 					Interpretation
 	S = '' 						Empty string
@@ -30,3 +32,31 @@
 	map(ord, S)
 	re.match('sp(.*)am', line) 	Pattern matching: library module
 ```
+# String backslash characters
+
+```
+	Escape 				Meaning
+	\newline 			Ignored (continuation line)
+	\\ 					Backslash (stores one \)
+	\' 					Single quote (stores ')
+	\" 					Double quote (stores ")
+	\a 					Bell
+	\b 					Backspace
+	\f 					Formfeed
+	\n 					Newline (linefeed)
+	\r 					Carriage return
+	\t 					Horizontal tab
+	\v 					Vertical tab
+	\xhh 				Character with hex value hh (exactly 2 digits)
+	\ooo 				Character with octal value ooo (up to 3 digits)
+	\0 					Null: binary 0 character (doesn’t end string)
+	\N{ id } 			Unicode database ID
+	\uhhhh 				Unicode character with 16-bit hex value
+	\Uhhhhhhhh 			Unicode character with 32-bit hex valuea
+	\other 				Not an escape (keeps both \ and other)
+```
+# String in Action
+
+- String slicing
+
+![String Slice]()
