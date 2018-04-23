@@ -59,4 +59,4 @@
 
 - String slicing
 
-![String Slice]()
+![String Slice](https://github.com/ItManHarry/Python/blob/master/LearningPython/Python3/String/stringSlice.jpg)
