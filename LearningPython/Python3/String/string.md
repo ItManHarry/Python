@@ -159,3 +159,35 @@ function’s result value.”
 | S.isupper()|  
 | S.zfill(width)| 
 | S.join(iterable)| 
+
+# String Formatting Expressions
+
+- String formatting expressions: '...%s...' % (values)
+	
+	The original technique available since Python’s inception, this form is based upon
+the C language’s “printf” model, and sees widespread use in much existing code.
+
+- String formatting method calls: '...{}...'.format(values)
+
+	A newer technique added in Python 2.6 and 3.0, this form is derived in part from
+a same-named tool in C#/.NET, and overlaps with string formatting expression
+functionality.
+
+| Code | Meaning |
+| --- | --- |	 					
+| s | String (or any object’s str(X) string) |
+| r | Same as s, but uses repr, not str |
+| c | Character (int or str) |
+| d | Decimal (base-10 integer) |
+| i | Integer |
+| u | Same as d (obsolete: no longer unsigned) |
+| o | Octal integer (base 8) |
+| x | Hex integer (base 16) |
+| X | Same as x, but with uppercase letters |
+| e | Floating point with exponent, lowercase |
+| E | Same as e, but uses uppercase letters |
+| f | Floating-point decimal |
+| F | Same as f, but uses uppercase letters |
+| g | Floating-point e or f |
+| G | Floating-point E or F |
+| % | Literal % (coded as %%) |
