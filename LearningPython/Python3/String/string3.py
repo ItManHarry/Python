@@ -56,3 +56,17 @@ print('%E' %x)
 print('%-6.2f | %05.2f | %+06.1f' %(x,x,x))
 print('%s' % x, str(x))
 print('-' * 80)
+#Dictionary-Based Formatting Expressions
+print('%(qty)d more %(food)s' %{'qty':1,'food':'spam'})
+reply = """
+	Greeting...
+	Hello %(name)s
+	Your age is %(age)s
+"""
+values = {'name':'Harry','age':35}
+print(reply % values)
+food = 'spam'
+qty = 10
+#print(vars())
+print('%(qty)d more %(food)s' % vars())
+print('-' * 80)
