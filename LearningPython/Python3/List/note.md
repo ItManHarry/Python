@@ -35,3 +35,5 @@
 | L[i:j] = [4,5,6] |  |
 | L = [x**2 for x in range(5)] | List comprehensions and maps |
 | list(map(ord, 'spam')) |  |
+
+- List in action
