@@ -27,4 +27,8 @@ print('first={0}, last={1}, middle={2}'.format(*parts))
 s = 'IamHarryCheng'
 i = s.find('Harry')
 print(s[1:i])
+def myformat(fmt, args):
+	return fmt % args
+print('MyFormat 1 : ', myformat('%s %s', (88, 99)))
+#print('MyFormat 2 : ', myformat('{}, {} ', (88, 99)))
 print('-' * 80)
