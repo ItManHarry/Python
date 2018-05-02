@@ -25,3 +25,88 @@ print(res)
 res = list(map(abs, [-1,-2,0,1,2]))
 print(res)
 print('-' * 80)
+l = ['spam','Spam','SPAM']
+print(l[2])
+print(l[-2])
+print(l[1:])
+l[1] = 'eggs'
+print(l)
+l[0:2] = ['eat','more']
+print(l)
+print('-' * 80)
+ml = [[1,2,3],[4,5,6],[7,8,9]]
+print(ml[1])
+print(ml[1][1])
+print(ml[2][0])
+print('-' * 80)
+l = [1,2,3]
+l[1:2] = [4,5]
+print(l)
+l[1:1] = [6,7]
+print(l)
+l[1:2] = []
+print(l)
+print('-' * 80)
+l = [1]
+l[:0] = [2,3,4]
+print(l)
+l[len(l):] = [5,6,7]
+print(l)
+l.extend([8,9,10])
+print(l)
+print('-' * 80)
+l = ['eat','more','SPAM!']
+l.append('please')
+print(l)
+l.sort()
+print(l)
+print('-' * 80)
+l = ['abc','ABD','aBe']
+l.sort()
+print(l)
+l.sort(key=str.lower)
+print(l)
+l.sort(key=str.lower,reverse=True)
+print(l)
+l = ['abc','ABD','aBe']
+print(sorted(l, key=str.lower, reverse=True))
+print(l)
+print(sorted([x.lower() for x in l], reverse=True))
+print('-' * 80)
+l = [1,2]
+l.extend([3,4,5,6])
+print(l)
+l.pop()
+print(l)
+l.reverse()
+print(l)
+print(list(reversed(l)))
+print(l)
+l = []
+l.append(1)
+l.append(2)
+print(l)
+l.pop()
+print(l)
+print('-' * 80)
+l = ['spam','eggs','ham']
+print(l.index('eggs'))
+l.insert(1, 'toast')
+print(l)
+l.remove('eggs')
+print(l)
+l.pop(1)
+print(l)
+print(l.count('spam'))
+print('-' * 80)
+l = ['spam','eggs','ham','toast']
+del(l[0])
+print(l)
+del(l[1:])
+print(l)
+l = ['Already','got','one']
+l[1:] = []
+print(l)
+l[0] = []
+print(l)
+print('-' * 80)
