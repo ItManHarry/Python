@@ -57,3 +57,27 @@ print(s)
 s = [key for key in table.keys() if table[key] == v]
 print(s)
 print('-' * 80)
+#Other Ways to Make Dictionaries
+d = {}
+d['name'] = 'Harry'
+d['age'] = 35
+print(d)
+d = dict(name='Bob',age=26)
+print('Now the d is : ', d)
+d = dict([('name','Jack'),('age',40)])
+print('After change the dictionary now is : ', d)
+#create a dictionary by using fromkeys method:the values are all the same
+d = dict.fromkeys(['a','b','c'],100)
+print('Dictionary created by fromkeys method : ', d)
+#create a dictionary by zip method
+d = dict(zip(['a','b','c'],[1,2,3]))
+print(d)
+for k in d.keys():
+	print('Key is : ', k , ' value : ', d[k])
+d = {x:x**2 for x in [1,2,3,4]}
+print(d)
+d = {c:c*4 for c in 'SPAM'}
+print(d)
+d = {c.lower():c+'!' for c in ['AAA','BBB','CCC']}
+print(d)
+print('-' * 80)
