@@ -80,4 +80,20 @@ d = {c:c*4 for c in 'SPAM'}
 print(d)
 d = {c.lower():c+'!' for c in ['AAA','BBB','CCC']}
 print(d)
+d = dict.fromkeys('spam')
+print(d)
+d = dict(a=1,b=2,c=3)
+print(d)
+k = d.keys()
+print(k)
+l = list(k)
+print(l)
+v = d.values()
+print(v)
+print(list(v))
+for k in d.keys():
+	print('Key is : ', k , ' value is : ', d[k])
+for k in d:
+	print('Key is : ', k , ' value is : ', d[k])
+
 print('-' * 80)
