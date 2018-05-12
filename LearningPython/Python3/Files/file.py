@@ -1,4 +1,6 @@
 import pickle
+import json
+import csv
 print('-' * 80)
 afile = open('file.txt')
 print(afile)
@@ -58,4 +60,21 @@ f = open('datafile.pkl', 'rb')
 d = pickle.load(f)
 print(d)
 f.close()
+print('-' * 80)
+name = dict(first='Guoqian',last='Cheng')
+rec = dict(name=name,jobs=['Dev','Mgr'],age=35)
+print('dictionary : ',rec)
+s = json.dumps(rec)
+print('from dictionary to json object : ',s)
+o = json.loads(s)
+print('dictionary(from json object to dictionary) : ',o)
+print('Write the json object to the file now ...')
+json.dump(rec, open('jsondata.txt','w'),indent=4)
+p = json.load(open('jsondata.txt'))
+print('loaded from the file : ' , p)
+print('-' * 80)
+#CSV (comma-separated value)
+rdr = csv.reader(open('csvdata.txt'))
+for row in rdr:
+	print(row)
 print('-' * 80)
