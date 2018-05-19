@@ -33,3 +33,17 @@ values and are not ordered, so sets are neither a mapping nor a sequence type;
 frozenset is an immutable variant of set.
 - In addition to type category operations, as of Python 2.6 and 3.0 all the types in
 Table 9-3 have callable methods, which are generally specific to their type.
+
+## Object truth values
+
+| Object | Value | 
+| --- | --- |
+| "spam" |  True |
+| "" |  False |
+| [1, 2] |  True |
+| []  | False |
+| {'a': 1} |  True |
+| {}  | False |
+| 1  | True |
+| 0.0  | False |
+| None  | False  |

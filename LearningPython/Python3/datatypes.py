@@ -39,3 +39,20 @@ if s1 == s2 and s1 is s2:
 else:
 	print('string1 and string2 are not the same')
 print('-' * 80)
+l1 = [1,('a',2)]
+l2 = [2,('a',3)]
+print('l1 is lass than l2 : ', l1 < l2)
+print('l1 equals with l2 : ', l1 == l2)
+print('l1 is greater than l2 : ', l1 > l2)
+print('abc is less than ac ? ', 'abc' < 'ac')
+print('-' * 80)
+print(bool(1))
+print(bool('spam'))
+print(bool(''))
+print(bool({'a':1}))
+print(bool(None))
+print('-' * 80)
+print('type of list : ', type([1]))
+print('type of list : ', type([]) == list)
+print('type of list : ', isinstance([1], list))
+print('-' * 80)
