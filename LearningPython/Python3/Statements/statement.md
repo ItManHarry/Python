@@ -26,3 +26,15 @@
 | assert | Debugging checks | assert X > Y, 'X too small' |	
 | with/as | Context managers (3.X, 2.6+) | with open('data') as myfile:process(myfile) |	
 | del | Deleting references | del data[k] del data[i:j] del obj.attr del variable |
+
+## Assignment statement forms
+
+| Operation | Interpretation |
+| --- | --- |
+| spam = 'Spam' | Basic form |
+| spam, ham = 'yum', 'YUM' | Tuple assignment (positional) |
+| [spam, ham] = ['yum', 'YUM'] | List assignment (positional) |
+| a, b, c, d = 'spam' | Sequence assignment, generalized |
+| a, *b = 'spam' | Extended sequence unpacking (Python 3.X) |
+| spam = ham = 'lunch' | Multiple-target assignment |
+| spams += 42 | Augmented assignment (equivalent to spams = spams + 42) |
