@@ -38,3 +38,12 @@
 | a, *b = 'spam' | Extended sequence unpacking (Python 3.X) |
 | spam = ham = 'lunch' | Multiple-target assignment |
 | spams += 42 | Augmented assignment (equivalent to spams = spams + 42) |
+
+## Python 3.X reserved words
+False class finally is return
+None continue for lambda try
+True def from nonlocal while
+and del global not with
+as elif if or yield
+assert else import pass
+break except in raise
