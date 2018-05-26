@@ -1,3 +1,4 @@
+import sys
 print('-' * 80)
 spam = 'Spam'
 print('spam is : ', spam)
@@ -106,4 +107,26 @@ print('list m is : ', m)
 l += [5,6]		#But += really means extend
 print('list l is : ', l)
 print('list m is : ', m)
+print('-' * 80)
+x = print('spam')
+print('x is : ', x)
+print('-' * 80)
+sys.stdout.write('printed by sys.stdout.write\n')
+print('printed by print method')
+print('-' * 80)
+temp = sys.stdout
+sys.stdout = open('log.txt', 'a')
+print('spam')
+print(1,2,3)
+sys.stdout.close()
+sys.stdout = temp
+print('back here')
+print(open('log.txt').read())
+log = open('log2.txt','a')
+print('x,y,z', file=log)
+print('a,b,c')
+log = open('log3.txt','w')
+print(1,2,3,file=log)
+print(4,5,6,file=log)
+log.close()
 print('-' * 80)
