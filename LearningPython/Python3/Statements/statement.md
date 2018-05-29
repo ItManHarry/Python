@@ -93,3 +93,45 @@ when you are working interactively.
 | print(a, b, c, sep='') | Printing operations in Python 3.X |
 | yield x ** 2 | Yielding expression statements |
 
+## Python Syntax Revisited
+
+- Statements execute one after another, until you say otherwise
+
+	Python normally runs statements in a file or nested block in order from first to last as a
+	sequence, but statements like if (as well as loops and exceptions) cause the interpreter
+	to jump around in your code. Because Python’s path through a program is
+	called the control flow, statements such as if that affect it are often called controlflow
+	statements.
+
+-  Block and statement boundaries are detected automatically
+
+	As we’ve seen, there are no braces or “begin/end” delimiters around blocks of code in Python;
+	instead, Python uses the indentation of statements under a header to group the
+	statements in a nested block. Similarly, Python statements are not normally terminated
+	with semicolons; rather, the end of a line usually marks the end of the
+	statement coded on that line. As a special case, statements can span lines and be
+	combined on a line with special syntax.
+
+- Compound statements = header + “:” + indented statements
+
+	All Python compound statements—those with nested statements—follow the same pattern: a
+	header line terminated with a colon, followed by one or more nested statements,
+	usually indented under the header. The indented statements are called a block (or
+	sometimes, a suite). In the if statement, the elif and else clauses are part of the
+	if, but they are also header lines with nested blocks of their own. As a special case,
+	blocks can show up on the same line as the header if they are simple noncompound
+	code.
+
+- Blank lines, spaces, and comments are usually ignored
+
+	Blank lines are both optional and ignored in files (but not at the interactive prompt, when they terminate compound statements). Spaces inside statements and expressions are almost always ignored (except in string literals, and when used for indentation). Comments are always ignored: they start with a # character (not inside a string literal) and extend to the end of the current line.
+
+- Docstrings are ignored but are saved and displayed by tools
+
+	Python supports an additional comment form called documentation strings (docstrings for short),
+	which, unlike # comments, are retained at runtime for inspection. Docstrings are
+	simply strings that show up at the top of program files and some statements. Python
+	ignores their contents, but they are automatically attached to objects at runtime
+	and may be displayed with documentation tools like PyDoc. Docstrings are part
+	of Python’s larger documentation strategy and are covered in the last chapter in
+	this part of the book.
