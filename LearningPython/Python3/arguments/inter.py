@@ -22,7 +22,15 @@ def intersect2(*args):
 					break
 			if b:
 				result.append(x)
-	return result					
+	return result
+def unionall(*args):
+	result = []
+	for s in args:
+		for x in s:
+			if x not in result:
+				result.append(x)
+	return result
 print(intersect(intersect('SPAM', 'SCAM'),'CAM'))
 print(intersect('SPAM','SCAM','SPAM'))
 print(intersect2('SPAM','SCAM','SPAM'))
+print(unionall('SPAM','SCAM','SPAM'))
