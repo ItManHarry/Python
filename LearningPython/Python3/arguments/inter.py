@@ -1,3 +1,4 @@
+print('-' * 80)
 def intersect(*args):
 	res = []
 	for x in args[0]:
@@ -34,3 +35,24 @@ print(intersect(intersect('SPAM', 'SCAM'),'CAM'))
 print(intersect('SPAM','SCAM','SPAM'))
 print(intersect2('SPAM','SCAM','SPAM'))
 print(unionall('SPAM','SCAM','SPAM'))
+print('-' * 80)
+def tester(func, items, trace=True):
+	for i in range(len(items)):
+		items = items[1:] + items[:1]
+		if trace:
+			print(items)
+		print(sorted(func(*items)))
+tester(intersect, ('a', 'abcdefg', 'abdst', 'albmcnd'))
+print('-' * 80)
+tester(unionall, ('a', 'abcdefg', 'abdst', 'albmcnd'), False)
+print('-' * 80)
+tester(intersect, ('ba', 'abcdefg', 'abdst', 'albmcnd'), False)
+print('-' * 80)
+tester(intersect2, ('ba',), False)
+print('-' * 80)
+print(intersect2([1,2,1,3],[1,1,4]))
+print('-' * 80)
+print(unionall([1,2,1,3],[1,1,4]))
+print('-' * 80)
+tester(intersect2, ('ababa','abcdefg','aaab'), False)
+print('-' * 80)
