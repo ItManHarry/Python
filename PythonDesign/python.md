@@ -1,4 +1,4 @@
-#pip的安装与使用
+# pip的安装与使用
 
 	- pip在python3.X的版本中已自动安装，使用命令：pip --version即可查看对应的版本。
 	
