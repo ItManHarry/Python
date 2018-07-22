@@ -30,19 +30,19 @@
 	
 	注：以上命令需在管理员模式下执行（windows），Linux下使用root账号执行即可。
 	
-	一些是绘制sin函数图形的程序：
+	以下是绘制sin函数图形的程序：
 	
-	```python
-		import numpy as np
-		import matplotlib.pyplot as pt
-		x = np.arange(0,360)
-		y = np.sin(x * np.pi / 180.0)
-		pt.plot(x,y)
-		pt.xlim(0.360)
-		pt.ylim(-1.2,1.2)
-		pt.title('Sin Function')
-		pt.show()
-	```
+```python
+	import numpy as np
+	import matplotlib.pyplot as pt
+	x = np.arange(0,360)
+	y = np.sin(x * np.pi / 180.0)
+	pt.plot(x,y)
+	pt.xlim(0.360)
+	pt.ylim(-1.2,1.2)
+	pt.title('Sin Function')
+	pt.show()
+```
 # Python在线资源与支持
 
 	- PypI网站
