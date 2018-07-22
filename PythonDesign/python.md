@@ -18,7 +18,8 @@
 		
 # 高级软件包的安装 - Anaconda工具
 
-	Anaconda工具是一个包含300多种最受欢迎的科学、工程、数学和数据分析的Python软件组合包，以安装文件的形式在网络上发布，官网地址：
+	Anaconda工具是一个包含300多种最受欢迎的科学、工程、数学和数据分析的Python软件
+	组合包，以安装文件的形式在网络上发布，官网地址：
 	
 	https://www.anaconda.com/
 	
@@ -30,7 +31,7 @@
 	
 	注：以上命令需在管理员模式下执行（windows），Linux下使用root账号执行即可。
 	
-	以下是绘制sin函数图形的程序：
+以下是绘制sin函数图形的程序：
 	
 ```python
 	import numpy as np
