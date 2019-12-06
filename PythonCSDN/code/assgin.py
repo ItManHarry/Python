@@ -21,3 +21,20 @@ print(3 ** 3)
 print(27 ** (1/3))
 import math
 print(math.sin(3.14 / 4))
+#扩展运算符
+a = 24
+a += 2
+print(a)
+a *= 3
+print(a)
+a /= 4
+print(a)
+a %= 3
+print(a)
+a **= 2
+print(a)
+#索引运算符
+str = "www.baidu.com"
+print(str[3])
+print(str[3:7])
+print(str[3:9:2])
