@@ -156,3 +156,46 @@
 	
 	4. 索引运算符适用于所有的序列（字符串、字节串、列表、元组等）
 	
+- 比较运算符和逻辑运算符
+	
+	1. >, >= : 大于，大于等于
+	
+	2. <, <= : 小于，小于等于
+	
+	3. == : 等于
+	
+	4. != : 不等于
+	
+	5. is(is not) : 判断两个变量的引用对象是否相同（不相同），如果相同（不相同）则返回True， 否则返回False
+	
+	6. and : 与，任一操作数为False，返回便是False
+	
+	7. or : 或，任一操作为为True，返回便是True
+	
+	8. not : 非，操作数为False，返回True，操作数为True，返回False
+	
+- 三目运算符
+
+	Python用if来代替三目运算符
+	
+	语法： True_Statements if expression else Else_Statements
+	
+```python	
+	age = 25
+	print('age bigger than 25' if age > 25 else print('age less than 25'))
+```
+
+	if支持嵌套
+	
+	
+	注：True_Statements可以放置多个语句，如果用“,”号隔开，则返回多个语句返回值组合的元组，如果用“;”号隔开，则返回第一条语句返回的值
+	
+```python	
+	age = 25
+	s = print("比25大"), "成年人" if  age > 25 else print('小于或者等于25')
+	print(s)
+``` 
+	
+- in运算符
+
+	判断一个元素是否在序列之中
