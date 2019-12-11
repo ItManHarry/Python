@@ -203,7 +203,7 @@
 	
 ## 序列、元组
 
-	序列和元组都属于序列，区别在于列表是可变的，元组不可变（程序是无法修改的）。
+- 列表和元组都属于序列，区别在于列表是可变的，元组不可变（程序是无法修改的）。
 	
 	创建方式：
 	
@@ -215,5 +215,85 @@
 		
 	2. 列表用list()创建，元组用tuple()创建方式：
 	
+- 列表、元组访问
+
+	1. 列表、元组通过索引进行访问，可以正向访问也可反向访问(访问单个元素)
+		
+```python
+	my_list = [1,2,3,'Python',3.4]
+	print(my_list[0], my_list[2], my_list[-2])
+```
+
+	2. 截取列表、元素
 	
+```python
+	my_list = [1,2,3,'Python',3.4]
+	print(my_list[1:3])
+	print(my_list[3:-1])
+	print(my_list[1:7:2])
+```	
+
+	3. 列表、元组相加
 	
+	列表、元组支持相加的方法，相加就是列表、元组元素的总和
+	
+```python
+	list1 = [1,2,3]
+	list2 = ['a','b','c']
+	print("list1 + list2 :",list1 + list2)
+	tuple1 = (1,2,3)
+	tuple2 = ('a','b','c')
+	print("tuple1 + tuple2", tuple1 +tuple2)
+```
+	
+	注意：列表只能和列表相加、元组只能和元组相加。如果列表加元组，需要视图list函数将元组转换为列表后再相加
+	
+	4. 列表、元组相乘：意义就是把它们包含的元素重复N次(字符串也支持乘法运算)
+	
+```python
+	list = [1,2,3]
+	print("list * 3 :", list1 * 3)
+	str1 = 'abc'
+	print(str1 * 3)
+```
+	
+## 序列相关函数与封包解包
+
+- 函数
+
+	1. len()
+	
+	2. max()
+	
+	3. min()
+	
+- 封包
+
+	把多个值付给一个变量时，Python会自动将多个值封装成元组，这种功能称为序列封包
+	
+```python
+	pck = 1,2,3,'Python',3.4
+	print(type(pck))
+	print("pck is : ", pck)
+```
+	
+- 解包
+
+	把一个元组付给多个变量时，Python会自动将元组元素分别付给各个变量（变量个数要和元组元素个数相等），这种功能叫做序列解包(适用于元组、字符串)
+	
+```python
+	#全解包
+	params = ['python',1, 2]
+	a,b,c=params
+	print("a is : ",a, "b is : ",b," c is : ",c)
+	#部分解包
+	params = ('a','b','c','d','e')
+	a, *b = params
+```
+
+- Python支持将多个元素付给多个变量
+
+```python
+	a,b,c = 10 , 'Python', 30
+	print("a is : ",a,", b is :", b, ", c is : ", c)
+```
