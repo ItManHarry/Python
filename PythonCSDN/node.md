@@ -1,4 +1,4 @@
-# Python 
+# Python基础
 
 ## 变量
 
@@ -257,7 +257,7 @@
 	print(str1 * 3)
 ```
 	
-## 序列相关函数与封包解包
+### 序列相关函数与封包解包
 
 - 函数
 
@@ -296,4 +296,157 @@
 ```python
 	a,b,c = 10 , 'Python', 30
 	print("a is : ",a,", b is :", b, ", c is : ", c)
+```
+
+- 列表操作方法
+
+	1. 添加
+		
+		1.1. append()：会把传入的参数追加到列表的最后面，如果传入的是一个列表，那么这个列表会被当做一个元素添加到列表最后面。
+		
+```python
+	list1= [1,2,3]
+	list1.append("Java")
+	print("list is :", list1)
+```
+
+		1.2. extend(): 该方法用于追加另一个列表，它会把列表中的每个元素添加到当前列表
+		
+```python
+	list1= [1,2,3]	
+	list1.extend(tuple(range(1,6)))
+	print("list is :", list1)
+```		
+		1.3. insert()：将元素插入到指定的位置
+		
+```python
+	list1= [1,2,3]
+	list1.insert(2,'Jack')
+	print("list is :", list1)
+```
+		
+	2. 删除
+	
+		2.1. del语句是Python专门用来执行删除操作的语句，不仅可以删除列表的某个或者某段元素，也可以用来删除变量
+		
+```python
+	list1= [1,2,3,4,5,6]
+	del list1[2]
+	print('After delete : ', list1)
+	del list1[3:5]
+	print('After delete : ', list1)
+	del list1[2:5:2]
+	print('After delete : ', list1)
+```
+		
+		2.2. remove()方法，不根据index删除，删除第一个匹配的元素
+		
+```python
+	list1= [1,2,3,4,5,6]
+	list1.remove(5)
+	print('After delete : ', list1)
+```
+
+		2.3. 元素赋值，也可实现列表的增加和删除元素
+		
+```python
+	my_list = [1,2,3,'Python']
+	my_list[-2] = 'Java'
+	print("My list is : ", my_list)
+	my_list[2:4] = ['a','b','c']
+	print("My list is : ", my_list)
+	my_list[2:4] = ['Python']
+	print("My list is : ", my_list)
+	#字符串会被当成数组处理
+	my_list[2:4] = 'Python'
+	print("My list is : ", my_list)
+```
+
+	2.4. 列表常用方法
+	
+```python
+	my_list = [1,2,3,'Python']
+	#count()
+	print(my_list.count(1))
+	#index()
+	print(my_list.index(100))
+	#pop()
+	my_list.pop()
+	print(my_list)
+	#reverse()
+	my_list.reverse()
+	print(my_list)
+	my_list = [1,5,2,1,8,2,10,4,19]
+	print(my_list)
+	#sort() - 此方法仅限于列表中的元素是统一类型
+	my_list.sort()
+	print(my_list)
+	my_list.reverse()
+	print(my_list)
+```
+
+## 字典
+
+	字典用于保存具有映射关系的数据（key-value对），key不允许重复
+	
+	创建方式：
+	
+		1. 花括号直接创建
+		
+```python
+	my_dict = {"Java":98, "Python":89,"Javascipt":94}
+	print(my_dict)
+```
+		
+		2. dict构筑器, 可以传入多个列表或者元组参照作为key-value对,也可对dict指定关键字创建字典，此时字段的key不允许使用表达式
+		
+```python
+	#dict构造器构造，参数为列表，列表元素为元组，元组元素只能是两个，一个为key，一个为value
+	my_dict = dict([("Java",100,),("Python",120),("Javascipt",110)])
+	print(my_dict)
+	#dict构造器指定关键字创建字典，此时字段的key不允许使用表达式
+	my_dict = dict(Java=200,Python=300,Javascript=400)
+	print(my_dict)
+```	
+
+	3. 访问字典数据，使用key即可
+	
+	```python
+	#dict构造器构造，参数为列表，列表元素为元组，元组元素只能是两个，一个为key，一个为value
+	my_dict = dict([("Java",100,),("Python",120),("Javascipt",110)])
+	print(my_dict)
+	#dict构造器指定关键字创建字典，此时字段的key不允许使用表达式
+	my_dict = dict(Java=200,Python=300,Javascript=400)
+	print(my_dict)
+	#数据访问 - 通过key 访问
+	print("Java : ", my_dict['Java'])
+```	
+
+	4. 字典数据修改，如果key不存在，相当增加key-value对,如果存在，就是修改对应key的value值
+	
+```python
+	my_dict = dict(Java=200,Python=300,Javascript=400)
+	#修改value，如果key不存在，相当增加key-value对,如果存在，就是修改对应key的value值
+	my_dict['Vue'] = 500
+	print(my_dict)
+	my_dict['Java'] = 900
+	print(my_dict)
+```
+	
+	5. 删除，通过del语句实现即可
+	
+```python
+	my_dict = dict(Java=200,Python=300,Javascript=400)
+	del my_dict['Vue']
+	print(my_dict)
+```
+
+	6. 使用in, not in判断是否包含某一元素，只判断key就行了
+	
+```python
+	my_dict = dict(Java=200,Python=300,Javascript=400)
+	#判断是否存在某个key-value对
+	print('Java' in my_dict)
+	print('Vue' in my_dict)
+	print('Vue' not in my_dict)
 ```

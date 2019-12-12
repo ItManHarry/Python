@@ -55,3 +55,50 @@ print("a is : ",a,", b is :", b, ", c is : ", c)
 #多个值付给多个变量
 a,b,c = 10 , 'Python', 30
 print("a is : ",a,", b is :", b, ", c is : ", c)
+#添加、删除、替换元素
+list1= [1,2,3]
+list1.append("Java")
+print("list is :", list1)
+list1.append(tuple(range(1,6)))
+print("list is :", list1)
+list1.extend(list(range(2,6)))
+print("list is :", list1)
+list1.insert(2,'Jack')
+print("list is :", list1)
+#delete
+del list1[2]
+print('After delete : ', list1)
+del list1[3:5]
+print('After delete : ', list1)
+del list1[2:5:2]
+print('After delete : ', list1)
+list1.remove(5)
+print('After delete : ', list1)
+#更改列表元素
+my_list = [1,2,3,'Python']
+my_list[-2] = 'Java'
+print("My list is : ", my_list)
+my_list[2:4] = ['a','b','c']
+print("My list is : ", my_list)
+my_list[2:4] = ['Python']
+print("My list is : ", my_list)
+#字符串会被当成数组处理
+my_list[2:4] = 'Python'
+print("My list is : ", my_list)
+#count()
+print(my_list.count(1))
+#index()
+print(my_list.index(100))
+#pop()
+my_list.pop()
+print(my_list)
+#reverse()
+my_list.reverse()
+print(my_list)
+my_list = [1,5,2,1,8,2,10,4,19]
+print(my_list)
+#sort()
+my_list.sort()
+print(my_list)
+my_list.reverse()
+print(my_list)
