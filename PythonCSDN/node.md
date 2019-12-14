@@ -404,6 +404,8 @@
 	#dict构造器构造，参数为列表，列表元素为元组，元组元素只能是两个，一个为key，一个为value
 	my_dict = dict([("Java",100,),("Python",120),("Javascipt",110)])
 	print(my_dict)
+	my_dict = dict((("Java",500,),("Python",600),("Javascipt",700)))
+	print(my_dict)
 	#dict构造器指定关键字创建字典，此时字段的key不允许使用表达式
 	my_dict = dict(Java=200,Python=300,Javascript=400)
 	print(my_dict)
@@ -449,4 +451,95 @@
 	print('Java' in my_dict)
 	print('Vue' in my_dict)
 	print('Vue' not in my_dict)
+```
+
+### 字典的高级用法
+
+- 字典的常用方法
+
+	1. clear()方法，清空所有的key-value对
+	
+```python
+	#清空字典-clear()
+	my_dict = dict(Java=200,Python=300,Javascript=400)
+	print("Before clear : ", my_dict)
+	my_dict.clear()
+	print("After clear : ", my_dict)
+```
+	
+	2. get()方法，根据key获取value(和方括号加key值效果一样)
+	
+```python
+	#获取值-get()
+	my_dict = dict([('Python',100),('Java',120),('Js',130)])
+	print('Now the dictionary is : ', my_dict)
+	print("Java value is :", my_dict.get('Java'))
+```
+	
+	3. update()方法， 对于已经存在的key，就是更新value值，对于不存在的key，就是新增key-value
+	
+```python
+	#字典更新-update():对于已经存在的key，就是更新value值，对于不存在的key，就是新增key-value
+	#传值方式和构筑方法一致
+	my_dict.update({'Python':140,'C':130})
+	print("After update : ",my_dict)
+	my_dict.update([('Java',100),('Vue',150)])
+	print("After secondary update : ",my_dict)
+	my_dict.update((('Java',300),('Vue',500)))
+	print("After thirdly update : ",my_dict)
+	my_dict.update(Java=1000,HTML=2000)
+	print('After forth udpate : ',my_dict)
+```
+
+	4. 使用items()方法、keys(), values() 方法获取字典所有的键值对、键值、值
+	
+```python
+	#遍历
+	print('-' *80)
+	for key, value in my_dict.items():
+		print('Key is :',key, ', and value is :', value)
+	print('-' *80)
+	for item in my_dict.items():
+		 print('Key is :',item[0], ', and value is :', item[1])
+	print('-' *80)
+	for key in my_dict.keys():
+		print('Key is :',key, ', and value is :', my_dict.get(key))
+		print('Key is :',key, ', and value is :', my_dict[key])
+	print('-' *80)
+	for value in my_dict.values():
+		print("Value is : ", value)
+	print('-' *80)
+```
+
+	5. setdefault()方法，获取某个key对应的值，如果存在对应key，则直接返回key对应的value，如果不存在，则会返回指定的default值，同时会将key-value加到字典中
+	
+```python
+	#setdefault
+	value = my_dict.setdefault('Java', 50)
+	print("Value is : ",value)
+	value = my_dict.setdefault('CSS', 400)
+	print("Value is : ", value)
+	print("Dictionary is :", my_dict)
+```
+
+	6. fromkeys()方法，用于将字典直接转换为字典，默认字典的value为None，也可以设置一个默认值，此方法也可作为创建字典的一种方法
+	
+```python
+	#fromkeys
+	print('-' *80)
+	scores = dict.fromkeys(['Python','Java','HTML'])
+	print(scores)
+	scores = dict.fromkeys(['Python','Java','HTML'], 100)
+	print(scores)
+```
+
+- 使用字典格式化字符串
+
+```python
+	#元组匹配 - 根据顺序匹配
+	string = 'The book name is %s, and the price is : %10.2f'
+	print(string %('Java',120))
+	#字典格匹配 - 根据key匹配
+	string = 'The book name is %(name)s, and the price is : %(price)10.2f'
+	print(string %{'price':128,'name':'Python'})
 ```
