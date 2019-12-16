@@ -16,7 +16,7 @@ print('-' * 80)
 result = [chr(random.randint(65, 90)) for i in range(NUM)]
 print('Result : ', result)
 print('-' * 80)
-#方式三 
-import numpy
-result = [chr(a) for a in numpy.random.randint(65, 90, [NUM, 1])]
-print('Result ', result)
+#方式三 不可用 
+#import numpy as np
+#result = [chr(i) for i in numpy.random.randint(65, 90, [NUM, 1])]
+#print('Result ', result)
