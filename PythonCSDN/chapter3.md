@@ -42,3 +42,48 @@
 		2.3. pass语句，只是占位，不执行任何操作
 
 - 循环结构
+
+	1. while循环
+	
+		格式：
+			while test_expression:
+				body_statements
+				[iteration_statements]
+				
+		由于列表和元组都是有索引的，所以可以通过while循环来遍历列表和元组
+		
+```python
+	v_list = [1,2,3,4,5,3,3,4,5,2,9,8,10]
+	v_dict = {'A':100,'B':200,'C':300,'D':400}
+	print(len(v_list))
+	print('-' * 80)
+	i = 0
+	while i < len(v_list):
+		print(v_list[i])
+		i += 1
+	print('-' * 80)
+	i = 0
+	v_keys = list(v_dict.keys())
+	while i < len(v_keys):
+		print('Key : ', v_keys[i], ', Value : ', v_dict[v_keys[i]])
+		i += 1
+```
+	
+	2. for-in循环
+	
+		遍历列表、元组、字典
+		
+```python
+	v_list = [1,2,3,4,5,3,3,4,5,2,9,8,10]
+	v_dict = {'A':100,'B':200,'C':300,'D':400}
+	print('-' * 80)
+	for i in v_list:
+		print(i)
+	print('-' * 80)
+	for k, v in v_dict.items():
+		print('Key : ', k, ', Value : ', v)
+	print('-' * 80)
+	for i in range(10):
+		print(i)
+```
+	
