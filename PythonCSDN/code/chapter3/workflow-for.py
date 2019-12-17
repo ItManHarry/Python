@@ -26,9 +26,29 @@ for i in range(10):
     print(i)
 else:
     print('loop over')
-print('' * 80)
+print('-' * 80)
 for i in range(10):
     j = 0
     while j < 20:
         print("i is : %d, j is : %d" %(i, j))
         j += 1
+print('' * 80)
+#列表推导式
+v_list = [i * 2 for i in range(20)]
+print('Now the list is : ', v_list)
+v_sum = sum([i for i in range(1, 101)])
+print('Sum 1 to 100 : ', v_sum)
+print('-' * 80)
+#break
+for i in range(20):
+    if i == 15:
+        print('breaked...')
+        break
+    else:       
+        print('i is : ', i)
+print('-' * 80)
+count = 0
+for i in range(30):
+    if i % 2 == 0:
+        continue
+    print("Odd Number : ", i)

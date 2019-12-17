@@ -86,4 +86,11 @@
 	for i in range(10):
 		print(i)
 ```
+
+	3. 列表推导式
 	
+	语法格式：
+	
+		[表达式  for 循环计数器 in 可迭代对象]
+
+	4. break , continue,return
