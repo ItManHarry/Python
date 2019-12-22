@@ -65,3 +65,45 @@ def welcome(name="Harry", message="Welcome to the Python world."):
     print(name,',', message)
 welcome('Jack')
 welcome(message='change yourself for the future!')
+print('-' * 50)
+def test(num, *books):
+    print("Number : ", num)
+    print("Books : ", books)
+test(100, 'Java','Python','C#')        
+def info2(*names, message):
+    for name in names:
+        print('%s, %s' %(name, message))
+info2('A','B','C','D',message=' welcome you .')   
+print('-' * 50)
+def info3(*ages, message):
+    for age in ages:
+        print('%d, %s' %( age, message))
+info3(15,23,23,45,message="ok")
+print('-' * 50)
+def info4(num,*names, **scores):
+    print('Number : ', num)
+    print("Names : ", names)
+    print('Scores : ', scores)
+info4(30,'Java','Python','C#', js=100,ps=120,cs=150)  
+print('-' * 50)
+def info5(*names, message, **scores):
+    print('Message : ', message)
+    print("Names : ", names)
+    print('Scores : ', scores)
+info5('a','b','c',js=100,ps=120,cs=150,message='OK')  
+print('-' * 50)
+def info6(a,b):
+    print('a is : ', a)
+    print('b is : ', b)
+vs1 = (100, 200)
+vs2 = ['Python','Java']    
+vs3 = {'a':300,'b':400}
+vs4 = [1,2,3,4]
+info6(*vs1)
+print('-' * 50)
+info6(*vs2)
+print('-' * 50)
+info6(**vs3)   
+print('-' * 50)
+#参数个数不符，函数调用报错（TypeError: info6() takes 2 positional arguments but 4 were given）
+#info6(*vs4)
