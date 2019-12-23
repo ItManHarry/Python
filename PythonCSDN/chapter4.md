@@ -114,3 +114,122 @@
 	print('-' * 50)
 	info6(**vs3) 
 ```
+
+## 变量作用域
+
+- 局部变量
+
+	在函数内定义的变量，成为局部变量，只在函数内有效
+
+- 全局变量
+
+	在函数为定义的变量为全局变量，全局有效
+	
+```python
+	a = 35
+	name = 'Java'
+	def info():
+		b = 'Python'
+		print(b)
+	info()
+	print(a)
+	print(globals())
+	print(locals())
+```
+	
+- 获取变量的方法
+
+	1. globals(): 该函数返回全局范围内所有变量组成的“变量字典”
+	
+	2. locals(): 该函数返回当前局部范围内所有变量组成的“变量字典”
+	
+	3. vars(object): 指定对象的范围内所有变量组成的“变量字典”，如果不传入object参数，vars()和locals()的作用完全相同
+	
+	4. 如果在函数内定义了和全局变量同名的变量，此时局部变量会屏蔽全局变量
+	
+		解决方法一：
+		
+			4.1. 使用globals()获取全局变量字典，然后通过变量名作为key进行访问，此方式不会修改全局变量的值
+	
+```python
+	a = 23
+	name = 'Python'
+	def info():
+		b = "Java"
+		print(b)
+		print(locals())
+	print('-' * 50)    
+	info()
+	print('-' * 50)    
+	print(globals())
+	def vars_info():
+		#使用globals()获取全局变量字典，然后通过变量名作为key进行访问,此方式不会修改全局变量的值
+		print(globals()['name'])
+		name = "C#"
+		print(name)
+	print('-' * 50)        
+	vars_info()
+	print('-' * 50)  
+```
+
+	解决方式二：
+		
+		4.2. 使用global进行声明，这样函数中的name使用的就是全局变量，此方式会修改全局变量的值
+		
+```python
+	name = 'Python'
+	def vars_info2():
+		global name
+		print(name)
+		name = "Javascript"
+		print(name)
+	vars_info2()
+	print("Now the name is : ", name) 
+```
+## 局部函数
+
+	定义：放在函数内的函数成为局部函数，默认情况下，局部函数只能在綦封闭的函数内使用，对外是隐藏的。
+	
+```python
+	def outerFun():
+		print('outer function ')
+		a = 'ok'
+		def innerFun():
+			for i in range(5):
+				print(i, a)
+		innerFun()
+	outerFun()  
+```
+
+	返回局部函数：
+
+```python
+	def foo():
+		print('foo')
+		def bar():
+			for i in range(5):
+				print(i)
+		return bar
+	r = foo()
+	r()
+	print('-' * 50)
+	foo()()
+```
+
+	局部函数中的变量遮蔽处理
+	
+```python
+	def outerFun():
+		print('outer function ')
+		a = 'ok'
+		def innerFun():
+			#使用nonlocal声明来使用函数中的变量
+			nonlocal a
+			for i in range(5):              
+				print(i, a)
+				a = 'i'+str(5)
+				print('now a is : ', a)
+		innerFun()
+	outerFun()  
+```
+	
