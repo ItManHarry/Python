@@ -103,3 +103,52 @@ print('-' * 80)
 v_str = '-'.join(v_array)
 print('Now the string is : ', v_str)
 print('-' * 80)
+#运算符
+x = 20
+y = 7
+print(x + y)
+print(x - y)
+print(x * y)
+print(x / y)
+print(x % y)
+print(x // y)
+print(x ** 2)
+print('-' * 80)
+x += 100
+print(r'x+=100 :', x)
+x -= 10
+print(r'x-=10 :', x)
+x *= 2
+print(r'x*=2 :', x)
+x /= 4
+print(r'x/=4 :', x)
+x //= 5
+print(r'x//=5 :', x)
+x %= 4
+print(r'x%=4 :', x)
+x **= 3
+print(r'x**=3 :', x)
+print('-' * 80)
+x , y = 20, 30
+print('x : ', x, ' y : ', y)
+print(r'x > y : ', x > y)
+print(r'x >= y : ', x >= y)
+print(r'x < y : ', x < y)
+print(r'x <= y : ', x > y)
+print(r'x == y : ', x == y)
+print(r'x != y : ', x != y)
+z = x
+print('z : ', z)
+print(r'z is x : ', z is x)
+print(r'z is not x : ', z is not x)
+b1,b2 = True, False
+print('b1 : ', b1, ' b2 : ', b2)
+print('b1 and b2 : ', b1 and b2)
+print('b1 or b2 : ', b1 or b2)
+print('not b1 : ', not b1)
+print('not b2 : ', not b2)
+print('-' * 80)
+#三目运算符
+#表达式：True_Statements if expression else Else_Statements，支持嵌套
+print('I am OK!' if b2 else print('I am OK indeed!') if b1 else print('I am not OK!'))
+print('-' * 80)
