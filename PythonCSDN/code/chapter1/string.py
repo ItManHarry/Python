@@ -8,7 +8,7 @@ s2 = " World"
 s3 = s1 + s2
 print("String3 is : " , s3)
 n = 2.3
-#字符串不能和非字符串通过加好进行拼接
+#字符串不能和非字符串通过加号进行拼接
 #s4 = s3 + n
 #print("String4 is : " , s4)
 #可以通过str()或者repr()函数进行转换
@@ -32,10 +32,10 @@ print(rs)
 #字符串转字节串 方式一:加b前缀
 b1 = b'abc'
 print(type(b1))
-#字符串转字节串 方式一:使用bytes()函数
+#字符串转字节串 方式二:使用bytes()函数
 b2 = bytes('abc', 'utf-8')
 print(b2)
-#字符串转字节串 方式一:使用encode()函数
+#字符串转字节串 方式三:使用encode()函数
 b3 = "I Love You".encode()
 print(b3)
 #使用decode将bytes解码成字符串
