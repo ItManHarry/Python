@@ -323,7 +323,7 @@
 	print("Dictionary is :", my_dict)
 ```
 
-	6. fromkeys()方法，用于将字典直接转换为字典，默认字典的value为None，也可以设置一个默认值，此方法也可作为创建字典的一种方法
+	6. fromkeys()方法，用于将序列直接转换为字典，默认字典的value为None，也可以设置一个默认值，此方法也可作为创建字典的一种方法
 	
 ```python
 	#fromkeys
