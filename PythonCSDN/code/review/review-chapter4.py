@@ -58,3 +58,53 @@ def multiParam4(*names, message,**scores):
     print('Scores is : ', scores)
 multiParam4('Harry','Jack','Tom',message='I am OK!',english=120,math=120,chinese=100)    
 print('-' * 80)   
+#反向参数收集
+params = (100, 200)
+dictParam = {'a':300,'b':400}
+def reParam(a,b):
+    print('a is : ',a, '\tb is : ', b)
+reParam(*params)    
+reParam(**dictParam)
+print('-' * 80)    
+# 变量作用域
+a = 1000
+b = 2000
+print(globals())
+print('-' * 80) 
+#变量覆盖
+def info():
+    #使用globals函数获取全局参数字典，根据key获取值，此方式不会更改全局变量的值
+    print(globals()['a'])
+    a = 'local'
+    print('Local variable a is : ',a)
+info()
+print('Global variable a is : ',a)
+def info2():
+     #使用global声明，此时使用的全局变量，此方式会更改全局变量a的值
+    global a
+    a = 'local'
+    print('Local variable a is : ',a)
+print('-' * 80)     
+info2()
+print('Global variable a is : ',a)
+info()
+print('Global variable a is : ',a)    
+print('-' * 80) 
+#内部函数
+def outer(p):
+    print('outer function')
+    a = 'OK'
+    print('outer a is : ', a)
+    print('outer p is : ', p)
+    print('-' * 50)
+    def inner(pi):
+        nonlocal a, p
+        for i in range(5):
+            print('inner for : ', i, '\ta  is : ', a, '\tout p is : ', p, '\tinner p is : ', pi)
+            a += str(i)
+            p += str(i)
+    inner('inParam')
+    print('final a is : ', a)
+    print('final p is : ', p)
+outer('outerParam')            
+print('-' * 80) 
