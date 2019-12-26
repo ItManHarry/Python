@@ -197,3 +197,49 @@
 	r = Role()
 	Role.test(r)      
 ```
+## 类方法与静态方法
+
+- 类方法定义
+
+	1. 是有@classmethod修饰
+	
+	2. 方法的第一个参数定义为cls，用类调用该方法的时候该参数会自动绑定。
+	
+```python
+	#类方法
+	class Tiger:
+		#1. 使用@classmethod修饰 2. 绑定cls变量
+		@classmethod
+		def info(cls):
+			print('info method')
+			print(cls)
+	print('-' * 80)
+	print(Tiger)
+	Tiger.info()
+	print('-' * 80)
+	#对象调用类方法就相当于类调用，同样也会自动绑定
+	t = Tiger()
+	t.info()
+	print('-' * 80)
+```
+	
+- 静态方法
+
+	1. 使用@staticmethod修饰
+	
+	2. 对方法参数没有要求，无论如何都不会自动绑定
+	
+```python
+	#静态方法
+class Pig:	
+	@staticmethod
+	def eat(food):
+		print('The food is : ', food)
+	print('-' * 80)	
+	Pig.eat('grass')
+	print('-' * 80)
+```
+
+|--|--实例方法--|--类方法--|--静态方法--|
+| 对象调用 |--自动绑定--|--自动绑定--|--不自动绑定--|
+| 类调用 |--不自动绑定--|-自动绑定-|--不自动绑定--|
