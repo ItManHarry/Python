@@ -244,3 +244,129 @@ class Pig:
 | --- | --- | ---- | ---- |
 | 对象调用  | 自动绑定 | 自动绑定 | 不自动绑定|
 | 类调用 | 不自动绑定 | 自动绑定 | 不自动绑定 |
+
+
+## 函数装饰器
+
+- @staticmethod和@classmethod的本质就是函数装饰器
+
+- staticmethod和classmethod都是Python内置的函数
+
+- 使用@符号引用已有的函数，可以修饰其他函数
+
+- 当程序使用“@函数”（比如函数A）装饰另一个函数（比如函数B）时，实际完成以下两步：
+
+	1. 将被修饰的函数（函数B）作为参数传给@符号引用的函数（函数A）
+	
+	2. 将函数B替换（装饰）成第一步的返回值
+	
+```python
+	#函数装饰器
+	def foo(fn):
+		print('function foo')
+		print(fn)
+		return 'PythonProgramming'
+		
+	@foo
+	def bar():
+		print('function bar')
+	print('-' * 80)
+	print(bar)
+	print('-' * 80)
+	foo(bar)
+```	
+
+	3. 函数装饰器与AOP
+	
+```python
+	#函数装饰器与AOP
+	def foo(fn):
+		print('function foo')
+		def aspect(*args):
+			print('before function execution...')
+			fn(*args)
+			print('after function execution...')
+		return aspect
+		
+	@foo
+	def bar(a,b):
+		print('function bar')
+		print('a is : ', a)
+		print('b is : ', b)
+	print('-' *80)
+	bar(10,20)
+	print('-' * 80)
+```
+
+## 类变量与实例变量
+
+- 类变量：在类空间或通过类引用赋值的变量
+
+- 实例变量：通过对象引用或self引用赋值的变量
+
+- 通过类可以获取、修改类变量
+
+- 通过对象只可以获取类变量的值，不能修改类变量的值
+
+- 如果试图通过实例设置类变量，其结果就是新增了实例变量
+
+```python
+	#类变量与实力变量
+	class ClassA:
+		v1 = 'variable1'
+		
+		def __init__(self, name, age):
+			self.name = name
+			self.age = age
+			
+	ClassA.type = 'class type'
+	print('-' * 80)
+	print('Class Variable 1 : ', ClassA.v1)
+	print('Class Variable 2 : ', ClassA.type)
+	print('-' * 80)
+	#实例只能访问类变量
+	ca = ClassA('Jack',36)
+	print('Class Variable 1 : ', ca.v1)
+	print('Class Variable 2 : ', ca.type)
+	#如果试图通过实例设置类变量，其结果就是新增了实例变量
+	ca.v1 = 'ca v1'
+	print(ca.v1)
+	print(ClassA.v1)
+	print('-' * 80)
+```
+
+- 使用property合成属性（相当于实例变量）
+
+- property(fget=None,fset=None,fdel=None,doc=None)
+
+- 使用property()函数合成属性时，也可根据需要只传入少量参数，如合成只读属性就无需设置fget参数
+
+```python
+	#属性合成器property
+	class Rectangle:
+		
+		def __init__(self, w, h):
+			self.w = w
+			self.h = h
+			
+		def getarea(self):
+			return self.w * self.h
+		#合成area属性	
+		area = property(fget=getarea,doc='get rectangle area')
+		
+		def setsize(self,size):
+			self.w = size[0]
+			self.h = size[1]
+			
+		def getsize(self):
+			return self.w, self.h
+			
+		#合成size属性
+		size = property(fget=getsize, fset=setsize, doc='get rectangle size')
+		
+	print('-' * 80)
+	r = Rectangle(10, 5)
+	print('Rectangle area is : ', r.area)	
+	print('Rectangle size is : ', r.size)
+	print('-' * 80)	
+```
