@@ -341,8 +341,10 @@ class Pig:
 
 - 使用property()函数合成属性时，也可根据需要只传入少量参数，如合成只读属性就无需设置fget参数
 
+	1. 使用property方法
+
 ```python
-	#属性合成器property
+	#属性合成器property 
 	class Rectangle:
 		
 		def __init__(self, w, h):
@@ -369,4 +371,95 @@ class Pig:
 	print('Rectangle area is : ', r.area)	
 	print('Rectangle size is : ', r.size)
 	print('-' * 80)	
+```
+
+	2. 使用@property装饰器
+	
+```python
+	#合成属性
+	class Property:
+		
+		def __init__(self, width, height):
+			self.width = width
+			self.height = height
+		 
+		@property    
+		def size(self):
+			return self.width, self.height
+		  
+		@size.setter
+		def size(self, size):
+			self.width = size[0]
+			self.height = size[1]
+			
+		def info(self):
+			print('Width is : ', self.width, '\theight is : ', self.height)
+			
+	p = Property(40,20)
+	print('-' * 80)
+	p.info()
+	print('init size is : \t', p.size)
+	#设置size
+	p.size = (50,25)
+	print('set size : \t', p.size)
+	print('-' * 80)
+```
+
+## 隐藏与封装
+
+- 隐藏机制
+
+	规定：凡是以双下划线开头的，Python都会把他们隐藏起来
+	
+	1. 将实例变量、工具方法名以双下划线开头，就实现了隐藏：隐藏的目的就是保证对象的完整性
+	
+	2. 提供方法（默认暴露）来操作实例变量
+	
+```python
+	#隐藏与封装
+	class SystemUser:
+		
+		def __init__(self, name='Noname',passwd='default'):
+			if isinstance(name, str) and 4 <= len(name) <= 8:
+				self.__name = name
+			else:
+				self.__name = 'Noname'
+			if isinstance(passwd, str) and 4 <= len(passwd) <= 8:
+				self.__passwd = passwd
+        else:
+            self.__passwd = 'default'
+			
+		def setName(self, name):
+			if isinstance(name, str) and 4 <= len(name) <= 8:
+				self.__name = name
+			else:
+				print('用户名无效')
+				
+		def getName(self):
+			return self.__name
+			
+		name = property(fget=getName,fset=setName)
+		
+		def setPasswd(self, passwd):
+			if isinstance(passwd, str) and 4 <= len(passwd) <= 8:
+				self.__passwd = passwd
+			else:
+				print('密码无效')
+				
+		def getPasswd(self):
+			return self.__passwd
+			
+		passwd = property(fget=getPasswd,fset=setPasswd)
+		
+	print('-' * 80)    
+	u = SystemUser()
+	u.name = '123'
+	u.passwd = '123'
+	print('User name : ', u.name)   
+	print('User passed : ', u.passwd)   
+	u.name = 'Guoqian'
+	u.passwd = 'Jack'
+	print('User name : ', u.name) 
+	print('User passed : ', u.passwd)
+	print('-' * 80)   
 ```
