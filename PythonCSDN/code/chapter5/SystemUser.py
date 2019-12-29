@@ -38,3 +38,12 @@ u.passwd = 'Jack'
 print('User name : ', u.name) 
 print('User passed : ', u.passwd)
 print('-' * 80)   
+
+class BizUser(SystemUser):
+    pass
+    
+print('-' * 80)
+bizUser = BizUser()
+print('', bizUser.name)
+print('', bizUser.passwd)
+print('-' * 80)

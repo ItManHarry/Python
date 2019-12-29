@@ -463,3 +463,128 @@ class Pig:
 	print('User passed : ', u.passwd)
 	print('-' * 80)   
 ```
+
+## 继承与多继承及复写父类方法
+
+- 继承语法：
+		
+		class Subclass(SuperClass1,SuperClass2,SuperClass3...):
+			#类方法
+			
+```python
+	#继承
+	class Fruit:
+		
+		def info(self):
+			print('fruit is good to health...')
+			
+	class Apple(Fruit):
+		pass
+		
+	print('-' * 80)
+	apple = Apple()
+	apple.info()
+	print('-' * 80)
+```
+
+- 重写父类方法
+
+```python
+	#重写父类方法
+	class Bird:
+		
+		def fly(self):
+			print('bird fly ...')
+			
+	class Ostich(Bird):
+
+		def fly(self):
+			print('I can not fly , I can only run...')
+			
+	print('-' * 80)
+	ostich = Ostich()
+	ostich.fly()
+	print('-' * 80)
+```
+
+- 调用被复写方法及调用父类构造方法
+
+	1. 调用父类被复写的方法
+	
+		以父类类名调用被复写的方法，将self作为第一个参数传入
+	
+```python
+	#调用被复写的父类方法
+	class Employee:
+		
+		def work(self):
+			print('work hard 996...')
+			
+	class Manager(Employee):
+		
+		def work(self):
+			print('work much harder...')
+			
+		def relax(self):
+			print('still work while relaxing...')
+			#默认调用复写后的方法
+			#self.work()
+			#如果此处希望调用父类被重写的方法，可以使用未绑定方法来调用，类名调用方法，未绑定方法，因此需要显示传入一个self参数
+			Employee.work(self)
+	print('-' * 80)
+	m = Manager()
+	m.relax()
+	print('-' * 80)
+```
+
+	2. 调用父类构造方法
+	
+	当子类提供自己的构造方法时，需要调用父类的构造方法
+	
+	2.1. 调用方式一：和调用复写方法一样，使用未绑定方法仅限调用
+	
+```python
+	#调用父类的构造器
+	class Employee:
+		
+		def __init__(self, salary):
+			self.salary = salary * 2.1
+			
+	class Manager(Employee):
+		
+		def __init__(self, salary, title):
+			#当子类的初始化操作和父类的初始化操作相同时，
+			#我们不应该直接复制父类的初始化代码，这样不利于后期项目的升级
+			#因此，此处需要调用父类的构造方法
+			#方式一：使用未绑定方式调用
+			Employee.__init__(self, salary) 
+			self.title = title
+			
+	m = Manager(8000, 'Manager')
+	print(m.salary)
+	print(m.title)
+```
+
+	2.2. 调用方式二：使用super()函数调用父类的构造方法，一般使用此方式调用
+	
+```python
+	#调用父类的构造器
+	class Employee:
+		
+		def __init__(self, salary):
+			self.salary = salary * 2.1
+			
+	class Manager(Employee):
+		
+		def __init__(self, salary, title):
+			#当子类的初始化操作和父类的初始化操作相同时，
+			#我们不应该直接复制父类的初始化代码，这样不利于后期项目的升级
+			#因此，此处需要调用父类的构造方法
+			#方式二：使用super()方式调用
+			super().__init__( salary) 
+			self.title = title
+			
+	m = Manager(8000, 'Manager')
+	print(m.salary)
+	print(m.title)
+```
