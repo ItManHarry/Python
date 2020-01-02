@@ -138,3 +138,67 @@
 	except:
 		print('Error occured while read the file...')
 ```
+
+- 管道输入
+
+	管道的作用：把前一个命令的输出，作为下一个命令的标准输入
+	
+	管道输入的语法如下：
+		
+		cmd1|cmd2|cmd3...
+		
+	Python的标准输入：
+	
+		sys.stdin
+
+- with语句
+
+	with语句用以管理资源关闭
+	
+	比如：如果把打开的文件放到with语句中，with语句会自动关闭文件
+	
+```python
+	#使用with语句打开文件，with会自动关闭文件资源
+	with open('myfile.txt') as f:
+		for line in f:
+			print(line)
+```
+
+	使用with语句管理的资源必须是一个实现了上下文管理协议（context manage protocol）的类，实现上下文管理协议的类必须实现以下两个方法：
+	
+	1. context_manager.__enter__():进入上下文资源管理器自动调用的方法
+	
+	2. context_manager.__exit__(exc_type,exc_value,exc_traceback):退出上下文资源管理器自动调用的方法```python
+	class FkResource:
+		def __init__(self,tag):
+			self.tag = tag
+			
+		def __enter__(self):
+			print('Resource tag is : ', self.tag)
+			return 'python'
+		'''
+			这三个参数都代表了异常
+			ex_type:异常类型
+			ex_value:异常值
+			ex_traceback:异常traceback
+		'''
+		def __exit__(self, ex_type, ex_value, ex_traceback):
+			if ex_traceback:
+				print('资源异常关闭')
+			else:
+				print('资源正常关闭')
+	# 1. 执行with后的表达式（FkResource('crazypython')）
+	# 2. 执行__enter__()方法，并将返回值付给as后面的变量
+	# 3. with语句块执行完成或者遇到异常时，__exit__()方法自动执行
+	with FkResource('crazypython') as fk:
+		print('fk is : ', fk)
+		print('before')
+		raise Exception(20,'error')
+		print('after')
+```
+
+- 文件指针与文件写入
+
+	1. 文件指针
+	
+	2. 文件写入
