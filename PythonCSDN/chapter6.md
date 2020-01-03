@@ -201,4 +201,46 @@
 
 	1. 文件指针
 	
+		1.1 seek(offset[,whence]):该方法把文件指针指到某个位置
+		
+		1.2. tell():判断文件的指针位置
+		
+```python
+	#文件指针
+	with open('myfile.txt') as f:
+		#whence为0 ， 从头计算移动
+		print(f.tell())
+		f.seek(3)
+		print(f.tell())
+		#whence为1， 从当前计算移动
+		f.seek(4,1)
+		print(f.tell())
+		#whence为2， offset为0，移动到文件末尾
+		f.seek(0,2)
+		print(f.tell())
+		#whence为2， offset为-10，从文件末尾移动到倒数第十位
+		import os
+		print(os.path.getsize('myfile.txt'))
+		f.seek(-10, 2)
+		print(f.tell())
+```
+		1.3. 写入有两种方式
+		
+			A: write(str/bytes):输出字符串或者字节串。只有以二进制打开的文件才能输出字节串
+			
+```python
+	#文件写入 - write
+	with open('myfile2.txt','wb') as f:
+		f.write('人生苦短，我用Python'.encode('utf-8'))
+```
+			
+			B: writelines(可迭代对象)：输出多个字符串或者字节串
+			
+```python
+	#文件写入 - writelines
+	import os
+	with open('myfile4.txt', 'wb') as f:
+		f.writelines((('人生苦短'+os.linesep).encode('gbk'),('我用Python'+os.linesep).encode('gbk'),('学习让我不断进步'+os.linesep).encode('gbk')))
+```
+		
 	2. 文件写入
