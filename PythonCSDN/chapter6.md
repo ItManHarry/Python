@@ -223,8 +223,11 @@
 		print(os.path.getsize('myfile.txt'))
 		f.seek(-10, 2)
 		print(f.tell())
-```
-		1.3. 写入有两种方式
+```		
+		
+	2. 文件写入
+	
+		写入有两种方式
 		
 			A: write(str/bytes):输出字符串或者字节串。只有以二进制打开的文件才能输出字节串
 			
@@ -242,5 +245,101 @@
 	with open('myfile4.txt', 'wb') as f:
 		f.writelines((('人生苦短'+os.linesep).encode('gbk'),('我用Python'+os.linesep).encode('gbk'),('学习让我不断进步'+os.linesep).encode('gbk')))
 ```
+
+
+## 多异常捕捉和异常处理
+
+- 多异常捕捉
+	
+	1. Python的一个except块可以捕获多种类型的异常
+	
+	2. 使用一个except块可以捕捉多个异常类，异常类用圆括号括起来，中间用逗号隔开即可-其实就是构建了多个异常类的元组
+	
+```python
+	try:
+		a = int(input('Number A:'))
+		b = int(input('Number B:'))
+		print('a / b is : ', a / b)
+	#如果需要访问异常信息，需要使用as指定异常变量
+	except (ValueError, ArithmeticError) as e:
+		print(e)
+		print(type(e))
+```
+
+- else语句块
+
+	1. 添加else块（except之后，finally之前），当try块代码没有出现异常时，程序会执行else语句块的代码
+	
+	2. 大部分时候，else块与放在try块后面的代码的作用相同。但是如果希望某段代码的异常能向外传播（不被except块捕捉到），那么就应该将这段代码放在else块中。
+	
+```python
+	try:
+		a = int(input('Number A:'))
+		b = int(input('Number B:'))
+		print('a / b is : ', a / b)
+	except (ValueError, ArithmeticError) as e:
+		print(e)
+		print(type(e))
+	else:
+		print('Everything is OK!!!')
+```
+
+- 异常处理的嵌套
+
+	1. 在try块、except块或者finally块中包含完整的异常处理流程的情形被称之为异常处理的嵌套
+	
+	2. 完成的异常处理流程嵌套既可以放在try块中，也可放在except块中，还可以放在finally块中
+	
+```python
+	f = None
+	try:
+		f = open('abc.txt')
+		print(f.read())
+	except:
+		print('exception happened...')
+	finally:
+		#程序判断文件是否存在，存在才close
+		if f:
+			#此处即为异常的嵌套
+			try:
+				f.close()
+			except:
+				print('close file failed...')
+```
+
+- 手动抛出异常
+
+	raise语句用于手动抛出异常，用法有三：
+	
+	1. raise：单独的raise引发当前上下文捕获的异常（比如在except块中），或默认引发RuntimeError异常
+	
+	2. raise异常类：raise后面带一个异常类。该语句引发指定异常类的默认实例
+	
+	3. raise异常对象：引发指定的异常对象
+
+```python
+	class Person:
+	
+		def __init__(self, age):
+			if age > 30 or age < 10:
+				raise #RuntimeError异常
+			self.__age = age
+			
+		def setage(self, age):
+			#要求年龄必须在10-30之间
+			if age > 30 or age < 10:
+				#raise                                                                                  #情况一：RuntimeError异常
+				#raise ValueError                                                              #情况二：引发指定类的默认异常对象
+				raise ValueError(age, '年龄必须介于10-30之间')          #情况三：引发异常对象
+			self.__age = age
+			
+		def getage(self):
+			return self.__age
+			
+		age = property(fget=getage,fset=setage)
 		
-	2. 文件写入
+	person = Person(25)
+	print(person.age)
+	person.age = 45
+	print(person.age)
+```
