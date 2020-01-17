@@ -37,7 +37,7 @@
 			print('构造方法')
 			self.name = name
 			self.password = password
-		def info():
+		def info(self):
 			print('User name is : ', self.name, '\tPassword is : ', self.password)
 	#空类使用pass即可        
 	class Employee:
@@ -60,7 +60,7 @@
 	
 	2. 创建对象
 	
-		直接创建对象，括号内访问参数即可
+		直接创建对象，括号内添加访问参数即可
 		
 	3. 操作实例变量
 	
@@ -123,7 +123,7 @@
 	
 - 实例方法与自动绑定
 
-	1. 使用对象调用方法是，Python会自动绑定方法的第一个参数（通常建议参数名命名为：self）
+	1. 使用对象调用方法时，Python会自动绑定方法的第一个参数（通常建议参数名命名为：self）
 	
 	2. 根据第一个参数出现的位置的不同，第一个参数所绑定的对象略有区别
 	
@@ -147,7 +147,7 @@
 	print('-' * 80)
 ```
 
-	3. 类中的方法调用其他类中其他的方法时，self不可省略
+	3. 类中的方法调用类中其他的方法时，self不可省略
 	
 ```python
 	#类的一个方法调用另外一个方法
@@ -192,7 +192,7 @@
 	class Role:
 		def test(self):
 			print('Test method')
-	#test方法本身是实例方法，应该有对象调用
+	#test方法本身是实例方法，应该由对象调用
 	#但是Python允许类调用实例方法，此时就变成了'未绑定的方法',因此必须手动传入self参数
 	r = Role()
 	Role.test(r)      
