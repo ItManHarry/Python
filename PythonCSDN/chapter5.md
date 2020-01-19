@@ -311,7 +311,7 @@ class Pig:
 - 如果试图通过实例设置类变量，其结果就是新增了实例变量
 
 ```python
-	#类变量与实力变量
+	#类变量与实例变量
 	class ClassA:
 		v1 = 'variable1'
 		

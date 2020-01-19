@@ -128,3 +128,71 @@ print(bar)
 print('-' * 80)
 foo(bar)
 print('-' * 80)
+#函数装饰器与AOP
+def aop(fn):
+    print('AOP function ...')
+    def aspect(*args):
+        if args[0] < 100:
+            return 0
+        print('Arguments are : ',args[0], args[1])
+        for arg in args:
+            print('Argument is : ', arg)
+        print('Before the function execute ...')
+        fn(*args)
+        print('After the function execute ...')
+        return 1
+    return aspect
+@aop    
+def fun(a, b):
+    print('a is : ', a)
+    print('b is : ', b)
+    
+fun(10, 200)    
+print('-' * 80)
+#类变量与实例变量
+class ClassA:
+
+    v1 = 'classVariable1'
+    
+    def __init__(self, name='Harry',age=36):
+        self.name = name
+        self.age = age
+        
+print('Old class variable : ', ClassA.v1)
+#新增类变量
+ClassA.v2 = 'classVariable2' 
+print('New class variable : ', ClassA.v2)
+#实例只能访问类变量，不能修改类变量
+c = ClassA('Tom', 25)
+print('Variable 1 is : ' , c.v1)
+print('Variable 2 is : ' , c.v2)
+#如果试图通过实例增加类变量，结果就是增加了实例变量
+c.v1 = 'AddVarialbe'
+print("Variable is : ",c.v1)
+print('Class Variable v1 is : ', ClassA.v1)
+print(ClassA)
+print('-' * 80)
+#合成属性property
+class Rectangle:
+
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        
+    def getarea(self):
+        return self.width * self.height
+        
+    def getsize(self):
+        return self.width, self.height
+        
+    def setsize(self, size):
+        self.width = size[0]
+        self.height = size[1]
+        
+    area = property(fget=getarea,doc='get the rectangle area')
+    size = property(fget=getsize,fset=setsize,doc='set and get rectangle size')
+    
+r = Rectangle(100, 200)
+print('Rectangle area is : ', r.area)    
+print('Rectangle size  is : ', r.size)
+print('-' * 80)
