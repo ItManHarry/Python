@@ -196,3 +196,77 @@ r = Rectangle(100, 200)
 print('Rectangle area is : ', r.area)    
 print('Rectangle size  is : ', r.size)
 print('-' * 80)
+class SystemUser:
+    def __init__(self,name='None'):
+        if isinstance(name, str) and  4 <= len(name) <= 8:
+            self.__name = name
+        else:
+            self.__name = 'None'
+    def setName(self, name):
+        if isinstance(name, str) and  4 <= len(name) <= 8:
+            self.__name = name
+        else:
+            self.__name = '用户名无效!'
+    def getName(self):
+        return self.__name
+        
+    name = property(fget=getName, fset=setName)
+su = SystemUser() 
+print("User name is : ", su.name)
+su.setName('Jack')
+print(su.getName())   
+print('Now the name is : ', su.name)
+print('-' * 80)
+#类的继承及复写父类方法
+class Fruit:
+    
+    def info(self):
+        print('The fruit is good for your health.')
+        
+class Apple(Fruit):
+    
+    def info(self):
+        print('I am an apple , and I am much helpful for your health.')
+    
+apple = Apple()
+apple.info()    
+print('-' * 80)
+class Employee:
+    
+    def work(self):
+        print('work hard 996...')
+    
+class Manager(Employee):
+
+    def work(self):
+        print('I am a manager , and I must work even harder ...')
+        
+    def relax(self):
+        #self.work()
+        #调用父类的work方法
+        #方法一：
+        #Employee.work(self)
+        #方法二
+        super().work()
+        print('Even I am on vacation, I still have to work.')
+employee = Employee()
+employee.work()    
+manager = Manager()
+manager.relax()
+print('-' * 80)
+#调用父类的构造方法，方式和调用父类方法一样，两种方式
+class Work:
+
+    def __init__(self, salary):
+        self.salary = salary * 2
+        
+class Leader(Work):
+
+    def __init__(self, salary, position):
+        super().__init__(salary)
+        self.position = position
+        
+leader = Leader(8000, 'PartLeader')
+print('Leader position : ', leader.position)
+print('Leader salary : ',leader.salary)
+print('-' * 80)

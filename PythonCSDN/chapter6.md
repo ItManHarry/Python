@@ -25,8 +25,8 @@
 ```python
 	#写模式打开文件，文件内容被清空
 	open('data.txt', 'w')
-	#r/r+模式打开文件，都邀请文件必须存在，否则程序报错
-	open('myfile.txt', 'a')
+	#r/r+模式打开文件，都要求文件必须存在，否则程序报错
+	open('myfile.txt', 'r')
 ```
 
 - 如果没有指定b默认，以字符为单位执行读写文件，如果指定了b模式，则以字节为单位进行文件读写
@@ -76,7 +76,7 @@
 
 	如果文件是文本文件，则可以按行读取，文件对象提供了两个方法读取行
 	
-	1. readline([n])：读取一样内容，如果指定了参数n，则读取该行的n个字符
+	1. readline([n])：读取一行内容，如果指定了参数n，则读取该行的n个字符
 	
 	2. readlines()：读取所有的行
 	
@@ -330,7 +330,7 @@
 			if age > 30 or age < 10:
 				#raise                                                                                  #情况一：RuntimeError异常
 				#raise ValueError                                                              #情况二：引发指定类的默认异常对象
-				raise ValueError(age, '年龄必须介于10-30之间')          #情况三：引发异常对象
+				raise ValueError(age, '年龄必须介于10-30之间')           #情况三：引发异常对象
 			self.__age = age
 			
 		def getage(self):
