@@ -72,7 +72,153 @@
 	1. 使用urlopen()函数时，可以使用data参数向被请求的URL发送数据
 	
 	2. 如果是GET请求，只要将请求参数追加到URL后面即可
+	
+```python
+	params = {'y':2019,'m':12}
+	with ur.urlopen('http://10.41.129.35/esb/scb/funnel/bonus/getData.do?%s' %up.urlencode(params)) as f:
+		print(f.read().decode('UTF-8'))
+```
 
 - 发送不同的请求
 
+```python
+	#POST请求使用data传入产生
+	print('-' * 190)
+	params = {'p1':300,'p2':400}
+	with ur.urlopen('http://localhost:8080/esb/test/rep/post.do',data=up.urlencode(params).encode('utf-8')) as f:
+		print(f.read().decode('UTF-8'))
+	params = {'p1':300,'p2':400}
+	req = ur.Request(url='http://localhost:8080/esb/test/rep/post.do?%s' %up.urlencode(params) ,method='POST')
+	with ur.urlopen(req) as f:
+		print(f.read().decode('UTF-8'))
+	print('-' * 190)  
+	#如果需要发送PUT\PATCH\DELETE等请求，需要创建Request对象
+	params = {'p1':100,'p2':200}
+	req = ur.Request(url='http://localhost:8080/esb/test/rep/put.do?%s' %up.urlencode(params) ,method='PUT')
+	#req = ur.Request(url='http://localhost:8080/esb/test/rep/put.do', data=up.urlencode(params).encode('utf-8')  ,method='PUT')
+	with ur.urlopen(req) as f:
+		print(f.read().decode('UTF-8'))
+	print('-' * 190)   
+```
+
 - 读取受保护的资源
+
+- TCP协议
+
+	TCP协议被称作一种可靠的端对端协议。TCP协议让他们建立一个连接，用于发送接收数据的虚拟链路。TCP协议保证数据传输的准确性
+
+- 创建socket - 服务端
+
+	1. 创建socket对象
+	
+	2. socket.socket(family=AF_INEF,type=SOCK_STREAM,proto=0,fileno=None)
+	
+	3. 绑定IP地址、端口，并在该IP、端口监听，用于监听来自客户端的连接
+	
+	4. socket.bind(address):绑定指定的address，该address参数可以是一个元组，包含IP地址和端口
+	
+	5. socket.accept():接收来自客户端的连接
+	
+```python
+	#创建socket
+	import socket
+	#第一个参数指定网络类型：AF_INET代表ipv4的网络，AF_INET6代表IPV6的网络，AF_UNIX代表UNIX的网络
+	#第二个参数指定Socket类型，SOCK_STREAM（TCP协议） SOCK_DGRAM(UDP协议)
+	#创建socket对象
+	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+	#绑定到指定的IP地址和端口
+	s.bind(('10.40.122.215',3000))
+	#监听
+	s.listen()
+	#接收
+	while True:
+		print('waiting for connect...')
+		#该方法返回两个值，客户端socket及客户端的地址
+		sc, address = s.accept()
+		print('Address : ' , address)
+		#通过sc与客户端进行通信
+		sc.send('Hello, I am the server.')
+		sc.close()
+```
+
+- 创建socket - 客户端
+
+```python
+	import socket
+	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	# 调用connect连接服务器
+	client.connect(('10.40.122.215',3000))
+	#通信
+	print(client.recv(2048).decode('utf-8'))
+```
+
+- 加入多线程
+
+	1. 通过threading.Thread创建线程
+	
+	2. 服务端为每个客户端启动一条进程，保证客户端互不干扰
+	
+	3. 客户端为网络IO启动一线程，为用户交互启动一条线程
+	
+服务端：
+
+```python
+	#创建socket
+	import socket
+	import threading
+	clients = []
+	def server_target(server):
+		 while True:
+			content = server.recv(2048).decode('utf-8')
+			if content:
+				#打印客户端传输的数据
+				print(content)
+				#将当个客户端发送的数据分发给各个客户端
+				for c in clients:
+					c.send(content.encode('utf-8'))
+	#第一个参数指定网络类型：AF_INET代表ipv4的网络，AF_INET6代表IPV6的网络，AF_UNIX代表UNIX的网络
+	#第二个参数指定Socket类型，SOCK_STREAM（TCP协议） SOCK_DGRAM(UDP协议)
+	#创建socket对象
+	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+	#绑定到指定的IP地址和端口
+	s.bind(('10.40.122.215',3000))
+	#监听
+	s.listen()
+	#接收
+	while True:
+		print('waiting for connect...')
+		#该方法返回两个值，客户端socket及客户端的地址
+		sc, address = s.accept()
+		print('Address : ' , address)
+		#将客户端对应的socket放到一个列表中
+		clients.append(sc)
+		#为客户端对应的socket启动对应的线程
+		threading.Thread(target=server_target,args=(sc,)).start()
+```
+
+客户端：
+
+```python
+	import socket
+	import threading
+	def readFromServer(client):
+		while True:
+			content = client.recv(2048).decode('utf-8')
+			if content:
+				print(content)            
+	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	# 调用connect连接服务器
+	client.connect(('10.40.122.215',3000))
+	#将读取服务器端函数以多线程方式启动，这样的函数可与以下的死循环并发执行
+	threading.Thread(target=readFromServer,args=(client,)).start()
+	#通信
+	while True:
+		line = input('Please Input(input exit to abord) : ')
+		print('Your input is : ', line)
+		if line and line != 'exit':
+			client.send(line.encode('utf-8'))
+		else:
+			print('You have not input any data or input exit order, socket break')
+			break
+	client.close()        
+```
