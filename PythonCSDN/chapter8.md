@@ -103,6 +103,20 @@
 
 - 读取受保护的资源
 
+```python
+	import urllib.request
+	import http.cookiejar
+	#创建cookieJar对象
+	cookie_jar = http.cookiejar.MozillaCookieJar('a.txt')
+	#创建cookie处理器
+	cookie_proc = urllib.request.HTTPCookieProcessor(cookie_jar)
+	opener = urllib.request.build_opener(cookie_proc)
+	with opener.open('http://10.41.129.35/esb/scb/funnel/bonus/login.do?%s' %up.urlencode(params)) as f:
+		print(f.read().decode('UTF-8'))
+	with opener.open('http://10.41.129.35/esb/scb/funnel/bonus/getData.do?%s' %up.urlencode(params)) as f:
+		print(f.read().decode('UTF-8'))
+```
+
 - TCP协议
 
 	TCP协议被称作一种可靠的端对端协议。TCP协议让他们建立一个连接，用于发送接收数据的虚拟链路。TCP协议保证数据传输的准确性
