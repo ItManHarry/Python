@@ -285,7 +285,7 @@
 	message.set_content("""
 		<h2>The mail from python application.</h2>
 		<div style = 'border:1px solid red'>HTML邮件内容</div>
-		<img src = 'cid:%s'/>
+		<img src = 'cid:%s' width = '200' height = '120'/>
 	""" %att_id1[1:-1], 'html', 'utf-8')
 	#设置邮件标题
 	message['subject']='HTML邮件测试-带有附件'
@@ -294,12 +294,13 @@
 	#设置收件人
 	message['to']='ChengGuoqian <%s>' %'guoqian.cheng@doosan.com'
 	#添加附件 - 二进制读取
+	#如果正文要引用附件则添加cid属性，否则不需要
 	with open('e:/th.jpg', 'rb') as f:
 		message.add_attachment(f.read(), maintype='image',subtype='jpeg',filename='picture.jpg',cid=att_id1)
 	with open('e:/harry.jpg', 'rb') as f:
 		message.add_attachment(f.read(), maintype='image',subtype='jpeg',filename='me.jpg')    
 	with open('e:/test.xlsx', 'rb') as f:
-		message.add_attachment(f.read(), maintype='file',subtype='excel',filename='test.xlsx')     
+		message.add_attachment(f.read(), maintype='file',subtype='excel',filename='test.xlsx')      
 	#执行邮件发送
 	server.sendmail(account, ['guoqian.cheng@doosan.com'], message.as_string())
 	#断开连接
@@ -307,3 +308,76 @@
 ```
 
 - 接收邮件
+
+	使用poplib模块提供的poplib.POP3和poplib.POP3_SSL两个类，分别连接普通的POP服务器和基于SSL的POP服务器
+	连接到服务器后，接下来就按照POP3协议与服务器交互。
+	POP3的命令和响应都是基于ASCII文本的，并以CR和LF(/r/n)作为结束符。响应包括一个表示返回状态的符号(+/-)和描述信息
+	请求和响应的标准格式如下：
+	 1. 请求标准格式：命令[参数]  CRLF
+	 
+	常见命令：
+		
+		1.1. stat：统计邮件服务的状态，包括邮件数和总大小
+		
+		1.2. list[msg_no]：列出全部邮件或指定邮件，返回邮件编号和对应大小
+		
+		1.3. retr msg_no：获取指定邮件的内容（根据邮件序号来获取，序号从1开始）
+	 
+	 2. 响应标准格式：+OK/[-ERR] description CRLF
+	 
+```python
+	import poplib
+	import email.parser
+	import email.policy 
+	#创建与邮件服务器的连接
+	#connect = poplib.POP3('pop.qq.com', 10)             #普通连接
+	connect = poplib.POP3_SSL('pop.qq.com', 995)    #基于SSL的安全连接
+	connect.set_debuglevel(1)
+	content = connect.getwelcome().decode('utf-8')
+	print(content)
+	#邮箱账户
+	account = '280688074@qq.com'
+	#安全码
+	code = 'fzbifrurnhhwcajd'
+	#登录服务器
+	connect.user(account)
+	connect.pass_(code)
+	#统计邮件信息
+	num, size = connect.stat()
+	print('Email amount : ', num, ' email size : ', size)
+	#获取邮件列表
+	respstate, list, other = connect.list()
+	print('Response state : ', respstate)
+	print('Mail list : ', list)
+	#获取指定的邮件 (最后一封)
+	respstate, data, other = connect.retr(len(list))
+	print('Response state : ', respstate)
+	#print('Mail content : ', data)
+	mailcontent =  b'\r\n'.join(data)
+	message = email.parser.BytesParser(policy=email.policy .default).parsebytes(mailcontent)
+	print(type(message))
+	print('From : ', message['from'])
+	print('To : ', message['to'])
+	print('Subject : ', message['subject'])
+	print('First to : ', message['to'].addresses[0].username)
+	#遍历邮件内容 - 邮件每个部分都是一个part
+	for part in message.walk():
+		print('Content type is : ', part.get_content_type())
+		#'multipart'代表是邮件内容的容器，无需处理
+		if part.get_content_type() == 'multipart':
+			continue
+		 #'text'代表是邮件内容，执行打印
+		elif part.get_content_type() == 'text/plain' or part.get_content_type() == 'text/html':
+			print(part.get_content())
+		#剩下的就是附件
+		else:
+			file= part.get_filename()
+			print('fiel type is : ',type(file))
+			#with open(file, 'wb') as f:
+				#f.write(part.get_payload(decode=True))
+	#断开服务器
+	connect.quit()            
+```	
+	
+	
+	
