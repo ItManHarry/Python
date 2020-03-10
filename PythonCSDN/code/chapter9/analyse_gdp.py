@@ -8,12 +8,11 @@ print('-' * 80)
 print(type(datas))
 #print(datas[0])
 countries = ['中国','美国','英国','法国','德国']
-codes = ['A1','A2','A3','A4','A5']
 #GPD
 gdps = [{},{},{},{},{}]
 for data in datas:
-    for  i, code in enumerate(codes):
-        if data['CountryCode'] == code:
+    for  i, name in enumerate(countries):
+        if data['CountryName'] == name:
             year = data['Year']
             gdps[i][year] = data['Value']
 #print('GDP data is : ', gdps)  
@@ -22,6 +21,7 @@ years = []
 for key in gdps[0].keys():
     years.append(key)
 print('-' * 80)
+#年度排序
 years.sort()
 print('Years : ', years)
 print('-' * 80)
