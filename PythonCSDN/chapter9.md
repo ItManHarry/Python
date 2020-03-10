@@ -403,3 +403,20 @@
 	dot.show_x_guides = True
 	dot.render_to_file('dot.svg')
 ```
+
+- 解析JSON数据
+
+	json模块提供了对JSON的支持。对应关系如下：
+	
+	JSON类型							Python类型
+	对象（object）					字典（dict）
+	数组（array）					列表（list）
+	字符串（string）				字符串（str）
+	整数（number（int））	整数（int）
+	实数（number（real））浮点数（float）
+	true									True
+	false									False
+	null										None
+	
+
+
