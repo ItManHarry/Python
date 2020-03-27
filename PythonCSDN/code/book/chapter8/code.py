@@ -85,3 +85,35 @@ print(rect.size)
 del rect.size
 print(rect.size)
 #反射相关的方法
+'''
+    动态操作属性
+    hasattr(obj, name) : 判断对象是否包含某个属性或者方法
+    getattr(obj, name[,default]) : 获取对象中名为name的属性或者方法
+    setattr(obj, name, value) : 设置对象的name属性值为value
+'''
+class Comment:
+    def __init__(self, detail, count):
+        self.detail = detail
+        self.count = count
+    def info(self):
+        print('This is a comment , the content is %s' %self.detail)
+        
+c = Comment('Python Core', 1200)        
+print(hasattr(c, 'detail'))
+print(hasattr(c, 'count'))
+print(hasattr(c, 'info'))
+print(hasattr(c, 'jack'))
+print(getattr(c, 'detail'))
+print(getattr(c, 'count'))
+setattr(c, 'detail', 'Java In Action')
+setattr(c, 'count', 5000)
+print(c.detail)
+print(c.count)
+setattr(c, 'test', 'A new property added')
+print(c.test)
+'''
+    __call__属性：判断对应的属性是否是方法
+'''
+print(hasattr(c.detail, '__call__'))
+print(hasattr(c.count, '__call__'))
+print(hasattr(c.info, '__call__'))
