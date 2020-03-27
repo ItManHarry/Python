@@ -84,3 +84,4 @@ rect.size = 6,8
 print(rect.size)
 del rect.size
 print(rect.size)
+#反射相关的方法
