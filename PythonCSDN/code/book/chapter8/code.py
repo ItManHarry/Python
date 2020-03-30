@@ -117,3 +117,4 @@ print(c.test)
 print(hasattr(c.detail, '__call__'))
 print(hasattr(c.count, '__call__'))
 print(hasattr(c.info, '__call__'))
+#与序列相关的方法
