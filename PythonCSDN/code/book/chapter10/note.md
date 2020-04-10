@@ -74,7 +74,105 @@ Python库参考手册：https://docs.python.org/3/index.html
 
 - 使用random模块生成随机数
 
+```python
+	#生成大于等于0.0小于1.0的伪随机浮点数
+	v1 = random.random()
+	print('v1 is : ', v1)
+	print('-' * 80)
+	#生成大于等于2.5小于10.0的伪随机浮点数
+	v2 = random.uniform(2.5, 10.0)
+	print('v2 is : ', v2)
+	print('-' * 80)
+	#生成大于等于5小于等于20的随机数
+	v3 = random.randint(5, 20)
+	print('v3 is : ', v3)
+	print('-' * 80)
+	#生成0到10的伪随机整数
+	v4 = random.randrange(10)
+	print('v4 is : ', v4)
+	print('-' * 80)
+	#生成0到100的随机偶数
+	v5 = random.randrange(0, 101, 2)
+	print('v5 is : ', v5)
+	print('-' * 80)
+	#随机抽取数组元素
+	vl = ['Java','Python','C','Kotlin','Groovy']
+	v6 = random.choice(vl)
+	print('v6 is : ', v6)
+	print('-' * 80)
+	#对列表进行随机排序
+	print('Before sort : ', vl)
+	random.shuffle(vl)
+	print('After sort : ', vl)
+	print('-' * 80)
+	#随机抽取n个独立元素
+	nvl = random.sample(vl, k = 3)
+	print('Sample list is : ', nvl)
+	print('-' * 80)
+```
+
 - 使用time模块
+
+```python
+	import time
+	print('-' * 80)
+	#显示时区
+	print(time.tzname)
+	print('-' * 80)
+	#当前时间转换为字符串
+	now_str = time.asctime()
+	print('Now is : ', now_str)
+	print('-' * 80)
+	#将指定的时间（使用包含9个元素的元组表示时间）转换为字符串
+	time_str = time.asctime((2019,11,2,12,5,35,0,0,0))
+	print('Time is : ', time_str)
+	print('-' * 80)
+	#将以秒代表的时间转换为字符串
+	time_str = time.ctime(9000000000.0)
+	print('Time is : ', time_str)
+	print('-' * 80)
+	#将当前时间转换为struct_time对象
+	st = time.gmtime()
+	print('Now the struct time is : ', st)
+	print('-' * 80)
+	#将以秒代表的时间转换为struct_time对象
+	st = time.gmtime(300)
+	print('Second time struct time is : ', st)
+	print('-' * 80)
+	#将以秒代表的时间转换为代表当前时间的struct_time对象
+	st = time.localtime(300)
+	print('Second local time struct time is : ', st)
+	print('-' * 80)
+	#将元组代表的时间转换为秒数代表的时间
+	mt = time.mktime((2019,11,2,12,5,35,0,0,0))
+	print('Seconds are : ', mt)
+	print('-' * 80)
+	#性能计数器的值
+	count = time.perf_counter()
+	print('Count is : ', count)
+	print('-' * 80)
+	#当前进程使用CPU的时间
+	ct = time.process_time()
+	print('CPU process time : ', ct)
+	print('-' * 80)
+	#将当前时间转换为指定格式的字符串
+	now_str = time.strftime('%Y年%m月%d日 %H时%M分%S秒')
+	print('Now is : ', now_str)
+	print('-' * 80)
+	#将指定的时间转换为指定格式的字符串
+	time_str = time.strftime('%Y年%m月%d日 %H时%M分%S秒',(2010,1,23,13,22,34,0,0,0))
+	print('Time is : ', time_str)
+	print('-' * 80)
+	#将指定时间字符串转换为struct_time对象
+	time_str = '2018-10-12'
+	st = time.strptime(time_str, '%Y-%m-%d')
+	print('Struct time is : ', st)
+	print('-' * 80)
+	#获取从1970年1月1日0点到现在过了多少秒
+	sds = time.time()
+	print('Seconds are : ', sds)
+	print('-' * 80)
+```
 
 - 日期、时间与字符串相互转换
 
