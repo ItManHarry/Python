@@ -287,6 +287,78 @@ Python库参考手册：https://docs.python.org/3/index.html
 
 - 正则表达式
 
+	1. re.compile(pattern, flags=0) 将正则表达式编译成_sre.SRE_Pattern对象
+	
+	2. re.match(pattern, string, flags=0) 从字符串开始位置来匹配正则表达式，如果从开始位置匹配不成功，则返回None
+	
+	3. re.search(pattern, string, flags=0) 扫描整个字符串，并返回字符串第一处匹配pattern的匹配对象
+	
+	注：match()和search()的区别：match()必须从字符串起始位置匹配，search()则可以扫描整个字符串
+	
+```python
+	import re
+	print('=' * 180)
+	p = re.compile('www')
+	print(type(p))
+	m1 = re.match(p,'www.fkit.org')
+	print(type(m1))
+	print(m1.span())
+	print(m1.group())
+	print(re.match('fkit','www.fkit.org'))
+	print('-' * 80)
+	m2 = re.search('www','www.fkit.org')
+	print(type(m2))
+	print(m2.span())
+	print(m2.group())
+	print('-' * 80)
+	m3 = re.search('fkit','www.fkit.org')
+	print(m3.span())
+	print(m3.group())
+	print('=' * 180)
+```	
+
+	4. re.findall(pattern, string, flags=0) 扫描整个字符串，并返回字符串中匹配pattern的子串组成的列表
+	
+	5. re.finditer(pattern, string, flags=0) 扫描整个字符串，并返回字符串中匹配pattern的子串组成的迭代器
+	
+```python
+	import re
+	r = re.findall('fkit','Fkit is good, I like the fkit and the Fkit.org web',re.I)
+	print(type(r))
+	print(r)
+	r = re.finditer('fkit','Fkit is good, I like the fkit and the Fkit.org web',re.I)
+	print(type(r))
+	for e in r:
+		print(e.span() ,'-->',e.group())
+```
+
+	6. re.fullmatch(pattern, string, flags=0) 整个字符串匹配pattern，不匹配则会返回None
+	
+	7. re.sub(pattern, repl, string, count=0,flags=0)将字符串中所有匹配pattern的内容都替换为repl(repl可以是一个字符串，也可以是一个函数)，
+	count控制替换的次数，默认为0替换全部
+	
+```python
+	import re
+	my_date = '2020-04-24'    
+	print('Date string : ', my_date)
+	print(re.sub(r'-','/',my_date))
+	my_str = 'Java is a good language , and the Python too'
+	print('String : ', my_str)
+	print(re.sub(r'o', 'u', my_str))
+```
+
+	8. re.split(pattern, string, maxsplit=0, flags=0)使用pattern对字符串进行分割
+	
+```python
+	import re
+	my_str = 'a,b,c,d,e,f'
+	my_list = my_str.split(',')
+	print(my_list)
+	r = re.split(',', my_str)
+	print(type(r))
+	print(r)
+```
+
 - set和frozenset集合
 
 - 双端队列deque的功能和用法
