@@ -393,7 +393,7 @@ Python库参考手册：https://docs.python.org/3/index.html
 		
 		11.8. re.X或re.VERBOSE:允许分行书写正则表达式
 		
-	###创建正则表达式
+###创建正则表达式
 	
 	- 正则表达式支持的合法字符
 	
