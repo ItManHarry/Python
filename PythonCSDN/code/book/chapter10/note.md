@@ -2,7 +2,7 @@
 
 Python库参考手册：https://docs.python.org/3/index.html
 
-- 使用sys模块的函数与Python解释器交互
+## 使用sys模块的函数与Python解释器交互
 
 ```
 	import sys
@@ -72,7 +72,7 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print(os.urandom(3))
 ```
 
-- 使用random模块生成随机数
+##  使用random模块生成随机数
 
 ```python
 	#生成大于等于0.0小于1.0的伪随机浮点数
@@ -111,7 +111,7 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print('-' * 80)
 ```
 
-- 使用time模块
+##  使用time模块
 
 ```python
 	import time
@@ -174,7 +174,7 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print('-' * 80)
 ```
 
-- 日期、时间与字符串相互转换
+##  日期、时间与字符串相互转换
 
 ```python
 	import time
@@ -237,7 +237,7 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print('-' * 80)
 ```
 
-- JSON及Python的JSON支持
+##  JSON及Python的JSON支持
 
 ```python
 	import json
@@ -285,7 +285,9 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print('-' * 80)
 ```
 
-- 正则表达式
+## 正则表达式
+
+### 正则表达式对象&方法
 
 	1. re.compile(pattern, flags=0) 将正则表达式编译成_sre.SRE_Pattern对象
 	
@@ -417,22 +419,22 @@ Python库参考手册：https://docs.python.org/3/index.html
 	
 	- 边界匹配符
 
-- set和frozenset集合
+##  set和frozenset集合
 
-- 双端队列deque的功能和用法
+##  双端队列deque的功能和用法
 
-- Python的堆操作
+##  Python的堆操作
 
-- ChainMap对象的功能和用法
+##  ChainMap对象的功能和用法
 
-- Counter对象的功能和用法
+##  Counter对象的功能和用法
 
-- defaultdict对象的功能和用法
+##  defaultdict对象的功能和用法
 
-- 命名元组的功能和用法
+##  命名元组的功能和用法
 
-- OrderedDict对象的功能和用法
+##  OrderedDict对象的功能和用法
 
-- itertools模块下的迭代器功能函数
+##  itertools模块下的迭代器功能函数
 
-- functools模块下的函数修饰器和功能函数
+##  functools模块下的函数修饰器和功能函数
