@@ -401,17 +401,31 @@ Python库参考手册：https://docs.python.org/3/index.html
 	
 | 字符 | 说明 | 
 | ------------- | ------------- | 
-| x | Content Cell | 
-| \uhhhh | Content Cell |	
-| \t | Content Cell | 
-| \n | Content Cell | 
-| \r | Content Cell | 
-| \f | Content Cell | 
-| \a | Content Cell | 
-| \e | Content Cell | 
-| \cx | Content Cell | 
+| x | 字符x(x可代表任意合法的字符) | 
+| \uhhhh | 十六进制0xhhhh所表示的Unicode字符 |	
+| \t | 制表符('\u0009') | 
+| \n | 新行(换行)符('\u000A') | 
+| \r | 回车符('\u000D') | 
+| \f | 换页符('\u000C') | 
+| \a | 报警(bell)符('\u0007') | 
+| \e | Escape符('\u001B') | 
+| \cx | x对应的控制符。例如：\xM匹配ctrl+M。x值必须为A~Z或a~z之一 | 
 	
 	- 正则表达式中的特殊字符
+	
+| 特殊字符 | 说明 | 
+| ------------- | ------------- | 
+| $ | A | 	
+| ^ | B | 	
+| () | C | 	
+| \[\] | D | 	
+| {} | E | 	
+| \* | F | 	
+| + | G | 	
+| ? | H | 	
+| . | I | 	
+| \\ | J | 	
+| \| | K | 	
 	
 	- 正则表达式所支持的预定义字符
 	
