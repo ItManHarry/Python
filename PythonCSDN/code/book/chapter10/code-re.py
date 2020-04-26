@@ -66,5 +66,12 @@ print(re.findall(r'fkit','Fkit is a good domain, FKIT is good'))
 print(re.findall(r'fkit','Fkit is a good domain, FKIT is good',re.I))
 print('-' * 80)
 #创建正则表达式
-
+print(re.fullmatch(r'c\wt','cat cbt cct ddd otd cut'))
+print(re.search(r'c\wt','cat cbt cct ddd otd cut').group())
+print(re.findall(r'c\wt','cat cbt cct ddd otd cut'))
+m = re.fullmatch(r'\d\d\d-\d\d\d-\d\d\d\d', '123-456-8888')
+if(m):
+    print(m.group())
+else:
+    print('Not match!!!')
 print('=' * 180)
