@@ -359,6 +359,64 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print(r)
 ```
 
+	9. re.purge()清除正则表达式缓存
+	
+	10. re.escape(pattern)
+	
+```python
+	import re
+	print(re.escape(r'www.crazyit.org is good, and I love it'))
+	print(re.escape(r'A-Zand0_9?'))
+```
+
+	11. 正则表达式旗标
+	
+		11.1. re.A或re.ASCII:该旗标只控制\w,\W,\b,\B,\d,\D,\s,\S只匹配ASCII字符，而不匹配所有的Unicode字符
+		
+		11.2. re.DEBUG:显示编译正则表达式的Debug信息
+		
+		11.3. re.I或re.IGNORECASE:使用正则表达式匹配时不区分大小写
+		
+```python
+	import re
+	print(re.findall(r'fkit','Fkit is a good domain, FKIT is good'))
+	print(re.findall(r'fkit','Fkit is a good domain, FKIT is good',re.I))
+```
+
+		11.4. re.L或re.LOCALE:根据当前区域设置使用正则表达式匹配时不区分大小写，只对bytes模式起作用
+		
+		11.5. re.M或re.MULTLINE:多行模式
+		
+		11.6. re.S或s.DOALL:让(.)能匹配包含换行符在内的所有字符。
+		
+		11.7. re.U或re.Unicode:该旗标控制\w,\W,\b,\B,\d,\D,\s,\S匹配所有的Unicode字符，Python3.x完全是多余的，Python3.x默认匹配所有的Unicode。
+		
+		11.8. re.X或re.VERBOSE:允许分行书写正则表达式
+		
+	###创建正则表达式
+	
+	- 正则表达式支持的合法字符
+	
+| 字符 | 说明 | 
+| ------------- | ------------- | 
+| x | Content Cell | 
+| \uhhhh | Content Cell |	
+| \t | Content Cell | 
+| \n | Content Cell | 
+| \r | Content Cell | 
+| \f | Content Cell | 
+| \a | Content Cell | 
+| \e | Content Cell | 
+| \cx | Content Cell | 
+	
+	- 正则表达式中的特殊字符
+	
+	- 正则表达式所支持的预定义字符
+	
+	- 方括号表达式
+	
+	- 边界匹配符
+
 - set和frozenset集合
 
 - 双端队列deque的功能和用法
