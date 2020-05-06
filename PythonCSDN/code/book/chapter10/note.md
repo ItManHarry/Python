@@ -460,6 +460,14 @@ Python库参考手册：https://docs.python.org/3/index.html
 
 ##  set和frozenset集合
 
+	set集合的特征：
+	
+	1. set不记录元素的添加顺序
+	
+	2. set的元素不允许重复
+	
+
+
 ##  双端队列deque的功能和用法
 
 ##  Python的堆操作
