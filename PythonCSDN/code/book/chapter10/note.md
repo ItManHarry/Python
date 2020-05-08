@@ -585,10 +585,79 @@ Python库参考手册：https://docs.python.org/3/index.html
 	print('-' * 120)
 ```
 
-
 ##  双端队列deque的功能和用法
 
+```python
+	from collections import deque
+	print('-' * 80)
+	stack = deque(('Kotlin','Python'))
+	stack.append('Erlang')
+	stack.append('Swift')
+	stack.append('Groovy')
+	print('Elements in stack : ',stack)
+	#执行pop，后添加的元素先出栈
+	print(stack.pop())
+	print(stack.pop())
+	print(stack.pop())
+	print(stack.pop())
+	print('After pop , now the stack is : ',stack)
+	print('-' * 80)
+	#清空栈
+	stack.clear()
+	print('Stack has been cleared : ', stack)
+	#添加元素
+	stack.append('A')
+	stack.append('B')
+	stack.append('C')
+	stack.insert(2, 'D')
+	print('Now the stack is : ', stack)
+	print('-' * 80)
+	#执行popleft，先添加的元素先出栈
+	print(stack.popleft())
+	print(stack.popleft())
+	print(stack.popleft())
+	print('Now the stack is : ', stack)
+	print('-' * 80)
+	#rotate方法，交换收尾元素
+	stack.append('A')
+	stack.append('B')
+	print('Before rotate', stack)
+	stack.rotate()
+	print('After rotate', stack)
+```
+
 ##  Python的堆操作
+
+```python
+	from heapq import *
+	print('-' * 80)
+	lt = list(range(10))
+	lt.append(0.5)
+	#list data
+	print(type(lt))
+	print(lt)
+	print('-' * 80)
+	#将list转换为堆
+	heapify(lt)
+	print(type(lt))
+	print(lt)
+	print('-' * 80)
+	heappush(lt, 7.2)
+	print(lt)
+	print(heappop(lt))
+	print(heappop(lt))
+	print('Now the list is : ', lt)
+	print('-' * 80)
+	#heapreplace:弹出最小元素，压入指定元素
+	print(heapreplace(lt, 8.1))
+	print('After replace : ', lt)
+	print('-' * 80)
+	#输出最大的三个元素
+	print('Three largest elements : ', nlargest(3, lt))
+	#输出最小的三个元素
+	print('Three largest elements : ', nsmallest(3, lt))
+	print('-' * 80)
+```
 
 ##  ChainMap对象的功能和用法
 

@@ -1,0 +1,36 @@
+from collections import deque
+print('-' * 80)
+stack = deque(('Kotlin','Python'))
+stack.append('Erlang')
+stack.append('Swift')
+stack.append('Groovy')
+print('Elements in stack : ',stack)
+#执行pop，后添加的元素先出栈
+print(stack.pop())
+print(stack.pop())
+print(stack.pop())
+print(stack.pop())
+print('After pop , now the stack is : ',stack)
+print('-' * 80)
+#清空栈
+stack.clear()
+print('Stack has been cleared : ', stack)
+#添加元素
+stack.append('A')
+stack.append('B')
+stack.append('C')
+stack.insert(2, 'D')
+print('Now the stack is : ', stack)
+print('-' * 80)
+#执行popleft，先添加的元素先出栈
+print(stack.popleft())
+print(stack.popleft())
+print(stack.popleft())
+print('Now the stack is : ', stack)
+print('-' * 80)
+#rotate方法，交换收尾元素
+stack.append('A')
+stack.append('B')
+print('Before rotate', stack)
+stack.rotate()
+print('After rotate', stack)
