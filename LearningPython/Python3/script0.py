@@ -1,5 +1,0 @@
-print("-" * 40)
-print("Hello Python 3.")
-print("-" * 40)
-print(2 ** 8)
-print("-" * 40)
