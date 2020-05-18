@@ -192,3 +192,22 @@ print('After round : ', data_array.round(decimals=1))
 for d in data_array.round(decimals=1):
     print('Element : ', d)
 print('-' * 80)
+#排序
+data_array = np.array([[10.25,3.42,8.84,7.47,13.72,10.54],[2.25,3.42,1.84,7.47,5.72,10.54]])
+print('Sort all : ', np.sort(data_array))
+print('Sort column : ', np.sort(data_array,axis=0))
+print('Sort row :', np.sort(data_array,axis=1))
+print('Sort result : ', np.argsort(data_array))
+data_array = np.linspace(0,10,10)
+print(data_array)
+values = np.array([2.5,6.5,9.5])
+print(np.searchsorted(data_array,values))
+data_array = np.array([[1,0,6],
+        [1,7,0],
+        [2,3,1],
+        [2,4,0]])
+#按照第一列降序，第三列升序排列
+print('Data : ', data_array)
+index = np.lexsort([-1*data_array[:,0], data_array[:,2]])
+print('Sorted : ', data_array[index])    
+print('-' * 80)
