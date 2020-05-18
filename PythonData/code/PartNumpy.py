@@ -104,3 +104,91 @@ print('Now array 2 is : ', array2)
 for e in array2:
     print('Element : ', e)
 print('-' * 80)
+#数据过滤器的几种方式
+array1 = np.arange(0,100,10)
+#方式一
+mask = np.array([0,0,0,0,0,0,1,1,1,1], dtype=bool)
+print(array1)
+print(mask)
+#过滤结果
+print(array1[mask])
+#方式二
+random_array = np.random.rand(10)
+print(random_array)
+mask = random_array > 0.5
+print(mask)
+print(random_array[mask])
+array1 = np.array([10,20,30,40,50,60])
+print(array1[np.where(array1 > 30)])
+print('-' * 80)
+#构建指定类型的数组
+array1 = np.array([1,2,3,4,5],dtype = np.float32)
+print(array1)
+array1 = np.array([1,2,3,4,5.6,6,'Jack'],dtype=np.object)
+print(array1)
+#类型转换
+array1 = np.array([1,2,3,4,5],dtype=np.int32)
+print(array1)
+array2 = array1.astype(np.float32)
+print(array2)
+print('-' * 80)
+#数据计算
+data_array = np.array([[1,2,3],[4,5,6]])
+print('Data : ', data_array)
+#求和 - 所有元素的和
+print('All elements sum : ',np.sum(data_array))
+print('All elements sum : ',data_array.sum())
+#求和 - 列级相加
+#调用方式一
+print('Columns sum : ', np.sum(data_array,axis=0))
+#调用方式二
+print('Columns sum : ', data_array.sum(axis=0))
+#求和 - 子数组求和
+print('Rows sum : ', np.sum(data_array,axis=1))
+print('Rows sum : ', data_array.sum(axis=1))
+#求积
+print(data_array.prod())
+print(data_array.prod(axis=0))
+print(data_array.prod(axis=1))
+#最小元素
+print(data_array.min())
+print(data_array.min(axis=0))
+print(data_array.min(axis=1))
+#最大元素
+print(data_array.max())
+print(data_array.max(axis=0))
+print(data_array.max(axis=1))
+#最小索引
+print(data_array.argmin())
+print(data_array.argmin(axis=0))
+print(data_array.argmin(axis=1))
+#最大索引
+print(data_array.argmax())
+print(data_array.argmax(axis=0))
+print(data_array.argmax(axis=1))
+#平均数
+print(data_array.mean())
+print(data_array.mean(axis=0))
+print(data_array.mean(axis=1))
+#标准差
+print(data_array.std())
+print(data_array.std(axis=0))
+print(data_array.std(axis=1))
+#方差
+print(data_array.var())
+print(data_array.var(axis=0))
+print(data_array.var(axis=1))
+#截段
+print(data_array.clip(2,4))
+#四舍五入
+data_array = np.array([1.25,3.42,5.84,7.47,9.72,10.54])
+print('Data : ', data_array)
+print('After round : ', data_array.round())
+for d in data_array.round():
+    print('Element : ', d)
+#指定精度
+print('Data : ', data_array)
+print('After round : ', data_array.round(decimals=1))
+for d in data_array.round(decimals=1):
+    print('Element : ', d)
+print('-' * 80)
