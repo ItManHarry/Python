@@ -205,9 +205,195 @@ print(np.searchsorted(data_array,values))
 data_array = np.array([[1,0,6],
         [1,7,0],
         [2,3,1],
-        [2,4,0]])
+        [3,4,0]])
 #按照第一列降序，第三列升序排列
 print('Data : ', data_array)
 index = np.lexsort([-1*data_array[:,0], data_array[:,2]])
 print('Sorted : ', data_array[index])    
+print('-' * 80)
+#数组的形状 - 改变表维度
+data_array = np.arange(10)
+print('Raw data : ', data_array)
+print('Raw data ndim : ', data_array.shape)
+#直接设置维度
+data_array.shape = 5,2
+print('After change ndim : ', data_array)
+print('-' * 80)
+data_array = np.arange(10)
+print('Raw data : ', data_array)
+print('Raw data ndim : ', data_array.shape)
+#设置维度生成新的数组，原数组不变
+new_array = data_array.reshape(2,5)
+print('New data : ', new_array)
+print('After change ndim : ', data_array)
+print('-' * 80)
+#单独增加维度
+data_array = np.arange(10)
+print('Before change : ', data_array.shape, ', data : ', data_array)
+data_array1 = data_array[np.newaxis, :]
+print('Aftrer change1 : ', data_array1.shape, ', data : ', data_array1)
+data_array2 = data_array[:, np.newaxis]
+print('Aftrer change2 : ', data_array2.shape, ', data : ', data_array2)
+#增加多个轴维度
+data_array3 = data_array[:, np.newaxis, np.newaxis, np.newaxis]
+print('Aftrer change3 : ', data_array3.shape, ', data : ', data_array3)
+#轴压缩
+data_array3 = data_array3.squeeze()
+print('Aftrer squeeze : ', data_array3.shape, ', data : ', data_array3)
+print('-' * 80)
+#矩阵转置 
+data_array = np.arange(10)
+data_array.shape = 2,5
+print('Before transpose : ', data_array)
+#方式一 transpose方法
+data_array = data_array.transpose()
+print('After first transpose : ', data_array)
+#方式二 T
+data_array = data_array.T
+print('After second transpose : ', data_array)
+print('-' * 80)
+#数组连接
+data_array1 = np.array([[123,542,286,339],[234,652,784,298]])
+data_array2 = np.array([[324,908,734,874],[426,487,1001,1293]])
+print('Data array 1 ', data_array1)
+print('Data array 2 ', data_array2)
+data_array_sum1 = np.concatenate((data_array1, data_array2))
+print('Data concatenated 1 : ', data_array_sum1)
+data_array_sum2 = np.concatenate((data_array1, data_array2),axis=0)
+print('Data concatenated 2 : ', data_array_sum2)
+data_array_sum3 = np.concatenate((data_array1, data_array2),axis=1)
+print('Data concatenated 3 : ', data_array_sum3)
+#和np.concatenate((data_array1, data_array2),axis=0)等效
+data_array_sum4 = np.vstack((data_array1, data_array2))
+print('Data concatenated 4 : ', data_array_sum4)
+#np.concatenate((data_array1, data_array2),axis=1)等效
+data_array_sum5 = np.hstack((data_array1, data_array2))
+print('Data concatenated 5 : ', data_array_sum5)
+#flatten变为一维数组
+data_array_sum6 = data_array_sum5.flatten()
+print('Data concatenated 6 : ', data_array_sum6)
+print('-' * 80)
+#数组生成常用函数
+#方式一
+data_array = np.array([1,2,3,4,5])
+print('Data array : ',data_array)
+#方式二
+data_array = np.arange(10)
+print('Data array : ',data_array)
+data_array = np.arange(2,20,2)
+print('Data array : ',data_array)
+data_array = np.arange(2,20,2,dtype=np.float32)
+print('Data array : ',data_array)
+#方式三
+data_array = np.linspace(5,10,10)
+print('Data array : ',data_array)
+#方式四
+data_array = np.logspace(0,1,5)
+print('Data array : ',data_array)
+#方式五
+data_array = np.zeros((5,4))
+data_array.fill(9)
+print('Data array : ',data_array)
+#方式六
+data_array = np.ones((3,6)) * 8
+print('Data array : ',data_array)
+#方式七
+data_array = np.empty((5,4))
+#填充数据
+data_array.fill(9)
+print('Data array : ',data_array)
+#方式八
+data_array = np.zeros_like(data_array)
+print('Data array : ',data_array)
+#方式九
+data_array = np.ones_like(data_array)
+print('Data array : ',data_array)
+print('-' * 80)
+#运算
+x = np.array([5,6])
+y = np.array([7,8])
+print('x : ', x)
+print('y : ', y)
+m = np.multiply(x,y)
+print('Multiplied : ', m)
+#dot,一维数组为内积后相加，非一维为矩阵运算
+d = np.dot(x, y)
+print('Doted : ', d)
+x = np.array([[3,4],[7,8]])
+y = np.array([[5,6],[9,10]])
+print('x : ', x)
+print('y : ', y)
+d = np.dot(x, y)
+print('Doted : ', d)
+x = np.array([5,6])
+y = np.array([7,0])
+#逻辑与
+print('Logical and : ', np.logical_and(x, y))
+#逻辑或
+print('Logical or : ', np.logical_or(x, y))
+#逻辑非
+print('Logical not : ', np.logical_not(x, y))
+print('-' * 80)
+#随机数 - 默认是0到1的小数
+r = np.random.rand(3,2)
+print('Random rand : ', r)
+#随机整型
+r = np.random.randint(10, size=(5,4))
+print('Random rand : ', r)
+#随机采样
+s = np.random.random_sample()
+print('Sample is : ', s)
+s = np.random.randint(10)
+print(s)
+s = np.random.randint(1,5,3)
+print(s)
+#随机高斯分布
+mu, sigma = 0, 0.1
+#设置精度
+np.set_printoptions(precision=2)
+m = np.random.normal(mu, sigma, 10)
+print('m : ', m)
+#洗牌
+a = np.arange(10)
+print('Before shuffle : ', a)
+np.random.shuffle(a)
+print('After shuffle : ',a)
+#随机种子
+np.random.seed(100)
+mu, sigma = 0,0.1
+m = np.random.normal(mu, sigma,10)
+print('Random array : ', m)
+print('-' * 80)
+#数据文件读取
+data_array = np.loadtxt('data1.txt')
+print('Data is : ', data_array)
+data_array = np.loadtxt('data2.txt',delimiter=',')
+print('Data is : ', data_array)
+#跳过行数：从第一行算起
+data_array = np.loadtxt('data2.txt',delimiter=',', skiprows=2)
+print('Data is : ', data_array)
+#只取其中的某几列
+data_array = np.loadtxt('data2.txt',delimiter=',', skiprows=2,usecols=(0,2,4))
+print('Data is : ', data_array)
+#数据文件写入
+data = np.array([
+    [1,2,3,4],
+    [5,6,7,8],
+    [2,3,4,5],
+    [5,6,7,8]
+])
+#指定格式及分隔符
+np.savetxt('data3.txt',data,fmt='%d',delimiter=':')
+#读写array结构
+data = np.array([
+    [1,2,3,4],
+    [5,6,7,8],
+    [2,3,4,5],
+    [5,6,7,8]
+])
+#array格式保存
+np.save('data.npy', data)
+#array格式读取
+data = np.load('data.npy')
+print('Data loaded from array : ', data)
 print('-' * 80)
