@@ -23,9 +23,17 @@ print(ids.values)
 print('-' * 200)
 es1 = df[df['在职状态'] == 14891]
 es2 = df[df['在职状态'] == 123356]
+print('总人数 :\t', len(df))
 print('在职人数 :\t', len(es1))
 print('离职人数 :\t', len(es2))
-print('总人数 :\t', len(df))
+#多条件组合筛选
+es3 = df[(df['在职状态'] == 14891) & (df['代理商代码'] == '42')]
+print('湖南直营在职人数:\t', len(es3), type(es3))
+employees = es3.values
+for employee in employees:
+    print(employee)
+print('-' * 200)    
+print(employees[1])    
 print('-' * 200)
 print(es1.index)
 print(es1.head(10))
