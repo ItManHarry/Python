@@ -71,6 +71,8 @@ print('Max age : ', ages.max())
 print('Min age : ', ages.min())
 #取平均
 print('Mean age : ', ages.mean())
+#统计数量
+print('Count : ', ages.count())
 print('-' * 200)
 #获取数据基本统计特性（较为实用）,只针对数字类型的数据进行统计，非数字不可用
 print(df.describe())
