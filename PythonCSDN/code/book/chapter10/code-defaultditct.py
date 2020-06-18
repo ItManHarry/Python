@@ -12,7 +12,7 @@ print('-' * 80)
 #设置默认值
 s = [('Python',1,100),('Java',3,200),('Python',4,300),('Groovy',5,400),('Java', 5,500),('Groovy',20,600)]
 for e1,e2,e3 in s:
-    print('Element 1 : ',e1,', element 2 : ',e2,',element 3 : ',e3)
+    print('Element 1 : ',e1,', element 2 : ',e2,', element 3 : ', e3)
 print('-' * 80)
 s = [('Python',1),('Java',3),('Python',4),('Groovy',5),('Java', 5),('Groovy',20)]
 for k, v in s:
