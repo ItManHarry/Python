@@ -28,9 +28,9 @@
 	
 ```python
 	def info(name, age, height):
-    print('Name : ', name)
-    print('Age : ', age)
-    print('Height : ', height)
+            print('Name : ', name)
+            print('Age : ', age)
+            print('Height : ', height)
 	info(age=36,name='Harry',height=168)
 ```
 
@@ -40,9 +40,9 @@
 		
 ```python
 	def info(age, height,name='ABC'):
-    print('Name : ', name)
-    print('Age : ', age)
-    print('Height : ', height)
+            print('Name : ', name)
+            print('Age : ', age)
+            print('Height : ', height)
 	info(age=36,height=168)
 ```
 
@@ -50,7 +50,7 @@
 		
 ```python
 	def welcome(name="Harry", message="Welcome to the Python world."):
-    print(name,',', message)
+            print(name,',', message)
 	welcome('Jack')
 	welcome(message='change yourself for the future!')
 ```
@@ -65,8 +65,8 @@
 	
 ```python
 	def test(num, *books):
-    print("Number : ", num)
-    print("Books : ", books)
+            print("Number : ", num)
+            print("Books : ", books)
 	test(100, 'Java','Python','C#') 
 ```	
 	
@@ -74,8 +74,8 @@
 	
 ```python
 	def info2(*names, message):
-    for name in names:
-        print('%s, %s' %(name, message))
+            for name in names:
+                print('%s, %s' %(name, message))
 	info2('A','B','C','D',message=' welcome you .')   
 ```	
 
@@ -83,9 +83,9 @@
 	
 ```python
 	def info4(num,*names, **scores):
-    print('Number : ', num)
-    print("Names : ", names)
-    print('Scores : ', scores)
+            print('Number : ', num)
+            print("Names : ", names)
+            print('Scores : ', scores)
 	info4(30,'Java','Python','C#', js=100,ps=120,cs=150)  
 	print('-' * 50)
 	def info5(*names, message, **scores):
