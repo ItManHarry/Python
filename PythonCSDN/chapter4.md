@@ -10,7 +10,7 @@
 		[return [返回值]]
 ```	
 
-## 关键数参数和参数默认值
+## 关键字参数和参数默认值
 
 	函数参数传入方式：
 		
@@ -18,9 +18,9 @@
 
 ```python
 	def info(name, age, height):
-    print('Name : ', name)
-    print('Age : ', age)
-    print('Height : ', height)
+           print('Name : ', name)
+           print('Age : ', age)
+           print('Height : ', height)
 	info('ChengGuoqian',36,170) 
 ```
 	
