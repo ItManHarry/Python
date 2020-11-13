@@ -71,4 +71,21 @@
 | 数据格式 | 读入命令 | 保存命令 | 
 | ------------- | ------------- | ------------- | 
 | 剪贴板 | read_clipboard | to_clipboard | 
-| Content Cell | Content Cell |Content Cell | 
+| General delimited File | read_table | | 
+| Fixed-width File | read_table | | 
+| csv | read_csv | to_csv | 
+| MS Excel | read_excel | to_excel | 
+| OpenDocument | read_excel | | 
+| JSON | read_json | to_json | 
+| html | read_html | to_html | 
+| Stata | read_stata | to_stata | 
+| SAS | read_sas|  | 
+| SPSS | read_spss | pyreadstat.write_sav | 
+| SQL | read_sql,read_sql_query,read_sql_table | to_sql | 
+| Google BigQuery | read_gbq | to_gbq | 
+| HDF5 Format | read_hdf | to_hdf | 
+| Feather Format | read_feather | to_feather | 
+| Parquet Format | read_parquet | to_parquet | 
+| ORC Format | read_orc |  | 
+| Msgpack | read_msgpack | to_msgpack | 
+| Python Pickle Format | read_pickle | to_pickle | 
