@@ -69,6 +69,5 @@
 ### 数据读入/保存命令总结
 
 | 数据格式 | 读入命令 | 保存命令 | 
-| ------------- | ------------- | ------------- | 
 | 剪贴板 | read_clipboard | to_clipboard | 
 | Content Cell | Content Cell |Content Cell | 
