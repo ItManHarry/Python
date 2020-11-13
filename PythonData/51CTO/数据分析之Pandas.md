@@ -55,6 +55,7 @@
 	2. 读取数据表
 	
 ```python
+	#MySQL数据库
 	import pandas as pd
 	from sqlalchemy import create_engine
 	engine = create_engine('mysql+pymysql://root:root2019@localhost:3306/sdb?charset=gbk')
@@ -64,6 +65,21 @@
 	uc = pd.read_sql('select count(*) from sys_user', con=engine)
 	print(type(uc))
 	print(uc)
+	ud = users.to_dict()
+	print(type(ud))
+	for k,v in ud.items():
+		print('Key is : ', k, ' value type is : ', type(v), ' the 12th data is : ', v.get(11))
+		for kk,vv in v.items():
+			print('Key is :', kk, ' value is : ', vv)
+	#Oracle数据库	
+	import cx_Oracle as cxoc
+	#首先要初始化Oracle client library
+	cxoc.init_oracle_client(lib_dir=r"D:\Development\Python\db-drivers\instantclient_19_8")
+	engine = create_engine('oracle+cx_oracle://dcstest0801:Tsv33db#2016@10.40.128.171:1521/orcl?encoding=UTF-8&nencoding=UTF-8')
+	users = pd.read_sql('select * from gp_operator', con=engine)
+	print(users)
+	uc = pd.read_sql('select count(*) from gp_operator', con=engine)
+	print('User count is : ', uc)
 ```
 
 ### 数据读入/保存命令总结
@@ -89,3 +105,16 @@
 | ORC Format | read_orc |  | 
 | Msgpack | read_msgpack | to_msgpack | 
 | Python Pickle Format | read_pickle | to_pickle | 
+
+### Pandas将DataFrame转换为其他数据格式的命令
+
+| 数据格式 | 转换命令 |
+| ------------- | ------------- |
+| dict格式 | to_dict | 
+| Markdown-friendly 表格格式 | to_markdown |
+| Console-friendly tabularoutput | to_string |
+| Numpy array | to_numpy |
+| Numpy record array | to_records |
+| Latex格式 | to_latex |
+| Parquet | to_parquet |
+| xarray object | to_xarray |
