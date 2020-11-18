@@ -118,3 +118,96 @@
 | Latex格式 | to_latex |
 | Parquet | to_parquet |
 | xarray object | to_xarray |
+
+```python
+	#写入CSV	
+	print('-' * 80)
+	users = pd.DataFrame(columns=['Name','Email','Address','Mobile','age'],
+		data=[
+			['Harry','jack1@163.com','SD JN','13780924007',20],
+			['Jack','jack2@163.com','SD JN','13780924007',26],
+			['Tom','jack3@163.com','SD JN','13780924007',27],
+			['Will','jack4@163.com','SD JN','13780924007',28],
+			['Bill','jack5@163.com','SD JN','13780924007',24],
+			['Alex','jack6@163.com','SD JN','13780924007',29],
+			['Max','jack7@163.com','SD JN','13780924007',31],
+			['Jane','jack8@163.com','SD JN','13780924007',30],
+			['Jon','jack9@163.com','SD JN','13780924007',23],
+			['Dany','jack10@163.com','SD JN','13780924007',22]
+		]
+	)
+	print(users)
+	'''
+		to_csv(
+			filepath_or_buffer:''   #文件路径,
+			sep=','                 #分隔符,
+			columns=[...],          #导出的变量列表 
+			header=True,            #重置变量名，也可提供新的列表
+			index=True,             #是否导出索引
+			mode='',                #导出模式：r,r+,w,w+,a,a+
+			encoding='utf-8'        #编码集       
+		)
+	'''
+	users.to_csv('C:\\Users\\20112004\\Desktop\\tmp\\users.txt',index=False,header=['姓名','邮箱','地址'],columns=['Name','Email','Address'],mode='a+')
+	print('-' * 80)
+	#写入Excel
+	 import pandas as pd
+	print('-' * 80)
+	users = pd.DataFrame(columns=['Name','Email','Address','Mobile','age'],
+		data=[
+			['Harry','jack1@163.com','SD JN','13780924007',20],
+			['Jack','jack2@163.com','SD JN','13780924007',26],
+			['Tom','jack3@163.com','SD JN','13780924007',27],
+			['Will','jack4@163.com','SD JN','13780924007',28],
+			['Bill','jack5@163.com','SD JN','13780924007',24],
+			['Alex','jack6@163.com','SD JN','13780924007',29],
+			['Max','jack7@163.com','SD JN','13780924007',31],
+			['Jane','jack8@163.com','SD JN','13780924007',30],
+			['Jon','jack9@163.com','SD JN','13780924007',23],
+			['Dany','jack10@163.com','SD JN','13780924007',22]
+		]
+	)
+	print(users)
+	'''
+		to_excel(
+			filepath_or_buffer:''   #文件路径,
+			columns=[...],          #导出的变量列表 
+			header=True,            #重置变量名，也可提供新的列表
+			index=True,             #是否导出索引
+			encoding='utf-8'        #编码集       
+		)
+	'''
+	users.to_excel('C:\\Users\\20112004\\Desktop\\tmp\\users.xlsx',index=False,header=['姓名','邮箱','地址'],columns=['Name','Email','Address'])
+	print('-' * 80)
+	#写入数据库
+	import pandas as pd
+	from data.read.DatabaseEngines import DatabaseEngines
+	users = pd.DataFrame(columns=['Name','Email','Address','Mobile','age','birthday'],
+		data=[
+			['Harry','jack1@163.com','SD JN','13780924007',20,'1985-12-02'],
+			['Jack','jack2@163.com','SD JN','13780924007',26,'1985-12-02'],
+			['Tom','jack3@163.com','SD JN','13780924007',27,'1985-12-02'],
+			['Will','jack4@163.com','SD JN','13780924007',28,'1985-12-02'],
+			['Bill','jack5@163.com','SD JN','13780924007',24,'1985-12-02'],
+			['Alex','jack6@163.com','SD JN','13780924007',29,'1985-12-02'],
+			['Max','jack7@163.com','SD JN','13780924007',31,'1985-12-02'],
+			['Jane','jack8@163.com','SD JN','13780924007',30,'1985-12-02'],
+			['Jon','jack9@163.com','SD JN','13780924007',23,'1985-12-02'],
+			['Dany','jack10@163.com','SD JN','13780924007',22,'1985-12-02']
+		]
+	)
+	print(users)
+	'''
+		df.to_sql(
+			name='table name',      #表名
+			con=engine,             #SQLAlchemy引擎
+			if_exists='append',     #如果表已经存在，如何处理,取值：‘fail’：不做任何处理，‘replace’：删除源表并重建新表；‘append’：在原表追加数据
+			index=False             #是否导出索引
+		)
+	'''
+	connection_engine = DatabaseEngines.create('mysql')
+	users.to_sql(name='tb_user',con=connection_engine,if_exists='replace',index=True)
+	print('数据已导入数据库')
+```
+
+## 变量列的基本操作
