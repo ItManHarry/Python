@@ -67,6 +67,8 @@
 	
 	sl = [True, False, True, True]
 	
+- 按照位置筛选数据
+ 
 ```python
 	import pandas as pd
 	import random as rd
@@ -77,8 +79,8 @@
 	df = pd.DataFrame(data=data,columns=columns)
 	print('Data : \n', df)
 	sl = [True, False, True, True]
-	print('0 - 10 records : \n', df.iloc[0:10])                         #取某个范围内的数据不包括右侧边界
-	print('0,3,5,7 records : \n', df.iloc[[0,3,5,7]])                   #取具体的某几条数据
-	print('0 - 10 rows, 1 - 3 columns : \n', df.iloc[0:11,1:4])         #取某几列、某几行数据(范围别)
-	print('0 , 11 rows, 1 , 4 columns : \n', df.iloc[[0,11],[1,4]])     #取某几列、某几行数据(指定哪行哪列)
+	print('0 - 10 records : \n', df.iloc[0:10])                         			#取某个范围内的数据不包括右侧边界
+	print('0,3,5,7 records : \n', df.iloc[[0,3,5,7]])                   			#取具体的某几条数据
+	print('0 - 10 rows, 1 - 3 columns : \n', df.iloc[0:11,1:4])         	#取某几列、某几行数据(范围别)
+	print('0 , 11 rows, 1 , 4 columns : \n', df.iloc[[0,11],[1,4]])     	#取某几列、某几行数据(指定哪行哪列)
 ```	
