@@ -853,4 +853,14 @@ Python库参考手册：https://docs.python.org/3/index.html
 
 ##  itertools模块下的迭代器功能函数
 
+	1. 排列组合工具函数
+	
+		1.1. product(p, q, ...[repeat=1]) : 用序列p、q、......中的元素进行排列组合
+		
+		1.2. permutations(p[,r]) : 从序列p中取出r个元素组成全排列
+		
+		1.3. combinations(p, r): 从序列p中取出r个元素组成全排列，元素不允许重复
+		
+		1.4. combinations_with_replacement(p, r): 从序列p中取出r个元素组成全排列，元素允许重复
+	
 ##  functools模块下的函数修饰器和功能函数
