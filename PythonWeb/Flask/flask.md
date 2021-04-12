@@ -130,8 +130,8 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 			以某扩展实现了Foo 功能为例，这个扩展的名称将是Flask- Foo 或Foo-Flask ；程序包或模块的命名使用小写加下划线，即flask foo （ 即导人时的名称） ；
 			用于初始化的类一般为Foo ，实例化的类实例一般使用小写，即foo 。初始化这个假想中的F lask-Foo 扩展的示例如下所示：		from f las k 工mport Flask
 		```
-			from flask foo 工mport Foo
-			app = Flask( name )
+			from flask foo import Foo
+			app = Flask(__name__)
 			foo = Foo (app)
 		```
 	9. 项目配置
@@ -140,7 +140,7 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 		可以把配置变量存储在单独的Python 脚本、JSON 格式的文件或是Python类中， config 对象提供了相应的方法来导人配置。
 		和操作字典一样，读取一个配置就是从confi g 字典里通过将配置变量的名称作为链’读取对应的值：
 		```
-			value = app . config [ 'ADMIN_NAME ' ]
+			value = app.config[ 'ADMIN_NAME ' ]
 		```
 		
 	10. Flask命令
@@ -154,7 +154,6 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 			def hello () :		
 				click .echo('Hello , Human !'）
 		```
-		函数的名称即为命令名称，这里注册的命令即hello ，你可以使用flask hello 命令来触发函数。作为替代，你也可以在app.cli.command （） 装饰器中传入参数
-		来设置命令名称，比如app.cli.command （’ say-hello’）会把命令名称设置为say-hello ，完整的命令即flask say-hello.
-		借助cl ick 模块的echo（）函数，我们可以在命令行界面输出字符。命令函数的文档字符串则会作为帮助信息显示（ flask hello - -help ）
-	
+		函数的名称即为命令名称，这里注册的命令即hello ，你可以使用flask hello 命令来触发函数。作为替代，你也可以在app.cli.command(） 装饰器中传入参数
+		来设置命令名称，比如app.cli.command （'say-hello'）会把命令名称设置为say-hello ，完整的命令即flask say-hello.
+		借助cl ick 模块的echo(）函数，我们可以在命令行界面输出字符。命令函数的文档字符串则会作为帮助信息显示（ flask hello - -help ）
