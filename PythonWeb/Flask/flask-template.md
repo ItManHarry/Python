@@ -20,10 +20,10 @@
 				<i>This user has not provided a bio. </i>
 		｛%endif %}
 			{＃下面是电影清单（这是注释） #}
-			<h5>{{ user .username }} 's Watchlist ( { { movies I length } } ) : </h5>
-			<ul>
-			{% for movie in m ovies 宅｝
-				<l i >{{ movie.name}} - {{movie . year }}</l 工〉
+			<h5>{{ user.username }} 's Watchlist ( { { movies|length } } ) : </h5>
+		<ul>
+			{% for movie in m ovies %｝
+				<li>{{ movie.name}} - {{movie.year }}</li>
 			{% endfor %｝
 		</ul >
 </body>
@@ -47,7 +47,7 @@
 		{# ... #}
 		
 	另外，在模板中， Jinja2 支持使用“．”获取变量的属性，比如user 字典中的username 键值通过“．”获取，
-	即user. username ，在效果上等同于user\['name'\]
+	即user. username ，在效果上等同于user['name']
 	
 	Jinja2 允许你在模板中使用大部分Python 对象，比如字符串、列表、字典、元组、整型、浮点型、布尔值。它支持
 基本的运算符号（＋、-、\*、／等）、比较符号（ 比如＝＝ 、！＝ 等） 、逻辑符号（ and 、or 、not 和括号）
