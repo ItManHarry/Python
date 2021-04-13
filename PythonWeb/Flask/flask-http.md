@@ -4,14 +4,14 @@
 
 - 使用request的属性获取请求URL
 
-	url: http://helloflask.com/hello?name=Grey
+	url: http://helloflask.com/hello?name=Grey	
 	
-	Property					value
-	
-	path							'/hello'
-	full_path					'/hello?name=Grey'
-	host							'helloflask.com'
-	host_url					'http://helloflask.com/'
-	base_url					'http://helloflask.com/hello'
-	url							'http://helloflask.com/hello?name=Grey'
-	url_root					'http://helloflask.com/'
+| 属性 | 值 | 
+| ------------- | ------------- | 
+| path | '/hello' | 
+| full_path | '/hello?name=Grey' |
+| host | 'helloflask.com' | 
+| host_url | 'http://helloflask.com/' |
+| base_url | 'http://helloflask.com/hello' | 
+| url | 'http://helloflask.com/hello?name=Grey' |
+| url_root | 'http://helloflask.com/' | 
