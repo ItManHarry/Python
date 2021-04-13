@@ -205,7 +205,6 @@
 		return response
 ```
 - Response类常用属性和方法
-
 | 方法/属性 | 说 明 | 
 | ------------- | ------------- | 
 | headers | 一个Werkzeug 的Headers 对象， 表示响应首部，可以像字典一样操作 |
