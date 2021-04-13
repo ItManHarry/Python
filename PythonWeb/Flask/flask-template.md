@@ -12,18 +12,18 @@
 	<title>{{ user . username }} 's Watchlist</title>
 	</head>
 	<body>
-		<a href="{{ url for ('i ndex') ) )">& larr; Return</a>
+		<a href="{{ url_for('index') }}">& larr; Return</a>
 		<h2>{{ user.username }}</h2>
-		｛% if user.bio %｝
+		{% if user.bio %｝
 			<i>{{ user.bio}}＜/i>
-		｛% else %｝
-				<i>This user has not provided a bio. </i>
-		｛%endif %}
-			{＃下面是电影清单（这是注释） #}
-			<h5>{{ user.username }} 's Watchlist ( { { movies|length } } ) : </h5>
+		{% else %｝
+			<i>This user has not provided a bio. </i>
+		{% endif %}
+		{＃下面是电影清单（这是注释） #}
+		<h5>{{ user.username }} 's Watchlist ( {{movies|length }} ) : </h5>
 		<ul>
 			{% for movie in m ovies %｝
-				<li>{{ movie.name}} - {{movie.year }}</li>
+				<li>{{ movie.name }} - {{ movie.year }}</li>
 			{% endfor %｝
 		</ul >
 </body>
@@ -155,3 +155,11 @@ Flask 提供了一个app.context_processor 装饰器，可以用来注册模板�
 | range(\[start, ]stop\[, step]) | 和Python 中的range()用法相同 |
 | lipsum(n=5, html=True, min=20, max=100) | 生成随机文本(lorem ipsum)，可以在测试时用来填充页面。默认生成5 段HTML 文本， 每段包含20 ~ 100 个单词 |
 | dict(\*\*items) | 和Python中的diet()用法相同 |
+
+
+
+| AAA | BBB |
+| 1 | 2 |
+| 1 | 2 |
+| 1 | 2 |
+| 1 | 2 |
