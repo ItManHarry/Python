@@ -91,11 +91,11 @@
 	传人Jinja2 中的变量值可以是字符串、列表和字典，也可以是函数、类和类实例，这完全取决于你在视图函数传入的值。下面是一些示例：
 	
 ```html
-	<p ＞这是列表my_list 的第一个元素： ｛{ my_list[0] }}</p>
-	<p ＞这是元组my_tuple 的第一个元素：｛{ my_tuple[0]  }}</p>
-	<p ＞这是字典my_dict 的键为name 的值： {{ my_dict['name'] }}</p>
-	<p ＞这是函数my_func 的返回值：｛{ my_func() }}</p>
-	<p ＞这是对象my_object调用某方法的返回值:{{ my_object.name() }}</p>
+	<p>这是列表my_list 的第一个元素： ｛{ my_list[0] }}</p>
+	<p＞这是元组my_tuple 的第一个元素：｛{ my_tuple[0]  }}</p>
+	<p＞这是字典my_dict 的键为name 的值： {{ my_dict['name'] }}</p>
+	<p＞这是函数my_func 的返回值：｛{ my_func() }}</p>
+	<p＞这是对象my_object调用某方法的返回值:{{ my_object.name() }}</p>
 ```
 
 ## 上下文
@@ -106,7 +106,7 @@
 以及Flask 默认传入的变量。	除了渲染时传入变量，你也可以在模板中定义变量，使用set 标签：
 
 ```html
-	｛	% set navigation ＝［('／'，'Home'),('about','About')］ %｝
+	｛% set navigation ＝［('/','Home'),('about','About')］ %｝
 ```
 	
 	你也可以将一部分模板数据定义为变量，使用set 和endset 标签声明开始和结束：
@@ -267,4 +267,42 @@ Jinja2提供了许多内置过滤器，常用的过滤器如下表所示：
 		if n == 'baz':
 			return True
 		return False
+```
+
+## 模板环境对象
+
+	在Jinja2 中，渲染行为由jinja2.Enviroment 类控制，所有的配置选项、上下文变量、全局函数、过滤器和
+测试器都存储在Enviroment 实例上。当与Flask 结合后，我们并不单独创建Enviroment对象，而是使用Flask 
+创建的Enviroment 对象,它存储在app.jinja_env 属性上。在程序中,我们可以使用app.jinja_env 更改Jinja2设置.
+
+- 添加自定义全局函数
+
+	和app.template_global()装饰器不同，直接操作globals 字典允许我们传入任意Python 对象， 而不仅仅是函数，
+类似于上下文处理函数的作用。下面的代码使用app.jinjia_env.globals 分别向模板中添加全局函数bar 和全局变量foo:
+
+```python
+	def bar():
+		return 'I am bar'
+	foo = 'I am foo'
+	app.jinja_env.globals['bar'] = bar
+	app.jinja_env.globals['foo'] = foo
+```
+
+- 添加自定义过滤器
+
+```python
+	def smiling(s):
+		return s + ':)'
+	app.jinja_env.filters['smiling'] = smiling
+```
+
+- 添加自定义测试器
+
+```python
+	def baz(n):
+		if n == 'AAA':
+			return True
+		return False
+		
+	app.jinja_env.tests['baz'] = baz
 ```
