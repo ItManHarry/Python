@@ -165,7 +165,7 @@ Flask 提供了一个app.context_processor 装饰器，可以用来注册模板�
 
 	3. 自定义全局函数
 	
-		除了使用app.context_processor 注册模板上下文处理函数来传人函数， 我们也可以使用app.template_global(仅能用于注册全局函数,注册全局变量需要用其他方法)装饰器
+		除了使用app.context_processor 注册模板上下文处理函数来传入函数， 我们也可以使用app.template_global(仅能用于注册全局函数,注册全局变量需要用其他方法)装饰器
 直接将函数注册为模板全局函数。以下代码清单把bar()函数注册为模板全局函数。
 	
 ```python
@@ -275,7 +275,7 @@ Jinja2提供了许多内置过滤器，常用的过滤器如下表所示：
 测试器都存储在Enviroment 实例上。当与Flask 结合后，我们并不单独创建Enviroment对象，而是使用Flask 
 创建的Enviroment 对象,它存储在app.jinja_env 属性上。在程序中,我们可以使用app.jinja_env 更改Jinja2设置.
 
-- 添加自定义全局函数
+- 添加自定义全局函数/变量
 
 	和app.template_global()装饰器不同，直接操作globals 字典允许我们传入任意Python 对象， 而不仅仅是函数，
 类似于上下文处理函数的作用。下面的代码使用app.jinjia_env.globals 分别向模板中添加全局函数bar 和全局变量foo:
