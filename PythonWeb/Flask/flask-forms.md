@@ -34,7 +34,7 @@
 | 参数 | 说明 |
 | ---- | ---- |
 | label | 字段标签&lt;label&gt;的值，也就是渲染后显示在输入字段前的文字 |
-| render kw | 一个字典，用来设置对应的HTML &lt;input&gt;标签的属性，比如传入{'placeholder':'YourName'｝，渲染后的HTML 代码会将&lt;input&gt;标签的placeholder属性设为Your Name|
+| render_kw | 一个字典，用来设置对应的HTML &lt;input&gt;标签的属性，比如传入{'placeholder':'YourName'｝，渲染后的HTML 代码会将&lt;input&gt;标签的placeholder属性设为Your Name|
 | validators | 一个列表，包含一系列验证器，会在表单提交后被逐一调用验证表单数据 |
 | default | 字符串或可调用对象，用来为表单字段设置默认值 |
 
@@ -67,7 +67,7 @@
 
 默认情况下， WTForms 输出的字段HTML 代码只会包含id 和name 属性，属性值均为表单类中对应的字段属性名称。如果要添加额外的属性，通常有两种方法:
 
-	1. 使用「ender_kw 属性
+	1. 使用render_kw 属性
 	
 ```python
 	username = StringField('Username', render_kw={'placeholder ':'Your Username'})
@@ -98,7 +98,7 @@
 
 ```python
 	from flask import request
-	@app.route ('/ basic',methods=[ 'GET','POST' ])
+	@app.route ('/basic',methods=[ 'GET','POST' ])
 	def basic() :
 		form = LoginForm() # GET + POST
 		if request.method == 'POST' and form.validate() :
@@ -106,21 +106,21 @@
 		return render_template( ' forms/basic.html ', form=form) ＃处理GET 请求
 ```
 
-	Flask-WTF 提供的validate_on_ submit() 方法合并了这两个操作，因此上面的代码可以简化为：
+	Flask-WTF 提供的validate_on_submit() 方法合并了这两个操作，因此上面的代码可以简化为：
 	
 ```python
 	from flask import request
-	@app.route ('/ basic',methods=[ 'GET','POST' ])
+	@app.route ('/basic',methods=[ 'GET','POST' ])
 	def basic() :
 		form = LoginForm() # GET + POST
-		if form.validate_on_ submit() :
+		if form.validate_on_submit() :
 				＃处理POST 请求
 		return render_template( 'forms/basic.html',form=form) ＃处理GET 请求
 ```
 
 - 在模板中渲染错误消息
 
-	如果form.validate_on_ submit()返回False,那么说明验证没有通过。对于验证未通过的字段， WTForms会把错误消息添加到表单类的errors 属性中，这是
+	如果form.validate_on_submit()返回False,那么说明验证没有通过。对于验证未通过的字段， WTForms会把错误消息添加到表单类的errors 属性中，这是
 一个匹配作为表单字段的类属性到对应的错误消息列表的字典。我们一般会直接通过字段名来获取对应字段的错误消息列表，即"form.字段名.errors" 。
 比如， form.name.errors 返回name 字段的错误消息列表。
 
