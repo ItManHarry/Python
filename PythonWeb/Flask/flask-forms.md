@@ -14,7 +14,7 @@
 
 | 字段类 | 说明 | 对应的HTML表示 |
 | ---- | ---- | ---- |
-| BooleanField | 复选框，值会被处理为True 或False | <input type="checkbox"> |
+| BooleanField | 复选框，值会被处理为True 或False | &lt;input type="checkbox"&gt; |
 | DateField | 文本字段，值会被处理为datetime . date 对象 | <input type = "text"> |
 | DateTimeField | 文本字段，值会被处理为datetime.datetime对象| <input type = "text"> |
 | FileField | 文件上传字段 | <input type = "file"> |
