@@ -131,7 +131,7 @@
 
 - 自定义上下文
 	
-	如果多个模板都需要使用同一变量，那么比起在多个视图函数中重复传人，更好的方法是能够设置一个模板全局变量。
+	如果多个模板都需要使用同一变量，那么比起在多个视图函数中重复传入，更好的方法是能够设置一个模板全局变量。
 Flask 提供了一个app.context_processor 装饰器，可以用来注册模板上下文处理函数， 它可以帮我们完成统一传入
 变量的工作。模板上下文处理函数需要返回一个包含变量键值对的字典：
 
@@ -148,19 +148,123 @@ Flask 提供了一个app.context_processor 装饰器，可以用来注册模板�
 	
 - 内置全局对象
 
-	Jinja2 在模板中默认提供了一些全局函数，常用的三个函数如下：
+	1. Jinja2 在模板中默认提供了一些全局函数，常用的三个函数如下：
 	
-| 变量 | 说 明 | 
+| 函数 | 说 明 | 
 | ------------- | ------------- | 
 | range(\[start, ]stop\[, step]) | 和Python 中的range()用法相同 |
 | lipsum(n=5, html=True, min=20, max=100) | 生成随机文本(lorem ipsum)，可以在测试时用来填充页面。默认生成5 段HTML 文本， 每段包含20 ~ 100 个单词 |
 | dict(\*\*items) | 和Python中的diet()用法相同 |
 
+	2. Flask也在模板中内置了两个全局函数:
 
-
-| AAA | BBB |
+| 函数 | 说明 |
 | ---- | ---- |
-| 1 | 2 |
-| 1 | 2 |
-| 1 | 2 |
-| 1 | 2 |
+| url_for() | 用于生成U RL 的函数 |
+| get_flashed_messages() | 用于获取flash 消息的函数 |
+
+	3. 自定义全局函数
+	
+		除了使用app.context_processor 注册模板上下文处理函数来传人函数， 我们也可以使用app.template_global(仅能用于注册全局函数,注册全局变量需要用其他方法)装饰器
+直接将函数注册为模板全局函数。以下代码清单把bar()函数注册为模板全局函数。
+	
+```python
+	@app.template_global()
+	def bar():
+		return 'I am bar'
+```
+
+## 过滤器
+
+	在Jinja2 中，过滤器（ filter ）是一些可以用来修改和过滤变量值的特殊函数，过滤器和变量
+用一个竖线（管道符号）隔开，需要参数的过滤器可以像函数一样使用括号传递。下面是一个对
+name 变量使用title过滤器的例子：
+
+```html
+	#这会将name变量的值标题化，相当于在Python里调用name.title()
+	{{ name|title}}
+	{{ movies|length}}		#相当于Python里调用len(movies)
+```
+
+	另一种用法是将过滤器作用于一部分模板数据，使用filter 标签和endfilter标签声明开始和结束。
+比如，下面使用upper过滤器将一段文字转换为大写：
+
+```html
+	{% filter upper %}
+		This text will becomes uppercase.
+	{% endfilter%}
+```
+
+- 内置过滤器
+
+Jinja2提供了许多内置过滤器，常用的过滤器如下表所示：
+
+| 过滤器| 说明 |
+| ---- | ---- |
+| default(value, default_value='u',boolean=False) | 设置默认值，默认值做为参数传入，别名为d |
+| escape(s) | 转义HTML 文本，别名为e |
+| first (seq) | 返回序列的第一个元素 |
+| last( seq) | 返回序列的最后一个元素 |
+| Iength(object) | 返回变量的长度 |
+| random( seq) | 返回序列中的随机元素 |
+| safe( value) | 将变量值标记为安全，避免转义 |
+| trim( value) | 清除变量值前后的空格 |
+| max(value, case_ sensitive=False, attribute=None) | 返回序列中的最大值 |
+| min(value, case sensitive=False, a忧ribute=None) | 返回序列中的最小值 |
+| unique(value, case sensitive=False, attribute=None) | 返回序列中的不重复的值 |
+| stri ptags(value) | 清除变量值内的HTML 标签 |
+| urlize (value, trim_url_limit=None, nofollow=Flase,target=None,rel=None | 将URL 文本转换为可单击的HTML 链接 |
+| wordcount (s) | 计算单词数量 |
+| tojson(value, indent=None) | 将变量值转换为JSON 格式 |
+| truncate(s, length=25 5, killwords=False,end='...',leeway=None | 截断字符串，常用于显示文章摘要， length 参数设置截断的长度，killwords参数设置是否截断单词，end参数设置结尾符号 |
+
+- 自定义过滤器
+
+	如果内置的过滤器不能满足你的需要，还可以添加自定义过滤器。使用app.template_filter()装饰器可以注册自定义过滤器
+	
+```python
+	from flask import Markup
+	@app.template_filter()
+	def musical(s):
+		return s + Markup('&#9835;')
+```
+
+## 测试器
+
+	在Jinja2 中， 测试器（ Test ）是一些用来测试变量或表达式，返回布尔值（ True 或Fa l se ）的特殊函数。比如， number 测试器
+	用来判断一个变量或表达式是否是数字，我们使用is连接变量和测试器：
+	
+```html
+	{% if age is number %}
+		{{ age * 365 }}
+	{% else %}
+		<h2>无效数字</h2>
+	{% endif %}
+```
+
+- 内置测试器
+
+| 测试器 | 说明 |
+| ---- | ---- |
+|callable(object) | 判断对象是否可被调用|
+|defined(value)| 判断变量是否已定义|
+|undefined(value)| 判断变量是否未定义|
+|none(value) |判断变量是否为None|
+|number(value) |判断变量是否是数字|
+|string(value) |判断变量是否是字符串|
+|sequence(value) |判断变量是否是序列， 比如字符串、列表、元组|
+|iterable(value)| 判断变量是否可迭代|
+|mapping(value) |判断变量是否是匹配对象，比如字典|
+|sameas(value , other) |判断变量与other 是否指向相同的内存地址|
+
+- 自定义测试器
+
+	和过滤器类似，我们可以使用Flask提供的app. emplate_test()装饰器来注册一个自定义测试器：
+	
+```python
+	@app.template_test()
+	def baz(n):
+		if n == 'baz':
+			return True
+		return False
+```
