@@ -15,16 +15,16 @@
 | 字段类 | 说明 | 对应的HTML表示 |
 | ---- | ---- | ---- |
 | BooleanField | 复选框，值会被处理为True 或False | &lt;input type="checkbox"&gt; |
-| DateField | 文本字段，值会被处理为datetime . date 对象 | <input type = "text"> |
-| DateTimeField | 文本字段，值会被处理为datetime.datetime对象| <input type = "text"> |
-| FileField | 文件上传字段 | <input type = "file"> |
-| FloatField | 浮点数字段，值会被处理为浮点型 | <input type = "text"> |
-| IntegerField | 整数字段，值会被处理为整型 | <input type = "text"> |
-| RadioField | 一组单选按钮 | <input type = "radio"> |
-| SelectField | 下拉列表 | <select><option><\/option><\/select> |
-| SelectMultipleField | 多选下拉列表 | <select multiple><option><\/option><\/select> |
-| SubmitField | 提交按钮 | <input type = "submit"> |
-| Stringfield | 文本字段 | <input type = "text"> |
-| HiddenField | 隐藏文本字段 | <input type = "hidden"> |
-| PasswordField | 密码文本字段 | <input type = "password"> |
-| TextAreaField | 多行文本字段 | <textarea><\/textarea> |
+| DateField | 文本字段，值会被处理为datetime . date 对象 | &lt;input type = "text"&gt; |
+| DateTimeField | 文本字段，值会被处理为datetime.datetime对象| &lt;input type = "text"&gt; |
+| FileField | 文件上传字段 | &lt;input type = "file"&gt; |
+| FloatField | 浮点数字段，值会被处理为浮点型 | &lt;input type = "text"&gt; |
+| IntegerField | 整数字段，值会被处理为整型 | &lt;input type = "text"&gt; |
+| RadioField | 一组单选按钮 | &lt;input type = "radio"&gt; |
+| SelectField | 下拉列表 | &lt;select&gt;&lt;option&gt;&lt;/option&gt;&lt;\/select&gt; |
+| SelectMultipleField | 多选下拉列表 | &lt;select multiple&gt;&lt;option&gt;&lt;/option&gt;&lt;/select&gt; |
+| SubmitField | 提交按钮 | &lt;input type = "submit"&gt; |
+| Stringfield | 文本字段 | &lt;input type = "text"&gt; |
+| HiddenField | 隐藏文本字段 | &lt;input type = "hidden"&gt; |
+| PasswordField | 密码文本字段 | &lt;input type = "password"&gt; |
+| TextAreaField | 多行文本字段 | &lt;textarea>&lt;\/textarea&gt; |
