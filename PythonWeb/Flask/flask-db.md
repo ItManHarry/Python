@@ -17,6 +17,7 @@
 ```
 	dialect+driver://username:password@host:port/database
 ```
+
 	Many of the parts in the string are optional. If no driver is specified the default one is selected (make sure to not include the + in that case).
 	
 | DBMS | URI |
@@ -77,7 +78,7 @@
 	>>> db.create_all()
 ```
 	
-	我们也可以自己实现一个自定义fl ask 命令完成这个工作:
+	我们也可以自己实现一个自定义flask 命令完成这个工作:
 	
 ```python
 	import click
@@ -100,8 +101,6 @@
 	数据库中的会话代表一个临时存储区，你对数据库做出的改动都会存放在这里。你可以调用add() 方法将新创建的对象添加到数据库会话中，或是对会话中的对象进行更新。只有当你对
 数据库会话对象调用commit()方法时，改动才被提交到数据库，这确保了数据提交的一致性。另外，数据库会话也支持回滚操作。当你对会话调用rollback()方法时，添加到会话中且未提交
 的改动都将被撤销。
-
-- CRUD
 
 	1. Create
 	
