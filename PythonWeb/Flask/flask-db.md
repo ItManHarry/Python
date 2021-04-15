@@ -12,13 +12,11 @@
 
 	常用的数据库URI 格式
 	
+```	
 	SQLAlchemy indicates the source of an Engine as a URI combined with optional keyword arguments to specify options for the Engine. The form of the URI is:
-	
-```
 	dialect+driver://username:password@host:port/database
-```
-
 	Many of the parts in the string are optional. If no driver is specified the default one is selected (make sure to not include the + in that case).
+```
 	
 | DBMS | URI |
 | ---- | ---- |
