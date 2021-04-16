@@ -250,3 +250,32 @@
 		'''
 		articles= db.relationship('article')
 ```
+
+3. 建立关系
+
+	方式一：为外键字段赋值
+	
+```python
+	...
+	apam.author_id = 1
+	db.session.commit()
+```
+
+	方式二：操作关系属性
+	
+```python
+	...
+	foo.articles.append(spam)
+	foo.articles.append(ham)
+	db.session.commit()
+```
+
+注：一般采用第二种方式来建立管理
+
+和append()相对，对关系属性调用remove()方法可以与对应的Aritcle 对象解除关系：
+
+```python
+	...
+	foo.articles.remove(spam)	
+	db.session.commit()
+```
