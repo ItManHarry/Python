@@ -194,3 +194,59 @@
 	db.session.delete(note)
 	db.session.commit()
 ```
+
+## 定义关系
+
+>	在关系型数据库中，我们可以通过关系让不同表之间的字段建立联系。一般来说，定义关系需要两步，分别是创建外键和定义
+>关系属性。在更复杂的多对多关系中，我们还需要定义关联表来管理关系。
+
+- 一对多
+
+	以作者和文章为例，一个作者对应多篇文章，数据原始模型如下：
+	
+```python
+	class Author(db.Model):
+		id = db.Column(db.Integer, primary_key=True)
+		name = db.Column(db.String(30), unique=True)
+		phone = db.Column(db.String(20))		
+		
+	class Article(db.Model):
+		id = db.Column(db.Integer, primary_key=True)
+		title = db.Column(db.String(50), unique=True)
+		body = db.Column(db.Text)
+```
+1. 定义外键
+
+> 定义关系的第一步是创建外键。外键是（ foreign key ）用来在A 表存储B表的主键值以便和B表建立联系的关系字段。
+
+	因为外键只能存储单一数据（标量）所以外键总是在“多”这一侧定义，多篇文章属于同一个作者，所以我们需要为每篇
+文章添加外键存储作者的主键值以指向对应的作者。在Article模型中，我们定义一个author_id 字段作为外键
+
+```python
+	class Article(db.Model):
+		id = db.Column(db.Integer, primary_key=True)
+		title = db.Column(db.String(50), unique=True)
+		body = db.Column(db.Text)
+		#定义外键
+		'''
+			这个字段使用db.ForeignKey 类定义为外键，传入关系另一侧的表名和主键字段名，即author.id
+		'''
+		author_id = db.Column(db.Integer, db.ForeignKey('author.id))
+```
+
+2. 定义关系属性
+
+> 定义关系的第二步是使用关系函数定义关系属性。	
+
+```python
+	class Author(db.Model):
+		id = db.Column(db.Integer, primary_key=True)
+		name = db.Column(db.String(30), unique=True)
+		phone = db.Column(db.String(20))	
+		#定义关系属性
+		'''
+			关系属性在关系的出发侧定义，即一对多关系的“ 一”这一侧。一个作者拥有多篇文章，在Author 模型中，我们定义了一个articles属
+			性来表示对应的多篇文章：	
+		'''
+		articles= db.relationship('article')
+```
