@@ -320,7 +320,7 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 
 	class Writer(db.Model):
 		id = db.Column(db.String(40), primary_key=True)
-		name = db.Column(db.String(50) unique=True)
+		name = db.Column(db.String(50), unique=True)
 		books = db.relationship('Book', back_populates='writer')
 		
 	class Book(db.Model):
@@ -328,4 +328,59 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 		title = db.Column(db.String(20))
 		writer_id = db.Column(db.String(40), db.ForeignKey('writer.id'))
 		writer = db.relationship('Writer', back_populates='books')
+```
+
+	设置双向关系后，除了通过集合属性books 来操作关系，我们也可以使用标量属性writer来进行关系操作。比如，
+将一个Writer 对象赋值给某个Book 对象的w riter 属性，就会和这个Book 对象建立关系。
+
+	相对的，将某个Book 的wr iter 属性设为Non 巳， 就会解除与对应Writer 对象的关系
+	
+> 需要注意的是，我们只需要在关系的一侧操作关系。当为Book 对象的writer 属性赋值后，对应Writer 对象的books 
+属性的返回值也会自动包含这个Book 对象。反之，当某个Writer 对象被删除时，对应的Book 对象的writer 属性被调
+用时的返回值也会被置为空(即NULL,会返回None)
+
+- 一对一
+
+> 一对一关系实际上是通过建立双向关系的一对多关系的基础上转化而来。我们要确保关系两侧的关系属性都是标量属
+性，都只返回单个值，所以要在定义集合属性的关系函数中将**uselist参数设为False** ，这时一对多关系将被转换为一对
+一关系。代码清单基于建立双向关系的一对多关系实现了一对一关系:
+
+```python
+	class Country(db.Model):
+		id = db.Column(db.String(40), primary_key=True)
+		name = db.Column(db.String(50), unique=True)
+		capital = db.relationship('Capital', userlist=False)
+		
+	class Capital(db.Model):
+		id = db.Column(db.String(40), primary_key=True)
+		name = db.Column(db.String(50) unique=True)
+		country_id = db.Column(db.String(40), db.ForeignKey('country.id'))
+		country = db.relationship('Country')
+```
+
+- 多对多
+
+>	在一对多关系中，我们可以在“多”这一侧添加外键指向“一”这一侧，外键只能存储一个记录，但是在多对多关系中，
+每一个记录都可以与关系另一侧的多个记录建立关系，关系两侧的模型都需要存储一组外键。在SQLAlchemy 中， 要想
+表示多对多关系， 除了关系两侧的图模型外，我们还需要创建一个关联表(associationtable)。关联表不存储数据，只用
+来存储关系两侧模型的外键对应关系，如代码清单如下所示：
+
+```python
+	
+	association_table = db.Table('association', 
+		db.Column('student_id', db.String(40), db.ForeignKey('student.id')), 
+		db.Column('teacher_id', db.String(40), db.ForeignKey('teacher.id'))
+	)
+	
+	class Student(db.Model):
+		id = db.Column(db.String(40), primary_key=True)
+		name = db.Column(db.String(50), unique=True)
+		grade = db.Column(db.String(10))
+		teachers = db.relationship('Teacher', secondary=association_table, back_populates='students')
+		
+	class Teacher(db.Model):
+		id = db.Column(db.String(40), primary_key=True)
+		name = db.Column(db.String(50), unique=True)
+		office = db.Column(db.String(10))
+		students = db.relationship('Student', secondary=association_table, back_populates='teachers')
 ```
