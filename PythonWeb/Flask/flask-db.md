@@ -217,7 +217,7 @@
 ```
 1. 定义外键
 
-> 定义关系的第一步是创建外键。外键是（ foreign key ）用来在A 表存储B表的主键值以便和B表建立联系的关系字段。	
+> 定义关系的第一步是创建外键。外键是(foreign key)用来在A 表存储B表的主键值以便和B表建立联系的关系字段。	
 
 ```python
 	class Article(db.Model):
@@ -273,7 +273,7 @@
 
 注：一般采用第二种方式来建立管理
 
-和append()相对，对关系属性调用remove()方法可以与对应的Aritcle 对象解除关系：
+和append()相对，对关系属性调用remove()方法可以与对应的Aritcle对象解除关系：
 
 ```python
 	...
@@ -333,7 +333,7 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 	设置双向关系后，除了通过集合属性books 来操作关系，我们也可以使用标量属性writer来进行关系操作。比如，
 将一个Writer 对象赋值给某个Book 对象的w riter 属性，就会和这个Book 对象建立关系。
 
-	相对的，将某个Book 的wr iter 属性设为Non 巳， 就会解除与对应Writer 对象的关系
+	相对的，将某个Book 的writer属性设为None时， 就会解除与对应Writer对象的关系
 	
 > 需要注意的是，我们只需要在关系的一侧操作关系。当为Book 对象的writer 属性赋值后，对应Writer 对象的books 
 属性的返回值也会自动包含这个Book 对象。反之，当某个Writer 对象被删除时，对应的Book 对象的writer 属性被调
@@ -368,7 +368,7 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 ```python
 	
 	association_table = db.Table('association', 
-		db.Column('student_id', db.String(40), db.ForeignKey('student.id')), 
+		db.Column('student_id', db.String(40), db.ForeignKey('student.id')),
 		db.Column('teacher_id', db.String(40), db.ForeignKey('teacher.id'))
 	)
 	
@@ -376,11 +376,12 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 		id = db.Column(db.String(40), primary_key=True)
 		name = db.Column(db.String(50), unique=True)
 		grade = db.Column(db.String(10))
+		clazz = db.Column(db.String(10))
 		teachers = db.relationship('Teacher', secondary=association_table, back_populates='students')
 		
 	class Teacher(db.Model):
 		id = db.Column(db.String(40), primary_key=True)
 		name = db.Column(db.String(50), unique=True)
-		office = db.Column(db.String(10))
+		subject = db.Column(db.String(10))
 		students = db.relationship('Student', secondary=association_table, back_populates='teachers')
 ```
