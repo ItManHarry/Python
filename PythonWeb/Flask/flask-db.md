@@ -280,3 +280,52 @@
 	foo.articles.remove(spam)	
 	db.session.commit()
 ```
+
+	常用的SQLAlchemy 关系函数参数
+	
+| 参数名 | 说明 |
+| ---- | ---- |
+| back_populates | 定义反向引用，用于建立双向关系， 在关系的另一侧也必须显式定义关系属性 |
+| backref | 添加反向引用，自动在另一侧建立关系属性，是back_populates 的简化版 |
+| lazy | 指定如何加载相关记录，具体选项见下表 |
+| uselist | 指定是否使用列表的形式加载记录，设为False则使用标量(scalar) |
+| cascade | 设置级联操作 |
+| order_by | 指定加载相关记录时的排序方式 |
+| secondary | 在多对多关系中指定关联表 |
+| primaryjoin | 指定多对多关系中的一级联结条件 |
+| secondaryjo in | 指定多对多关系中的二级联结条件 |
+
+	常用的SQLAlchemy 关系记录加载方式（ lazy 参数可选值）
+	
+| 关系加载方式 | 说明 |
+| ---- | ---- |
+| select | 在必要时一次性加载记录，返回包含记录的列表（默认值）， 等同于lazy=True |
+| joined | 和父查询一样加载记录，但使用联结，等同于lazy=False | 
+| immediate | 一旦父查询加载就加载 |
+| subquery | 类似于join时，不过将使用子查询 |
+| dynamic | 不直接加载记录，而是返回一个包含相关记录的query对象，以便再继续附加查询函数对结果进行过滤 |
+
+4. 建立双向关系
+
+> 我们在Author 类中定义了集合关系属性articles ，用来获取某个作者拥有的多篇文章记录。在某些情况下，你
+也许希望能在Arti cle 类中定义一个类似的author 关系属性，当被调用时返回对应的作者记录，这类返回单个值
+的关系属性被称为标量关系属性。而这种两侧都添加关系属性获取对方记录的关系我们称之为双向关系(bidirectional relationship)
+
+	双向关系并不是必须的，但在某些情况下会非常方便。双向关系的建立很简单，通过在关系的另一侧也创建一个
+relationship()函数，我们就可以在两个表之间建立双向关系。我们使用作家(Writer)和书(Book)的一对多关系来进行演示，
+建立双向关系后的Writer 和Book 类如代码清单:
+
+```python
+	#back _populates 参数的值需要设为关系另一侧的关系属性名
+
+	class Writer(db.Model):
+		id = db.Column(db.String(40), primary_key=True)
+		name = db.Column(db.String(50) unique=True)
+		books = db.relationship('Book', back_populates='writer')
+		
+	class Book(db.Model):
+		id = db.Column(db.String(40), primary_key=True)
+		title = db.Column(db.String(20))
+		writer_id = db.Column(db.String(40), db.ForeignKey('writer.id'))
+		writer = db.relationship('Writer', back_populates='books')
+```
