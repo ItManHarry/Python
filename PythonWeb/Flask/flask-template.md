@@ -212,7 +212,7 @@ Jinja2提供了许多内置过滤器，常用的过滤器如下表所示：
 | max(value, case_ sensitive=False, attribute=None) | 返回序列中的最大值 |
 | min(value, case sensitive=False, a忧ribute=None) | 返回序列中的最小值 |
 | unique(value, case sensitive=False, attribute=None) | 返回序列中的不重复的值 |
-| stri ptags(value) | 清除变量值内的HTML 标签 |
+| striptags(value) | 清除变量值内的HTML 标签 |
 | urlize (value, trim_url_limit=None, nofollow=Flase,target=None,rel=None | 将URL 文本转换为可单击的HTML 链接 |
 | wordcount (s) | 计算单词数量 |
 | tojson(value, indent=None) | 将变量值转换为JSON 格式 |
