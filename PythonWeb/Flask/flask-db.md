@@ -146,8 +146,23 @@
 | one_or_none() | 类似one()，如果结果数量不为1，返回None |
 | first _ or_ 404() | 返回查询的第一条记录，如果未找到，则返回404 错误响应 |
 | get_ or_ 404(id) | 传入主健值作为参数，返回指定主饱值的记录，如果未找到，则返回404 错误响应 |
-| paginate() | 返回一个Pag inat i on 对象，可以对记录进行分页处理 |
+| paginate() | 返回一个Pagination 对象，可以对记录进行分页处理(见下表) |
 | with_parent( instance) | 传人模型类实例作为参数， 返回和这个实例相关联的对象 |
+
+Pagination类属性
+
+| 属性/方法 | 说 明 |
+| ---- | ---- |
+| items | 当前页丽的记录 |
+| page | 当前页数|
+| per_page | 每页的记录数数量 |
+| pages | 总页数 |
+| total | 总记录数 |
+| next_num | 下一页的页数 |
+| prev_num| 上一页的页数 |
+| has_next | 有下一页返回True |
+| has_prev | 有上一页返回True |
+| query | 分页的源查询 |
 
 2.3. 查询示例
 	
