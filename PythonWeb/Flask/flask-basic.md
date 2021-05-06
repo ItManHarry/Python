@@ -14,7 +14,7 @@
 	pip install flask
 ```
 
-	安装成功后，除了Flask包外，还有其他五个依赖包：
+- 安装成功后，除了Flask包外，还有其他五个依赖包：
 	
 	1. Jinja2  ： 模板引擎
 	
@@ -34,7 +34,7 @@
 	from flask import Flask	
 	app = Flask(__name__)	
 ```
-	Flask表示一个Flask程序，实例化这个类，就得到了我们的程序实例app，传入Flask类构造方法的第一个参数时模块或者包名称，这里我们使用特殊变量"__name__",
+> Flask表示一个Flask程序，实例化这个类，就得到了我们的程序实例app，传入Flask类构造方法的第一个参数时模块或者包名称，这里我们使用特殊变量"__name__",
 Python会根据所处的模块来赋予__name__变量对应的值，同时也会在相应的文件夹里找的需要的资源，如模板和静态资源文件等。
 
 - 注册路由
@@ -74,7 +74,7 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 						set FLASK APP=hello
 	3. 管理环境变量
 	
-		F lask 的自动发现程序实例机制还有第三条规则：如果安装了python-dotenv ，那么在使用flask run 或其他命令时会使用它自动从.flaskenv 文件和.env 文件中加载环境变量
+		Flask 的自动发现程序实例机制还有第三条规则：如果安装了python-dotenv ，那么在使用flask run 或其他命令时会使用它自动从.flaskenv 文件和.env 文件中加载环境变量
 		
 		注：安装了python-dotenv时，Flask在加载环境变量的优先级是：手动设置的环境变量 > .env中的环境变量 > .flaskenv中的环境变量
 		
@@ -123,20 +123,21 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 		
 	8. 扩展
 		
-			扩展（ extension ） 即使用Flask 提供的API 接口编写的Python 库，可以为F lask 程序添加各种各样的功能。大部分Flask 扩展用来集成其他库，
-		作为F l ask 和其他库之间的薄薄一层胶水。因为F l as k 扩展的编写有一些约定，所以初始化的过程大致相似。大部分扩展都会提供一个扩展类，
+			扩展（ extension ） 即使用Flask 提供的API 接口编写的Python 库，可以为Flask 程序添加各种各样的功能。大部分Flask 扩展用来集成其他库，
+		作为Flask 和其他库之间的薄薄一层胶水。因为Flask 扩展的编写有一些约定，所以初始化的过程大致相似。大部分扩展都会提供一个扩展类，
 		实例化这个类，并传入我们创建的程序实例app作为参数，即可完成初始化过程。通常，扩展会在传入的程序实例上注册一些处理函数， 并加
 		载一些配置。
-			以某扩展实现了Foo 功能为例，这个扩展的名称将是Flask- Foo 或Foo-Flask ；程序包或模块的命名使用小写加下划线，即flask foo （ 即导人时的名称） ；
-			用于初始化的类一般为Foo ，实例化的类实例一般使用小写，即foo 。初始化这个假想中的F lask-Foo 扩展的示例如下所示：		from f las k 工mport Flask
+			以某扩展实现了Foo 功能为例，这个扩展的名称将是Flask- Foo 或Foo-Flask ；程序包或模块的命名使用小写加下划线，即flask_foo （ 即导人时的名称） ；
+			用于初始化的类一般为Foo ，实例化的类实例一般使用小写，即foo 。初始化这个假想中的F lask_Foo 扩展的示例如下所示：		
 		```
-			from flask foo import Foo
+			from flask import Flask
+			from flask_foo import Foo
 			app = Flask(__name__)
 			foo = Foo (app)
 		```
 	9. 项目配置
 	
-		配置变量都通过Flask 对象的app. co nfig 属性作为统一的接口来设置和获取，它指向的Config 类实际上是字典的子类，所以你可以像操作其他字典一样操作它。
+		配置变量都通过Flask 对象的app. config 属性作为统一的接口来设置和获取，它指向的Config 类实际上是字典的子类，所以你可以像操作其他字典一样操作它。
 		可以把配置变量存储在单独的Python 脚本、JSON 格式的文件或是Python类中， config 对象提供了相应的方法来导人配置。
 		和操作字典一样，读取一个配置就是从confi g 字典里通过将配置变量的名称作为链’读取对应的值：
 		```
@@ -145,7 +146,7 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 		
 	10. Flask命令
 	
-		除了Flask 内置的flask run 等命令，我们也可以自定义命令。在虚拟环境安装F lask 后，包含许多内置命令的flask 脚本就可以使用了。在前面我们已经接触了
+		除了Flask 内置的flask run 等命令，我们也可以自定义命令。在虚拟环境安装Flask 后，包含许多内置命令的flask 脚本就可以使用了。在前面我们已经接触了
 		很多flask 命令，比如运行服务器的flask run ，启动shell 的flask shell 。
 		通过创建任意一个函数，并为其添加app.cli.command（）装饰器，我们就可以注册一个flask命令：
 		
@@ -156,4 +157,4 @@ Python会根据所处的模块来赋予__name__变量对应的值，同时也会
 		```
 		函数的名称即为命令名称，这里注册的命令即hello ，你可以使用flask hello 命令来触发函数。作为替代，你也可以在app.cli.command(） 装饰器中传入参数
 		来设置命令名称，比如app.cli.command （'say-hello'）会把命令名称设置为say-hello ，完整的命令即flask say-hello.
-		借助cl ick 模块的echo(）函数，我们可以在命令行界面输出字符。命令函数的文档字符串则会作为帮助信息显示（ flask hello - -help ）
+		借助click 模块的echo(）函数，我们可以在命令行界面输出字符。命令函数的文档字符串则会作为帮助信息显示（ flask hello - -help ）
