@@ -2,7 +2,7 @@
 
 ## 使用URL定义资源
 
-> Web API的根URL应该尽量简单明了。根URL模式主要有两种：
+	Web API的根URL应该尽量简单明了。根URL模式主要有两种：
 
 - 通过URL前缀指定：http://example.com/api
 
@@ -10,7 +10,7 @@
 
 > 在实际应用中，后一种方法更为简洁，也是普遍采用的方式。
 
-> 资源是Web API的核心，这里共有两种资源：
+	资源是Web API的核心，这里共有两种资源：
 
 1. 单个资源
 
@@ -49,7 +49,7 @@
 > 	当打算对API 进行更新时，我们就不得不考虑还有大量的用户使用的客户端依赖于旧版本的API 。如果我们贸然更新，那么这些用户的客户端很可能会无法正常工作。为了解决这个问
 题，我们需要保留旧版本的API ，创建一个新版本。
 
-- 为了同时提供多个版本的API ，较为常见的做法是在API 的URL 中指定版本：
+- 为了同时提供多个版本的API ，较为常见的做法是在API 的URL中指定版本：
 
 	1. version 1: http: //api .example.com/v1
 	
@@ -129,3 +129,84 @@
 > 需要注意的是，如果要在本地测试时使用子域，我们还需要修改操作系统的hosts 文件。在Windows 系统中，hosts 文件的
 地址为C: \Windows\System32\drivers\etc\hosts （你可能需要根据Windows 系统的安装位置来修改盘符）；在Linux 和macOS 
 系统中的地址为/etc/hosts 。
+
+> hosts文件（又被称为域名映射文件）是一个没有扩展名的系统文件，它存储了主机名和相应IP 地址的映射关系。它通常作
+为对DNS (Domain Name System ，域名系统）的补充，可以理解成一个本地的域名解析系统。正因为如此，我们可以自己管理映射关系。
+
+	hosts文件添加以下内容：
+	
+```
+	127.0.0.1 todolist.com
+	127.0.0.1 api.todolist.com
+```
+
+	第一行的todolist.com作为程序的主机名，而第二行的api.todolist.com就是我们为API 蓝本分配的包含子域的主机名。
+	
+> 如果不知道主机名， Flask 就无法获取子域名称，也无法正确设置cookie 。为此我们需要在config文件中将SERVER NAME的值设为我们
+在hosts 文件中设置的主机名和对应的端口号
+
+```python
+	'''
+    系统配置
+	'''
+	import os
+	#开发数据库
+	dev_db = os.getenv('DEVELOP_DB')
+	#生产数据库
+	pro_db = os.getenv('PRODUCT_DB')
+	#系统路径
+	basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+	#全局配置
+	class GlobalSetting():
+		SECRET_KEY = os.getenv('SECRET_KEY', '123456789qwertyuio!@#$')  # 秘钥(session使用)
+		BOOTSTRAP_SERVE_LOCAL = True                                    # Bootstrap本地化
+		SYS_LOCALES = ['zh_Hans_CN', 'en_US']                           # 国际化区域设置
+		BABEL_DEFAULT_LOCALE = SYS_LOCALES[0]                           # 默认语言区域
+		SERVER_NAME = 'todolist.com:80'                                 # 主机名+端口号
+	#开发配置
+	class DevelopSetting(GlobalSetting):
+		# 数据库配置
+		SQLALCHEMY_TRACK_MODIFICATIONS = False
+		SQLALCHEMY_DATABASE_URI = os.getenv('DEVELOP_DATABASE_URL', dev_db)
+	#生产配置
+	class ProductSetting(GlobalSetting):
+		# 数据库配置
+		SQLALCHEMY_TRACK_MODIFICATIONS = False
+		SQLALCHEMY_DATABASE_URI = os.getenv('PRODUCT_DATABASE_URL', pro_db)
+	#映射配置
+	config = {
+		'dev_config': DevelopSetting,
+		'pro_config': ProductSetting
+	}
+```
+
+> 	在Windows 下，设置包含"点"的主机名可能会导致AttributeError异常，这是因为Windows 下的socket 对象没有inet_pton 属性。如果
+你使用Windows 系统，可以使用win_inet_pton 包来解决这个兼容问题，首先使用Pip安装$ pip install win_inet_pton 。然后在程序
+中相关调用前导入import win_inet_pton 这个模块（比如在程序包的构造文件中） 。
+
+## 添加CORS支持
+
+	CORS(Cross Origin Resource Sharing:跨域资源共享)
+	SOP(Same Origin Policy:同源策略)：出于安全考虑，浏览器会限制从脚本内发起的跨域请求
+	
+> 在CORS 流行之前， 大多数API 都通过支持JSONP (JSON with Padding）来支持跨域请求。和JSONP 相比， CORS 更加方便灵活，
+支持更多的跨域请求方法，并且在2014年成为W3C的推荐标准，逐渐开始替代JSONP 。
+
+	Flask添加跨域访问支持，首先安装flask-cors
+	
+```
+	pip install flask-cors
+```
+
+	因为我们只需要对API 蓝本中的路由添加跨域请求支持，所以Flask-CORS 扩展只在蓝本中初始化，传人蓝本对象作为参数：
+	
+```python
+	from flask import Blueprint
+	from flask_cors import CORS
+	api_v1 = Blueprint('api_v1', __name__)
+	CORS(api_v1)
+	from work.api.v1 import resources
+```
+
+> 默认情况下， Flask-CORS会为蓝本下的所有路由添加跨域请求支持，并且允许来自任意源的跨域请求。
+
