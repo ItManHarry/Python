@@ -215,4 +215,217 @@
 
 	在设计Web API 的资源端点时，我们首先要考虑的是通过Web API 开放程序的哪些功能。
 	
+## 创建资源类
+
+> 在Flask 中，资源端点可以使用普通的视图函数来表示，通过为同一个URL 定义不同的方法实现，比如：
+
+```python
+	@api_v1.route('/items/<item_id>', methods=['GET'])
+	def get_item(item_id):
+		pass
+	@api_v1.route('/items/<item_id>', methods=['POST'])
+	def post_item(item_id):
+		pass
+```
+
+	对于简单的程序，使用这种方式就足够了。不过，Flask 提供了使用Python 类来组织视图函数的支持，其中
+的方法视图（ MethodView 类）可以让Web API 的编写更加方便， 并且让资源的表示更加直观。借助方法视
+图，我们可以定义一个继承自MethodView 的资源类，整个类表示一个资源端点。我们使用资源端点支持的
+HTTP 方法作为类方法名，它会处理对应类型的请求。比如，当客户端向／items/<int:id>发起一个GET 
+请求时， 资源类中的get()方法将会被调用:
+
+```python
+	from flask.views import MethodView
 	
+	class ItemView(MethodView):
+		def get(self, item_id):
+			pass
+			
+		def delete(self, item_id):
+			pass
+```
+在使用方法视图时，除了定义资源类，我们还需要使用add_url_rule()方法来注册路由：	
+
+```python
+	api_v1.add_url_rule('/items/<item_id>', view_func=ItemView.as_view('item_api'), methods=['GET', 'DELETE'])
+```
+
+## 使用OAuth认证
+
+	OAuth ( Open Authorization ，开放授权）是一个2007 年发布的授权标准，它是现代Web API 中应用非常广泛的授权
+机制， Google 、Facebook 、Twitter 、腾讯QQ 等各种在绒服务都提供了OAuth 认证支持。
+
+- OAuth2.0认证模式
+
+| 认证模式(Grant Type) | 说明 |
+| ---- | ---- |
+| Authorization Code | 最常用，也是最完善和安全的认证模式，大多数在线服务器都提供了这种认证类型支持 |
+| Implicit | 同Authorization Code 使用场景类似，但简化了认证过程， 安全性也相应降低 |
+| Resource Owner Password Credentials | 直接使用用户名和密码登录，适用于可信的程序，比如在线服务自己开发的官方客户端 | 
+| Client Credentials | 不以用户为单位，而是通过客户端来认证， 通常用于访问公开信息 |
+
+Resource Owner Password Credentials认证模式代码如下：
+
+```python
+	class AuthTokenAPI(MethodView):
+		def post(self):
+			 grant_type = request.form.get('grant_type')
+			 username = request.form.get('username')
+			 password = request.form.get('password')
+			 if grant_type is None or grant_type.lower() != 'password':
+				 return api_abort(400, message='The grant type must be password.')
+			 user = User.query.filter_by(name=username).first()
+			 if user is None or not user.validate_password(password):
+				 return api_abort(400, message='User name or password is not right.')
+			 token, expiration = generate_token(user)
+			 response = jsonify({
+				 'access_token': token,
+				 'token_type': 'Bearer',
+				 'expires_in': expiration
+			 })
+			 response.headers['Cache-Control'] = 'no-store'
+			 response.headers['Pragma'] = 'no-cache'
+			 return response
+	api_v1.add_url_rule('/oauth/token', view_func=AuthTokenAPI.as_view('token'), methods=['POST'])
+```
+
+客户端提供的信息：
+	
+| 键(Key) | 值(Value) |
+| ---- | ---- |
+| grant_type | 必须为password |
+| username | 账号(必填值) |
+| password | 密码(必填值)|
+| scope | 允许的权限范围(可选值) |
+
+客户端示例代码：
+
+```javascript
+	$.ajax({
+          type:'post',
+          url:'/api/v1/oauth/token',
+          data:{grant_type:'password',username:'xxx',password:'xxxxxx'},
+          contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+          success:function(data){
+            token = data.access_token
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '令牌 : '+data.access_token ,
+               onClose:function(){
+
+               }
+            })
+          },
+          error:function(e){
+            $.alert({
+               type:'red',
+               //icon:'fa fa-info',
+               title:'{{_('sys.error')}}',
+               content: '{{_('system.common.error')}}, error code : '+e.status,
+               onClose:function(){
+
+               }
+            })
+          }
+     })
+```
+
+## 验证access令牌
+
+- 用户发送请求，账号密码验证通过后会获得类似如下的JSON响应：
+	
+```
+	{
+		"access_token":"eyJhbGciOiJIUzI1NiisimV4cCI6MTUyN] E3MTY1NiwiaWF0IjoxNTI2MTY4MDU2fQ . eyJpZCI6MX0.PJK4Ie07J x SAPNYcKEmfQogBzpiFEn 工cyzABOfmabYU"，
+		"expires_in": 3600 ,
+		"token_type": "Bearer "
+	}
+```
+
+- 调用受资源保护的Web API时需要将access_token作为参数传递给API：
+
+```javascript
+	var token = 'eyJhbGciOiJIUzI1NiisimV4cCI6MTUyN] E3MTY1NiwiaWF0IjoxNTI2MTY4MDU2fQ . eyJpZCI6MX0.PJK4Ie07J x SAPNYcKEmfQogBzpiFEn 工cyzABOfmabYU'
+	$.ajax({
+		type:'post',
+		url:'/api/v1/user/items/add',
+		data:JSON.stringify({title:'add', body:'20210710added'}),
+		contentType:'application/json;charset=UTF-8',
+		headers:{'Authorization': 'Bearer '+token}, //传递Token给Web API
+		success:function(data){
+			if(data.code == 1){
+				$.alert({
+				   type:'green',
+				   title:'{{_('sys.info')}}',
+				   content: data.message,
+				   onClose:function(){
+
+				   }
+				})
+			}else{
+			   $.alert({
+				   type:'red',
+				   title:'{{_('sys.info')}}',
+				   content: data.message,
+				   onClose:function(){
+
+				   }
+			   })
+			}
+		},
+		error:function(e){
+		   $.alert({
+			   type:'red',
+			   //icon:'fa fa-info',
+			   title:'{{_('sys.error')}}',
+			   content: '{{_('system.common.error')}}, error code : '+e.status,
+			   onClose:function(){
+
+			   }
+		   })
+		}
+	})
+```
+- 后台资源保护
+
+```python
+	#获取Token
+	def get_token():
+		if 'Authorization' in request.headers:
+			try:
+				token_type, token = request.headers['Authorization'].split(None, 1)
+			except ValueError:
+				token_type = token = None
+		else:
+			token_type = token = None
+		return token_type, token
+	#登录保护装饰器
+	def auth_required(f):
+		@wraps(f)
+		def decorated(*args, **kwargs):
+			token_type, token = get_token() #获取Token
+			if request.method != 'OPTIONS':
+				if token_type is None or token_type.lower() != 'bearer':
+					return api_abort(400, message='The token type must be bearer.')
+				if token is None:
+					return token_missing()
+				if not validate_token(token):
+					return invalid_token()
+			return f(*args, **kwargs)
+		return decorated
+```
+
+- Web API增加资源保护
+
+```python
+	class ItemView(MethodView):
+		decorators = [auth_required]  #所有资源都增加了资源保护
+		def get(self, item_id):
+			#获取待办事项
+			item = Item.query.get_or_404(item_id)
+			if g.current_user != item.author:
+				return jsonify(code=0, message='Wrong user!')
+			return jsonify(item_schema(item))
+		...
+```
