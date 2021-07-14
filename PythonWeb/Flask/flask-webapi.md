@@ -420,7 +420,7 @@ Resource Owner Password Credentials认证模式代码如下：
 
 ```python
 	class ItemView(MethodView):
-		decorators = [auth_required]  #所有资源都增加了资源保护
+		decorators = [auth_required]  #所有资源都增加了保护
 		def get(self, item_id):
 			#获取待办事项
 			item = Item.query.get_or_404(item_id)
@@ -428,4 +428,181 @@ Resource Owner Password Credentials认证模式代码如下：
 				return jsonify(code=0, message='Wrong user!')
 			return jsonify(item_schema(item))
 		...
+```
+
+## 资源序列化
+
+> 在传统Web 程序中，我们使用Jinja2 来把数据渲染到模板中，然后返回渲染后的HTML 数
+据；而在Web API 中，我们则需要将数据按照设计好的模式封装为JSON 数据并返回。这个过
+程被称为响应的格式化，或是响应封装，也被称为资源的序列化(Serialization)。
+
+- 定义资源模式
+
+	返回某个资漉时，我们要考虑如何设计响应数据的结构，这个结构被称为资源的模式。一
+般来说，资源的模式遵循以下几个要点：
+
+1. 响应数据并不需要完全反映数据库字段，仅需要包含必要的基本信息。
+
+2. 包含自身的描述信息（比如kind），指向自身及相关资糠的URL 。
+
+3. 为了便于使用，最好尽量使数据扁平化，以减少层级复杂度。当然，在使用层级结构更合适的情况下，也可以使用层级结构
+
+	示例(待办资源序列化):
+	
+```python
+	def item_schema(item):
+		return {
+			'id': item.id,
+			#'self': url_for('.item', item_id=item.id, _external=True),
+			'kind': 'Item',
+			'title': item.title,
+			'body': item.body,
+			'done': item.done,
+			'author': {
+				'id': item.author.id,
+				#'url': url_for('.user', _external=True),
+				'name': item.author.name,
+				'kind': 'User'
+			}
+		}
+	#对应响应
+	def get(self, item_id):
+        #获取待办事项
+        item = Item.query.get_or_404(item_id)
+        if g.current_user != item.author:
+            return jsonify(code=0, message='Wrong user!')
+        return jsonify(item_schema(item))
+```
+
+## 资源的反序列化
+
+> 在Web API 中，我们也需要获取POST 、PUT 、PATCH 等请求中包含的数据，然后验证这些数据的格式是否符合要求，最后存储于数据库中。这个过程被称为资源的反序列化（ Deserialization ）
+
+- 反序列化处理
+
+	在接收POST 方法的资源方法中，我们需要做相反的工作：从请求对象处获取客户端发来的JSON 数据，验证数据格式，并
+将其对应的值存储到数据库字段中。在我们的Web API 中，需要接收的数据就是条目的title, body 值，为了避免重复，我们把
+接收并验证条目title, body 字段的工作放到get_item_values()函数中完成，代码如下：
+
+```python
+	def get_item_values():
+		data = request.get_json()
+		title = data['title']
+		body = data['body']
+		if title is None or str(title).strip() == '':
+			raise ValidationError('待办事项标题为空或者未传递!')
+		if body is None or str(body).strip() == '':
+			raise ValidationError('待办事项内容为空或者未传递!')
+		return {
+			'title': title,
+			'body': body
+		}
+```
+	在get_item_values()函数中，我们还需要对数据进行验证。如果title, body 值为None 或是空
+白，我们需要返回400 响应。但因为get_item_values()由视图方法调用，我们并不能在这里使
+用api_abort()函数，只能通过抛出异常的方式来处理错误。我们在errors.py 脚本中定义了一个
+ValidationError 异常类，它继承Python 中的ValueError 类:
+
+```python
+	class ValidationError(ValueError):
+		pass
+
+	@api_v1.errorhandler(ValidationError)
+	def validate_error(e):
+		return api_abort(400, e.args[0])
+```
+
+- 使用Webargs解析请求
+
+> 因为我们的程序非常简单，创建待办条目时只需要验证title, body 字段。但对于大型程序来说，
+反序列化时通常需要处理多个资源， 每个资源又包含多个不同的字段，这时手动验证数据就会
+非常繁琐，而且容易出锚，我们需要借助工具来简化工作。Webargs 是一个用于解析HTTP 请求
+参数的Python 库，它主要基于Python 序列化/反序列化工具Marshmallow ( https://github.com/
+mars hmallow-code/marshmallow／）实现，添加了HTTP 请求解析支持。
+
+- 安装webargs
+
+```
+	 pip install -U webargs
+```
+
+- 编写资源模式字典脚本(args.py)
+
+```python
+	from webargs import fields, validate, ValidationError
+	from work.models import User
+	def check_user_code(code):
+		user = User.query.filter_by(code=code.lower()).first()
+		print('User is >>>>>>>>>>>>>>>>>>>>', user)
+		if user is not None:
+		   raise ValidationError('账号已存在!')
+	user_args = {
+		'code': fields.Str(required=True, validate=[check_user_code, validate.Length(min=1)]),
+		'name': fields.Str(required=True, validate=validate.Length(min=1)),
+		'password': fields.Str(validate=validate.Length(min=6))
+	}
+```
+
+- 使用资源模式脚本
+
+```python
+	# 用户注册-传参方式一
+	from webargs.flaskparser import parser
+	from work.api.v1.args import user_args
+	@api_v1.route('/user/register1', methods=['POST'])
+	def register1():
+		print('Do the user register action now...')
+		args = parser.parse(user_args, request)
+		user = User(
+			id=uuid.uuid4().hex,
+			code=args['code'].lower(),
+			name=args['name']
+		)
+		user.set_password(args['password'])
+		db.session.add(user)
+		db.session.commit()
+		return jsonify(code=1, message='用户注册成功!')
+	# 传参方式二
+	from webargs.flaskparser import use_args
+	@api_v1.route('/user/register2', methods=['POST'])
+	@use_args(user_args, location="json")
+	def register2(args):
+		user = User(
+			id=uuid.uuid4().hex,
+			code=args['code'].lower(),
+			name=args['name']
+		)
+		user.set_password(args['password'])
+		db.session.add(user)
+		db.session.commit()
+		return jsonify(code=1, message='用户注册成功!')
+	# 传参方式三
+	from webargs.flaskparser import use_kwargs
+	@api_v1.route('/user/register3', methods=['POST'])
+	@use_kwargs(user_args)
+	def register3(code, name, password):
+		u = User.query.filter_by(code=code.lower()).first()
+		if u is None:
+			print('User is not Exist!!!')
+		else:
+			print('User has been Exist!!!')
+			return jsonify(code=0, message='用户代码已存在!')
+		user = User(
+			id=uuid.uuid4().hex,
+			code=code.lower(),
+			name=name
+		)
+		user.set_password(password)
+		db.session.add(user)
+		db.session.commit()
+		return jsonify(code=1, message='用户注册成功!')
+```
+
+- 当验证出错时， Webargs 会返回422 响应(Unprocessable Entity ， 表示实体无法处理， 即语义错误)，我们可以注册一个对应的错误处理函数:
+
+```python
+	@app.errorhandler(422)
+    def unprocessable_entity(e):
+        exc = e.exc
+        return jsonify({'code':0, 'errors': exc.messages}), 422
 ```
