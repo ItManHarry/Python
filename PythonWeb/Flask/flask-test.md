@@ -102,5 +102,32 @@ Python 标准库内置了一个优秀的单元测试框架一－unittest 。本�
 
 	测试运行器用来运行测试，收集测试结果，并呈现给用户。
 	
+## Flask程序的测试固件
 
-	
+```python
+	import unittest
+	from chat import app, db
+	class SayHelloTest(unittest.TestCase):
+		def setUp(self):			
+			app.config.update(
+				TESTING=True,
+				WTF_CSRF_ENABLED=False,
+				SQLALCHEMY_DATABASE_URI='sqlite:///:memory'
+			)
+			self.client = app.test_client()
+			db.create_all()
+			
+		def tearDown(self):
+			db.session.remove()
+			db.drop_all()
+```
+
+对程序实例调用test_client()会获得一个Werkzeug 提供的Client 类的实例，我们在setUp()方法中将其保存为类属性self.client ，
+以便在测试方法中使用它来发送模拟请求。
+
+测试时通常使用不同的配置。在上面的setUp()方法中，我们使用config 对象的update 方法一次更新多个配置。其中，我们将
+TESTING 配置键设为True ， 这会开启测试模式。在测试模式下， F lask 会关闭在处理请求时的错误捕捉，从而获得更易读的错误报告。
+
+Flask-WTF 默认开启CSRF保护，但是测试时并不需要验证CSRF，开启CSRF保护会让发送POST提交表单数据变得困难，我们
+可以将配置变量WTF_CSRF_ENABLED 设为False来关闭CSRF保护。
+
