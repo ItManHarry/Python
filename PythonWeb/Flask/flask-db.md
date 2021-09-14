@@ -364,7 +364,7 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 	class Country(db.Model):
 		id = db.Column(db.String(40), primary_key=True)
 		name = db.Column(db.String(50), unique=True)
-		capital = db.relationship('Capital', userlist=False)
+		capital = db.relationship('Capital', uselist=False)
 		
 	class Capital(db.Model):
 		id = db.Column(db.String(40), primary_key=True)
