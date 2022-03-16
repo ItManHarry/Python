@@ -428,7 +428,7 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 
 - 生成迁移脚本
 
-使用m i grate 子命令可以自动生成迁移脚本：
+使用migrate 子命令可以自动生成迁移脚本：
 
 ```
 	flask db migrate -m "add note timestamp”
