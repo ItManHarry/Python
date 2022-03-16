@@ -400,3 +400,49 @@ relationship()函数，我们就可以在两个表之间建立双向关系。我
 		subject = db.Column(db.String(10))
 		students = db.relationship('Student', secondary=association_table, back_populates='teachers')
 ```
+
+## Data Migration
+
+- 安装Flask-Migrate及其依赖
+
+```
+	pip install flask-migrate
+```
+
+- 实例化
+
+```
+	migrate = Migrate()
+	migrate.init_app(app, db) #传入app和db两个参数
+```
+
+- 创建迁移环境(只做一次即可)
+
+```
+	'''
+	Flask-Migrate 提供了一个命令集，使用db 作为命名集名称，它提供的命令都以flask db开头
+	'''
+	flask db init
+```
+命令执行完成后会在项目根目录下创建一个migrations 文件夹，其中包含了自动生成的配置文件和迁移版本文件夹。
+
+- 生成迁移脚本
+
+使用m i grate 子命令可以自动生成迁移脚本：
+
+```
+	flask db migrate -m "add note timestamp”
+```
+这条命令可以简单理解为在flask 里对数据库（ db ）进行迁移（ migrate ） 。－m 选项用来添加迁移备注信息。
+
+- 更新数据库
+
+生成了迁移脚本后，使用upgrade 子命令即可更新数据库：
+
+```
+	flask db upgrade
+```
+如果还没有创建数据库和表，这个命令会自动创建；如果已经创建， 则会在不损坏数据的前提下执行更新。
+Tip：如果你想回滚迁移， 那么可以使用downgrade（降级），它会撤销最后一次迁移数据库中的改动，这在开发时非常有用。
+比如，当你执行upgrade 命令后发现某些地方出错了，这时就可以执行flask db downgrade 命令进行回滚，删除对应的迁移脚本，重新
+生成迁移脚本后再进行更新（ upgrade ） 。
