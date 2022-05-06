@@ -168,7 +168,7 @@ Pagination类属性
 	
 ```python
 	#Equal
-	Note.query.filter(Note.body='SHAVE').first()
+	Note.query.filter(Note.body=='SHAVE').first()
 	Note.query.filter_by(Note.body='SHAVE').all()
 	#Like
 	LIKE:
