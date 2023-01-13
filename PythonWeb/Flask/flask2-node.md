@@ -4,3 +4,7 @@
 |&nbsp;|&nbsp;|
 | --- | --- |
 |string|(default) accepts any text without a slash|
+| Syntax | Description |
+| --- | ----------- |
+| Header | Title |
+| Paragraph | Text |
