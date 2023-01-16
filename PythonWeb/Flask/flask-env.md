@@ -9,7 +9,7 @@
 2. flask-migrate删除表
 - 问题：配置flask-migrate后，执行flask db migrate -m 'remark'生成的python脚本每次都会删除数据库所有的表！
 - 原因：flask-migrate版本升级后，改动比较大，剔除了MigrateCommand类，由此导致无法识别对应的表，导致每次都删除表
-- 处理：实例化migrate的时候显示导入所有的模型即可
+- 处理：实例化migrate的时候显式导入所有的模型即可
  ```
  from com.plugins import *
 '''
