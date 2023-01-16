@@ -1,4 +1,4 @@
-# 安装包问题处理
+# 环境配置问题处理
 
 1. 问题一：包的安装
 - 问题：安装包时提示依赖pyproject.toml，但是pip安装pyproject.toml后，依然报错
