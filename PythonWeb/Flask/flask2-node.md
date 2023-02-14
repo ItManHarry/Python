@@ -21,3 +21,32 @@
 ```
   url_for('static', filename='style.css')
 ```
+
+## Deploy to production with Waitress
+
+Install Waitress : 
+
+```
+  pip install waitress
+```
+
+Two ways to do this :
+
+1. Modify app.py
+
+```
+from com import create_app
+app = create_app()
+from waitress import serve
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app)
+if __name__ == '__main__':
+    serve(app.wsgi_app, host='0.0.0.0', port=80)
+```
+then use command to start the server 'python app.py'
+
+2. Use waitress command directly
+
+```
+  waitress-serve --port 80 --call:com.create_app
+```
