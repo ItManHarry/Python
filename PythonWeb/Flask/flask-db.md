@@ -286,7 +286,7 @@ Pagination类属性
 	db.session.commit()
 ```
 
-注：一般采用第二种方式来建立管理
+注：一般采用第二种方式来建立关联
 
 和append()相对，对关系属性调用remove()方法可以与对应的Aritcle对象解除关系：
 
